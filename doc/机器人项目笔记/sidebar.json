@@ -1,0 +1,16 @@
+{
+    "items": [
+        {
+            "label": "README",
+            "file": "README.md"
+        },
+        {
+            "label": "ROS入门指南：什么是ROS？",
+            "file": "ROS入门指南：什么是ROS？.md"
+        },
+        {
+            "label": "YOLO物体检测原理与应用",
+            "file": "YOLO物体检测原理与应用.md"
+        }
+    ]
+}

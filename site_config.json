@@ -8,14 +8,8 @@
     "source": "https://github.com/XuSenfeng/note/tree/master",
     "route": {
         "docs": {
-            "/Linux/": "doc/Linux",
-            "/代码分析/": "doc/代码分析",
-            "/使用软件/": "doc/使用软件",
-            "/嵌入式/": "doc/嵌入式",
-            "/手机安卓/": "doc/手机安卓",
-            "/机器学习/": "doc/机器学习",
-            "/编程基础/": "doc/编程基础",
-            "/网络/": "doc/网络"
+            "/机器人项目笔记/": "doc/机器人项目笔记",
+            "/小智笔记/": "doc/小智笔记"
         },
         "pages": {
             "/": "pages/index/zh"
