@@ -1,0 +1,11 @@
+out
+build
+temp
+__pycache__
+*.egg-info
+dist
+.ipynb_checkpoints/
+config.json
+sidebar.json
+
+
