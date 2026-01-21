@@ -1,11 +1,11 @@
 {
-    "site_name": "XvSenfeng's Note",
+    "site_name": "niuniu's Note",
     "site_slogon": "记录学习笔记，分享技术文章",
     "site_root_url": "/note/",
     "site_domain": "teedoc.neucrack.com",
     "site_protocol": "https",
     "config_template_dir": "config",
-    "source": "https://github.com/XuSenfeng/note/tree/master",
+    "source": "https://github.com/HiNice2cu/note/tree/master",
     "route": {
         "docs": {
             "/机器人项目笔记/": "doc/机器人项目笔记",

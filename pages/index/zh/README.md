@@ -1,8 +1,8 @@
 
 ---
-title: XvSenfeng's note
+title: niuniu's note
 keywords: teedoc, markdown, jupyter notebook, html, 文档生成, 替代gitbook, 网站生成, 静态网站, 文档网站生成, 多文档, 静态博客
-desc: teedoc，开源静态文档网站生成工具，将 markdown 或者 jupyter notbook 转换成 html 静态网页， 用于个人或企业建站，建博客，建资料库，wiki等 XvSenfeng's note
+desc: teedoc，开源静态文档网站生成工具，将 markdown 或者 jupyter notbook 转换成 html 静态网页， 用于个人或企业建站，建博客，建资料库，wiki等 niuniu's note
 id: home_page
 ---
 
@@ -15,15 +15,12 @@ id: home_page
 <div id="fullpage">
     <div class="section" style="height: 100vh;">
         <div>
-            <h1><span>XvSenfeng's note</span></h1>
+            <h1><span>niuniu's note</span></h1>
             <h3>个人笔记文档</h3>
         </div>
         <div class="big_btn_wrapper">
             <div class="big_btn">
-                <a href="https://space.bilibili.com/673744606?spm_id_from=333.1007.0.0" id="learn_more">Bilibili</a>
-            </div>
-            <div class="big_btn">
-                <a href="https://github.com/XuSenfeng/note">github</a>
+                <a href="https://github.com/HiNice2cu/note">github</a>
             </div>
         </div>
     </div>
@@ -31,10 +28,10 @@ id: home_page
         <div>
             <div class="dsc_left">
                 <h2>嵌入式练习生</h2>
-                <h2>郑大+首师大本科</h2>
+                <h2>首师大本科</h2>
             </div>
             <div class="dsc_right">
-                嵌入式全栈开发+Linux开发全能
+                嵌入式开发
             </div>
         </div>
     </div>

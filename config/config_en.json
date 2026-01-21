@@ -1,9 +1,9 @@
 {
     "locale": "en",
     "navbar": {
-        "title": "XvSenfeng",
+        "title": "niuniu",
         "logo": {
-            "alt": "XvSenfeng logo",
+            "alt": "niuniu logo",
             "src": "/static/image/logo.png"
         },
         "home_url": "/en/",
@@ -14,7 +14,7 @@
                 "position": "left"
             },
             {
-                "url": "https://github.com/XuSenfeng/note/",
+                "url": "https://github.com/HiNice2cu/note/",
                 "label": "github",
                 "target": "_blank",
                 "position": "right"
@@ -63,12 +63,12 @@
                 "items": [
                     {
                         "label": "github",
-                        "url": "https://github.com/XuSenfeng/note/",
+                        "url": "https://github.com/HiNice2cu/note/",
                         "target": "_blank"
                     },
                     {
                         "label": "website source files",
-                        "url": "https://github.com/XuSenfeng/note/",
+                        "url": "https://github.com/HiNice2cu/note/",
                         "target": "_blank"
                     }
                 ]

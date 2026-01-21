@@ -1,5 +1,5 @@
 
-# XvSenfeng 个人笔记
+# niuniu 个人笔记
 
 个人笔记记录, 可以使用teedoc进行文档的自动生成
 
@@ -25,7 +25,7 @@ pip3 install teedoc
 * Get site source files 获取文档
 
 ```
-git clone https://github.com/XuSenfeng/note.git note
+git clone https://github.com/HiNice2cu/note.git note
 ```
 
 
