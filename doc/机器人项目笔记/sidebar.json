@@ -5,12 +5,26 @@
             "file": "README.md"
         },
         {
-            "label": "ROS入门指南：什么是ROS？",
-            "file": "ROS入门指南：什么是ROS？.md"
+            "label": "ROS",
+            "items": [
+                {
+                    "label": "ROS 基础流程",
+                    "file": "ROS\\ROS 基础流程.md"
+                },
+                {
+                    "label": "ROS入门指南：什么是ROS？",
+                    "file": "ROS\\ROS入门指南：什么是ROS？.md"
+                }
+            ]
         },
         {
-            "label": "YOLO物体检测原理与应用",
-            "file": "YOLO物体检测原理与应用.md"
+            "label": "YOLO",
+            "items": [
+                {
+                    "label": "YOLO物体检测原理与应用",
+                    "file": "YOLO\\YOLO物体检测原理与应用.md"
+                }
+            ]
         }
     ]
 }
