@@ -21,6 +21,22 @@
             "label": "YOLO",
             "items": [
                 {
+                    "label": "YOLOv5 数据集构建",
+                    "file": "YOLO\\YOLOv5 数据集构建.md"
+                },
+                {
+                    "label": "YOLOv5 模型检测",
+                    "file": "YOLO\\YOLOv5 模型检测.md"
+                },
+                {
+                    "label": "YOLOv5 模型训练",
+                    "file": "YOLO\\YOLOv5 模型训练.md"
+                },
+                {
+                    "label": "YOLOv5 环境安装",
+                    "file": "YOLO\\YOLOv5 环境安装.md"
+                },
+                {
                     "label": "YOLO物体检测原理与应用",
                     "file": "YOLO\\YOLO物体检测原理与应用.md"
                 }
