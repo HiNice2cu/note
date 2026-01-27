@@ -21,6 +21,14 @@
             "label": "YOLO",
             "items": [
                 {
+                    "label": "YOLOv5 Gradio搭建Web GUI",
+                    "file": "YOLO\\YOLOv5 Gradio搭建Web GUI.md"
+                },
+                {
+                    "label": "YOLOv5 Pyside6 可视化界面",
+                    "file": "YOLO\\YOLOv5 Pyside6 可视化界面.md"
+                },
+                {
                     "label": "YOLOv5 数据集构建",
                     "file": "YOLO\\YOLOv5 数据集构建.md"
                 },
