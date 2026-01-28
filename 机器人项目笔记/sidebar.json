@@ -1,0 +1,91 @@
+{
+    "items": [
+        {
+            "label": "README",
+            "file": "README.md"
+        },
+        {
+            "label": "ROS",
+            "items": [
+                {
+                    "label": "ROS 基础流程",
+                    "file": "ROS/ROS 基础流程.md"
+                },
+                {
+                    "label": "ROS入门指南：什么是ROS？",
+                    "file": "ROS/ROS入门指南：什么是ROS？.md"
+                }
+            ]
+        },
+        {
+            "label": "YOLO",
+            "items": [
+                {
+                    "label": "YOLOv5 Gradio搭建Web GUI",
+                    "file": "YOLO/YOLOv5 Gradio搭建Web GUI.md"
+                },
+                {
+                    "label": "YOLOv5 Pyside6 可视化界面",
+                    "file": "YOLO/YOLOv5 Pyside6 可视化界面.md"
+                },
+                {
+                    "label": "YOLOv5 VS Code 与 AutoDL 远程连接",
+                    "file": "YOLO/YOLOv5 VS Code 与 AutoDL 远程连接.md"
+                },
+                {
+                    "label": "YOLOv5 使用 AutoDL 服务器训练",
+                    "file": "YOLO/YOLOv5 使用 AutoDL 服务器训练.md"
+                },
+                {
+                    "label": "YOLOv5 修改网络结构（以C2f为例）",
+                    "file": "YOLO/YOLOv5 修改网络结构（以C2f为例）.md"
+                },
+                {
+                    "label": "YOLOv5 引入 SE 注意力机制",
+                    "file": "YOLO/YOLOv5 引入 SE 注意力机制.md"
+                },
+                {
+                    "label": "YOLOv5 数据集构建",
+                    "file": "YOLO/YOLOv5 数据集构建.md"
+                },
+                {
+                    "label": "YOLOv5 模型检测",
+                    "file": "YOLO/YOLOv5 模型检测.md"
+                },
+                {
+                    "label": "YOLOv5 模型结构与构建原理",
+                    "file": "YOLO/YOLOv5 模型结构与构建原理.md"
+                },
+                {
+                    "label": "YOLOv5 模型训练",
+                    "file": "YOLO/YOLOv5 模型训练.md"
+                },
+                {
+                    "label": "YOLOv5 环境安装",
+                    "file": "YOLO/YOLOv5 环境安装.md"
+                },
+                {
+                    "label": "YOLOv5：Pycharm 与 AutoDL 远程连接",
+                    "file": "YOLO/YOLOv5：Pycharm 与 AutoDL 远程连接.md"
+                },
+                {
+                    "label": "YOLO物体检测原理与应用",
+                    "file": "YOLO/YOLO物体检测原理与应用.md"
+                }
+            ]
+        },
+        {
+            "label": "本地模型部署与强化学习算法",
+            "items": [
+                {
+                    "label": "README",
+                    "file": "本地模型部署与强化学习算法/README.md"
+                },
+                {
+                    "label": "本地模型部署与强化学习算法简单概念",
+                    "file": "本地模型部署与强化学习算法/本地模型部署与强化学习算法简单概念.md"
+                }
+            ]
+        }
+    ]
+}

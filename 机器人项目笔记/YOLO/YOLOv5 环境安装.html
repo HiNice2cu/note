@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"  class="">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="keywords" content="">
+    
+    
+    <meta name="description" content="">
+    
+    <meta name="generator" content="teedoc">
+    <meta name="theme" content="teedoc-plugin-theme-default">
+    
+        
+        <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
+        
+        <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+        
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+        <meta name="html-generator" content="teedoc-plugin-jupyter-notebook-parser">
+        
+        <script src="/note/static/js/theme_default/pre_main.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/prism.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/viewer.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/dark.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/light.css" type="text/css"/>
+        
+        <script src="/note/static/js/theme_default/jquery.min.js"></script>
+        
+        <script src="/note/static/js/theme_default/split.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/search/style.css" type="text/css"/>
+        
+        <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4d52982572d5512e9762879ebf063c86";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+        
+        <meta name="blog-generator" content="teedoc-plugin-blog">
+        
+        <link rel="stylesheet" href="/note/static/css/gitalk/gitalk.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/gitalk/custom_gitalk.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/custom.css" type="text/css"/>
+        
+    
+    
+    <title>YOLOv5 Windows 11 环境安装 - niuniu's Note</title>
+    
+    <script type="text/javascript">js_vars = {"teedoc-plugin-ad-hint": {"type": "hint", "label": "☆", "content": "这是一个支持国际化的消息示例</br>喜欢项目请<a target=\"_blank\" href=\"https://github.com/teedoc/teedoc\">点下 ☆ star </a>哦~🦀🦀", "show_times": 2, "show_after_s": 432000, "date": "2021-11-16 14:40", "color": "#a0421d", "link_color": "#e53935", "link_bg_color": "#e6ae5c", "bg_color": "#ffcf89", "color_hover": "white", "bg_color_hover": "#f57c00", "close_color": "#eab971"}}</script>
+    <script type="text/javascript">metadata = {"tags": [], "date": null, "update": [], "ts": 0, "author": "", "brief": "", "cover": ""}</script>
+</head>
+
+
+<body class="type_doc">
+    
+    <div id="navbar">
+        <div id="navbar_menu">
+            <a class="site_title" href="/note/">
+                
+                    <img class="site_logo" src="/note/static/image/logo.png" alt="niuniu logo">
+                
+                
+                    <h2>niuniu</h2>
+                
+        </a>
+            <a id="navbar_menu_btn"></a>
+        </div>
+        <div id="navbar_items">
+            <div>
+                <ul id="nav_left">
+<li class=""><a  href="/note/blog/">博客</a></li>
+<li class="active"><a  href="/note/机器人项目笔记/">机器人项目笔记</a></li>
+<li class=""><a  href="/note/小智笔记/">小智笔记</a></li>
+</ul>
+
+            </div>
+            <div>
+                <ul id="nav_right">
+<li class=""><a target="_blank" href="https://github.com/HiNice2cu/note/">github</a></li>
+</ul>
+
+                <ul class="nav_plugins"><li><a id="google_translate_element"><img class="icon" src="/note/static/image/google_translate/translate.svg"/>Translate</a></li></ul><ul class="nav_plugins"><li><a id="themes" class="light"></a></li></ul><ul class="nav_plugins"><li><a id="search"><span class="icon"></span><span class="placeholder">搜索</span>
+                            <div id="search_hints">
+                                <span id="search_input_hint">输入关键词，多关键词空格隔开</span>
+                                <span id="search_loading_hint">正在加载，请稍候。。。</span>
+                                <span id="search_download_err_hint">下载文件失败，请刷新重试或检查网络</span>
+                                <span id="search_other_docs_result_hint">来自其它文档的结果</span>
+                                <span id="search_curr_doc_result_hint">当前文档搜索结果</span>
+                            </div></a></li></ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="wrapper">
+        <div id="sidebar_wrapper">
+            <div id="sidebar">
+                <div id="sidebar_title">
+                    
+                </div>
+                <ul class="show">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/index.html"><span class="label">README</span><span class=""></span></a></li>
+<li class="not_active no_link"><a><span class="label">ROS</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/ROS/ROS 基础流程.html"><span class="label">ROS 基础流程</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/ROS/ROS入门指南：什么是ROS？.html"><span class="label">ROS入门指南：什么是ROS？</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="active_parent no_link"><a><span class="label">YOLO</span><span class="sub_indicator"></span></a><ul class="show">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 Gradio搭建Web GUI.html"><span class="label">YOLOv5 Gradio搭建Web GUI</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 Pyside6 可视化界面.html"><span class="label">YOLOv5 Pyside6 可视化界面</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 VS Code 与 AutoDL 远程连接.html"><span class="label">YOLOv5 VS Code 与 AutoDL 远程连接</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 使用 AutoDL 服务器训练.html"><span class="label">YOLOv5 使用 AutoDL 服务器训练</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 修改网络结构（以C2f为例）.html"><span class="label">YOLOv5 修改网络结构（以C2f为例）</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 引入 SE 注意力机制.html"><span class="label">YOLOv5 引入 SE 注意力机制</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 数据集构建.html"><span class="label">YOLOv5 数据集构建</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 模型检测.html"><span class="label">YOLOv5 模型检测</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 模型结构与构建原理.html"><span class="label">YOLOv5 模型结构与构建原理</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 模型训练.html"><span class="label">YOLOv5 模型训练</span><span class=""></span></a></li>
+<li class="active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 环境安装.html"><span class="label">YOLOv5 环境安装</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5：Pycharm 与 AutoDL 远程连接.html"><span class="label">YOLOv5：Pycharm 与 AutoDL 远程连接</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLO物体检测原理与应用.html"><span class="label">YOLO物体检测原理与应用</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="not_active no_link"><a><span class="label">本地模型部署与强化学习算法</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/本地模型部署与强化学习算法/index.html"><span class="label">README</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/本地模型部署与强化学习算法/本地模型部署与强化学习算法简单概念.html"><span class="label">本地模型部署与强化学习算法简单概念</span><span class=""></span></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+        <div id="article">
+            <div id="menu_wrapper">
+                <div id="menu">
+                </div>
+            </div>
+            <div id="content_wrapper">
+                <div id="content_body">
+                    <div id="article_head">
+                        <div id="article_title">
+                            
+                            <h1>YOLOv5 Windows 11 环境安装</h1>
+                            
+                        </div>
+                        <div id="article_tags">
+                            <ul>
+                            
+                            </ul>
+                        </div>
+                        <div id="article_info">
+                        <div id="article_info_left">
+                            <span class="article_author">
+                                
+                            </span>
+                            
+                                <span class="article_date" title="最后修改日期： 2026-01-26">
+                                    2026-01-26
+                                </span>
+                            
+                        </div>
+                        <div id="article_info_right">
+                            
+                            <div id="source_link">
+                                <a href="https://github.com/HiNice2cu/note/tree/master/doc/机器人项目笔记/YOLO/YOLOv5 环境安装.md" target="_blank">
+                                    编辑本页
+                                </a>
+                            </div>
+                            
+                        </div>
+                        </div>
+                    </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
+                    <div id="update_history">
+                        
+                    </div>
+                    <div id="article_content">
+                        
+                            <h2 id="%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85%E5%89%8D%E5%87%86%E5%A4%87">一、安装前准备</h2>
+<h3 id="1.-%E7%B3%BB%E7%BB%9F%E4%B8%8E%E7%A1%AC%E4%BB%B6%E8%A6%81%E6%B1%82">1. 系统与硬件要求</h3>
+<ul>
+<li><p>系统：Windows 11（课程基于该系统演示，Win10 可参考适配）</p>
+</li>
+<li><p>CPU：无强制要求（示例为 i5-8300H）</p>
+</li>
+<li><p>显卡：NVIDIA 独立显卡（示例为 1050Ti，需匹配对应 CUDA 版本）</p>
+</li>
+<li><p>显卡驱动：需支持目标 PyTorch 版本（示例驱动版本 516.94）</p>
+</li>
+<li><p>网络：稳定网络（用于下载安装包与依赖，部分包体积较大）</p>
+</li>
+</ul>
+<h3 id="2.-%E6%A0%B8%E5%BF%83%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80">2. 核心下载地址</h3>
+<ul>
+<li><p>Miniconda（清华镜像）：用于创建隔离 Python 环境</p>
+</li>
+<li><p>PyPI 国内源（清华大学）：加速 Python 包下载</p>
+</li>
+<li><p>PyTorch 官网：获取指定版本安装命令</p>
+</li>
+<li><p>YOLOv5 GitHub 仓库：下载 7.0 稳定版源码</p>
+</li>
+</ul>
+<h2 id="%E4%BA%8C%E3%80%81%E5%88%86%E6%AD%A5%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B">二、分步安装流程</h2>
+<h3 id="%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%AE%89%E8%A3%85-Miniconda%EF%BC%88%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%99%A8%EF%BC%89">第一步：安装 Miniconda（轻量级环境管理器）</h3>
+<h4 id="%E7%9B%AE%E7%9A%84">目的</h4>
+<p>隔离不同项目的 Python 环境，避免依赖冲突，比 Anaconda 更轻量化（无需预制多余包）。</p>
+<h4 id="%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4">操作步骤</h4>
+<ol>
+<li><p>下载版本：访问Miniconda清华镜像具体地址 <code>https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/</code>，搜索 <code>PY38</code>，选择 <code>Miniconda3-py38_22.11.1-1-Windows-x86_64.exe</code>（Windows 64 位，Python 3.8 兼容版），其他系统需匹配对应版本。</p>
+</li>
+<li><p>安装向导：</p>
+<ul>
+<li><p>双击安装包，点击「Next」→ 勾选「I agree」→ 选择安装类型「Just Me」（个人使用）。</p>
+</li>
+<li><p>安装路径：优先选 C 盘（无空间可选其他盘），<strong>路径必须纯英文无空格</strong>（避免安装失败）。</p>
+</li>
+<li><p>关键勾选：务必勾选「Add Miniconda3 to my PATH environment variable」（虽系统提示不推荐，但后续使用必需）。</p>
+</li>
+<li><p>完成安装：点击「Install」→ 后续步骤取消两个默认勾选 → 点击「Finish」。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%88%9B%E5%BB%BA%E5%B9%B6%E6%BF%80%E6%B4%BB-Python-%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83">第二步：创建并激活 Python 虚拟环境</h3>
+<h4 id="%E6%A0%B8%E5%BF%83%E5%91%BD%E4%BB%A4">核心命令</h4>
+<ol>
+<li><p>打开 CMD：按 Win 键 + R，输入 <code>CMD</code> 打开命令提示符。</p>
+</li>
+<li><p>创建环境：</p>
+
+<pre class="language-Bash"><code class="language-Bash">
+conda create -n yolov5 python=3.8
+</code></pre>
+<ul>
+<li>说明：<code>yolov5</code> 为环境名称（可自定义），<code>python=3.8</code> 为指定 Python 版本（必需，避免高版本兼容问题）。</li>
+</ul>
+</li>
+<li><p>确认创建：输入 <code>y</code> 回车，等待环境创建完成。</p>
+</li>
+<li><p>激活环境：</p>
+
+<pre class="language-Bash"><code class="language-Bash">
+conda activate yolov5
+</code></pre>
+<ul>
+<li>验证：命令行前缀显示 <code>(yolov5)</code> 即激活成功。</li>
+</ul>
+</li>
+</ol>
+<h3 id="%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E9%85%8D%E7%BD%AE-PyPI-%E5%9B%BD%E5%86%85%E6%BA%90%EF%BC%88%E5%8A%A0%E9%80%9F%E5%8C%85%E4%B8%8B%E8%BD%BD%EF%BC%89">第三步：配置 PyPI 国内源（加速包下载）</h3>
+<h4 id="%E7%9B%AE%E7%9A%84">目的</h4>
+<p>解决 Python 官方仓库（国外）下载慢的问题，使用清华大学镜像。</p>
+<h4 id="%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4">配置命令</h4>
+<p>在激活的 <code>yolov5</code> 环境中执行：</p>
+
+<pre class="language-Bash"><code class="language-Bash">
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+</code></pre>
+<ul>
+<li>说明：命令会将国内源写入 <code>pip.ini</code> 文件，全局生效，后续 <code>pip install</code> 自动走国内源。</li>
+</ul>
+<h3 id="%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E5%AE%89%E8%A3%85-PyTorch-1.8.2%EF%BC%88YOLOv5-%E5%85%BC%E5%AE%B9%E7%89%88%EF%BC%89">第四步：安装 PyTorch 1.8.2（YOLOv5 兼容版）</h3>
+<h4 id="%E7%89%88%E6%9C%AC%E9%80%89%E6%8B%A9%E7%90%86%E7%94%B1">版本选择理由</h4>
+<p>当前 PyTorch 已更新至 2.1.20，但 YOLOv5 7.0 对高版本兼容性不佳，<strong>必须安装 1.8.2 版本</strong>，避免训练时出现报错。</p>
+<h4 id="%E6%8C%89%E6%98%BE%E5%8D%A1%E5%9E%8B%E5%8F%B7%E9%80%89%E6%8B%A9-CUDA-%E7%89%88%E6%9C%AC">按显卡型号选择 CUDA 版本</h4>
+<table>
+<thead>
+<tr>
+  <th>显卡类型</th>
+  <th>推荐 CUDA 版本</th>
+  <th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>30 系（3050/3060 等）、40 系</td>
+  <td>11.1</td>
+  <td>不支持 CUDA 11 以下版本</td>
+</tr>
+<tr>
+  <td>16 系（1650/1660 等）</td>
+  <td>10.2</td>
+  <td>半精度训练兼容性要求</td>
+</tr>
+<tr>
+  <td>无显卡/AMD 显卡</td>
+  <td>CPU 版本</td>
+  <td>无需 CUDA，直接安装 CPU 版 PyTorch</td>
+</tr>
+<tr>
+  <td>老显卡（如 1050Ti）</td>
+  <td>11.1</td>
+  <td>兼容性更优</td>
+</tr>
+</tbody>
+</table>
+<h4 id="%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4">安装命令</h4>
+<ol>
+<li><p>复制对应版本命令（从 PyTorch 官网「Previous Versions」获取）：</p>
+<ul>
+<li><p>CUDA 11.1 版本（30/40 系、老显卡）：</p>
+
+<pre class="language-Bash"><code class="language-Bash">
+pip install torch==1.8.2+cu111 torchvision==0.9.2+cu111 torchaudio==0.8.2 -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html
+</code></pre>
+</li>
+<li><p>CUDA 10.2 版本（16 系）：</p>
+
+<pre class="language-Bash"><code class="language-Bash">
+pip install torch==1.8.2+cu102 torchvision==0.9.2+cu102 torchaudio==0.8.2 -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html
+</code></pre>
+</li>
+<li><p>CPU 版本（无 NVIDIA 显卡）：</p>
+
+<pre class="language-Bash"><code class="language-Bash">
+pip install torch==1.8.2+cpu torchvision==0.9.2+cpu torchaudio==0.8.2 -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>执行命令：在激活的 <code>yolov5</code> 环境中粘贴命令，回车安装。</p>
+<ul>
+<li>注意：安装包约 3.1G，首次下载可能较慢，需耐心等待；若之前安装过，会优先使用缓存加速。</li>
+</ul>
+</li>
+</ol>
+<h4 id="%E9%AA%8C%E8%AF%81-GPU-%E5%8F%AF%E7%94%A8%E6%80%A7%EF%BC%88%E5%85%B3%E9%94%AE%E6%AD%A5%E9%AA%A4%EF%BC%89">验证 GPU 可用性（关键步骤）</h4>
+<p>无需额外安装 CUDA 和 CUDNN，仅需 PyTorch 安装正确 + 显卡驱动兼容：</p>
+<ol>
+<li><p>在 CMD 中执行：</p>
+
+<pre class="language-Bash"><code class="language-Bash">
+python
+import torch
+torch.cuda.is_available()  # 返回 True 则说明 GPU 可调用
+</code></pre>
+</li>
+<li><p>查看显卡驱动：桌面 → 右键 → 英伟达控制面板 → 系统信息 → 组件 → 查看 <code>NV CUDA 64.DLL</code> 版本（即驱动支持的最高 CUDA 版本，需 ≥ 安装的 CUDA 版本）。</p>
+<ul>
+<li>若驱动不兼容：升级显卡驱动后重试。</li>
+</ul>
+</li>
+</ol>
+<h3 id="%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E4%B8%8B%E8%BD%BD-YOLOv5-7.0-%E6%BA%90%E7%A0%81%E5%B9%B6%E9%85%8D%E7%BD%AE%E4%BE%9D%E8%B5%96">第五步：下载 YOLOv5 7.0 源码并配置依赖</h3>
+<h4 id="1.-%E4%B8%8B%E8%BD%BD%E6%BA%90%E7%A0%81">1. 下载源码</h4>
+<ul>
+<li><p>访问 YOLOv5 GitHub 仓库 → 点击「Releases」→ 选择「V7.0」→ 下载「Source code (zip)」。</p>
+</li>
+<li><p>解压：将 zip 文件解压到桌面，确保桌面生成 <code>yolov5-7.0</code> 文件夹（路径纯英文无空格）。</p>
+</li>
+</ul>
+<h4 id="2.-%E4%BF%AE%E6%94%B9-requirements.txt%EF%BC%88%E9%80%82%E9%85%8D%E7%89%88%E6%9C%AC%EF%BC%89">2. 修改 requirements.txt（适配版本）</h4>
+<p>打开 <code>yolov5-7.0</code> 文件夹中的 <code>requirements.txt</code>，调整 3 处配置：</p>
+<ul>
+<li><p><code>numpy==1.20.3</code>（指定版本，避免兼容问题）</p>
+</li>
+<li><p><code>pillow==8.3.0</code>（指定版本，适配 YOLOv5 7.0）</p>
+</li>
+<li><p>注释掉 <code>torch</code> 和 <code>torchvision</code> 相关行（已手动安装，避免重复安装为 CPU 版本）：</p>
+
+<pre class="language-Plain"><code class="language-Plain">
+# torch&gt;=1.7.0
+# torchvision&gt;=0.8.1
+</code></pre>
+</li>
+</ul>
+<h4 id="3.-%E5%AE%89%E8%A3%85-YOLOv5-%E4%BE%9D%E8%B5%96">3. 安装 YOLOv5 依赖</h4>
+<ol>
+<li><p>进入源码目录：</p>
+<ul>
+<li><p>方法 1：CMD 中执行 <code>cd Desktop\yolov5-7.0</code>（根据实际解压路径调整）。</p>
+</li>
+<li><p>方法 2：打开 <code>yolov5-7.0</code> 文件夹，地址栏输入 <code>CMD</code> 回车（直接进入当前目录的 CMD）。</p>
+</li>
+</ul>
+</li>
+<li><p>激活环境（若已退出）：<code>conda activate yolov5</code>。</p>
+</li>
+<li><p>安装依赖：</p>
+
+<pre class="language-Bash"><code class="language-Bash">
+pip install -r requirements.txt
+</code></pre>
+<ul>
+<li>验证：无报错且显示「Successfully installed」即依赖安装完成。</li>
+</ul>
+</li>
+</ol>
+<h3 id="%E7%AC%AC%E5%85%AD%E6%AD%A5%EF%BC%9A%E6%A8%A1%E5%9E%8B%E6%A3%80%E6%B5%8B%EF%BC%88%E9%AA%8C%E8%AF%81%E7%8E%AF%E5%A2%83%E6%98%AF%E5%90%A6%E7%94%9F%E6%95%88%EF%BC%89">第六步：模型检测（验证环境是否生效）</h3>
+<h4 id="1.-%E4%B8%8B%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B">1. 下载预训练模型</h4>
+<ul>
+<li><p>首次运行 <code>detect.py</code> 时，系统会自动下载 <code>yolov5s.pt</code> 预训练模型（约 140M）。</p>
+</li>
+<li><p>加速方案：若终端下载慢，复制终端中显示的模型下载链接，用浏览器下载，下载后复制到 <code>yolov5-7.0</code> 根目录。</p>
+</li>
+</ul>
+<h4 id="2.-%E8%BF%90%E8%A1%8C%E6%A3%80%E6%B5%8B%E8%84%9A%E6%9C%AC">2. 运行检测脚本</h4>
+<p>在 <code>yolov5-7.0</code> 目录的 CMD 中执行：</p>
+
+<pre class="language-Bash"><code class="language-Bash">
+python detect.py
+</code></pre>
+<h4 id="3.-%E9%AA%8C%E8%AF%81%E7%BB%93%E6%9E%9C">3. 验证结果</h4>
+<ul>
+<li><p>若终端显示 <code>GPU:0</code> 或 <code>CUDA:</code> 相关信息，说明 GPU 版本生效。</p>
+</li>
+<li><p>若显示 <code>CPU</code>，说明环境配置失败（需检查 PyTorch 安装版本与显卡适配性）。</p>
+</li>
+<li><p>检测结果：生成 <code>runs/detect/exp2</code> 文件夹，内含测试图片的检测结果（框选目标），即环境搭建成功。</p>
+</li>
+</ul>
+<h2 id="%E4%B8%89%E3%80%81%E5%85%B3%E9%94%AE%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">三、关键注意事项</h2>
+<ol>
+<li><p>路径规范：所有安装路径、文件夹名称必须纯英文无空格，否则会导致脚本运行失败。</p>
+</li>
+<li><p>版本匹配：Python 3.8 + PyTorch 1.8.2 + YOLOv5 7.0 为稳定组合，不可随意升级版本。</p>
+</li>
+<li><p>无需额外安装 CUDA/CUDNN：PyTorch 已内置对应版本，仅需显卡驱动支持即可调用 GPU。</p>
+</li>
+<li><p>常见问题：</p>
+<ul>
+<li><p>环境激活失败：检查 Miniconda 是否添加到系统 PATH。</p>
+</li>
+<li><p>依赖安装报错：删除 <code>requirements.txt</code> 中冲突的包版本，重新执行 <code>pip install</code>。</p>
+</li>
+<li><p>GPU 调用失败：确认显卡型号、CUDA 版本、驱动版本三者匹配，重新安装 PyTorch。</p>
+</li>
+</ul>
+</li>
+</ol>
+
+                        
+                    </div>
+                </div>
+                <div id="previous_next">
+                    <div id="previous">
+                        
+                        <a href="/note/机器人项目笔记/YOLO/YOLOv5 模型训练.html">
+                            <span class="icon"></span>
+                            <span class="label">YOLOv5 模型训练</span>
+                        </a>
+                        
+                    </div>
+                    <div id="next">
+                        
+                        <a href="/note/机器人项目笔记/YOLO/YOLOv5：Pycharm 与 AutoDL 远程连接.html">
+                            <span class="label">YOLOv5：Pycharm 与 AutoDL 远程连接</span>
+                            <span class="icon"></span>
+                        </a>
+                        
+                    </div>
+                </div>
+                <div id="comments-container"></div>
+            </div>
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="to_top" href="#"></a>
+    <div id="doc_footer">
+        <div id="footer">
+            <div id="footer_top">
+                <ul>
+<li><a>链接</a><ul><li><a target="_blank" href="https://teedoc.neucrack.com">网站使用 teedoc 生成</a></li>
+<li><a target="_blank" href="https://neucrack.com">Copyright © 2021 Neucrack</a></li>
+<li><a  href="/note/sitemap.xml">网站地图</a></li>
+</ul>
+</li>
+<li><a>源码</a><ul><li><a target="_blank" href="https://github.com/HiNice2cu/note/">github</a></li>
+<li><a target="_blank" href="https://github.com/teedoc/teedoc">本网站源文件</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div id="footer_bottom">
+                <ul>
+<li><a target="_blank" href="https://beian.miit.gov.cn">渝ICP备19015320号</a></li>
+<li><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030602004109">粤公网安备44030602004109号</a></li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+    
+        <script src="/note/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+        <script type="text/javascript">
+                var transLoaded = false;
+                var loading = false;
+                var domain = "translate.google.com";
+                var domainDefault = domain;
+                var storeDomain = localStorage.getItem("googleTransDomain");
+                if(storeDomain){
+                    domain = storeDomain;
+                    console.log("load google translate domain from local storage:" + domain);
+                }
+                function getUrl(domain){
+                    if(domain == "/")
+                        return "/static/js/google_translate/element.js?cb=googleTranslateElementInit";
+                    else
+                        return "https://" + domain + "/translate_a/element.js?cb=googleTranslateElementInit";
+                }
+                var url = getUrl(domain);
+                console.log("google translate domain:" + domain + ", url: " + url);
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({pageLanguage: "auto", layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                }
+                function loadJS( url, callback ){
+                    var script = document.createElement('script');
+                    fn = callback || function(){ };
+                    script.type = 'text/javascript';
+                    if(script.readyState){
+                        script.onreadystatechange = function(){
+                            if( script.readyState == 'loaded' || script.readyState == 'complete' ){
+                                script.onreadystatechange = null;
+                                fn();
+                            }
+                        };
+                    }else{
+                        script.onload = function(){
+                            fn();
+                        };
+                    }
+                    script.src = url;
+                    document.getElementsByTagName('head')[0].appendChild(script);
+                }
+                function removeHint(){
+                    var hint = document.getElementById("loadingTranslate");
+                    if(hint){
+                        hint.remove();
+                    }
+                }
+                var btn = document.getElementById("google_translate_element");
+                btn.onclick = function(){
+                    if(transLoaded) return;
+                    if(loading){
+                        var flag = confirm("loading from " + domain + ", please wait, or change domain?");
+                        if(flag){
+                            newDomain = prompt("domain, default: " + domainDefault + ", now: " + domain);
+                            if(newDomain){
+                                domain = newDomain;
+                                console.log(domain);
+                                url = getUrl(domain);
+                                loadJS(url, function(){
+                                    localStorage.setItem("googleTransDomain", domain);
+                                    removeHint()
+                                    transLoaded = true;
+                                });
+                            }
+                        }
+                        return;
+                    }
+                    btn.innerHTML = '<span id="loadingTranslate"><img class="icon" src="/note/static/image/google_translate/translate.svg"/>Loading ...</span>';
+                    loading = true;
+                    loadJS(url, function(){
+                        localStorage.setItem("googleTransDomain", domain);
+                        removeHint()
+                        transLoaded = true;
+                    });
+                }
+                </script>
+            
+    
+        <script src="/note/static/js/theme_default/tocbot.min.js"></script>
+    
+        <script src="/note/static/js/theme_default/main.js"></script>
+    
+        <script src="/note/static/js/theme_default/viewer.min.js"></script>
+    
+        <script src="/note/static/css/theme_default/prism.min.js"></script>
+    
+        <script src="/note/static/js/search/search_main.js"></script>
+    
+        <script src="/note/static/js/plugin_blog/main.js"></script>
+    
+        <link rel="stylesheet" href="/note/static/js/add_hint/style.css" type="text/css"/>
+    
+        <script src="/note/static/js/add_hint/main.js"></script>
+    
+        <script src="/note/static/js/gitalk/gitalk.min.js"></script>
+    
+        <script src="/note/static/js/gitalk/main.js"></script>
+    
+        <script src="/note/static/js/custom.js"></script>
+    
+</body>
+
+</html>

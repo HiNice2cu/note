@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"  class="">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="keywords" content="">
+    
+    
+    <meta name="description" content="">
+    
+    <meta name="generator" content="teedoc">
+    <meta name="theme" content="teedoc-plugin-theme-default">
+    
+        
+        <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
+        
+        <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+        
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+        <meta name="html-generator" content="teedoc-plugin-jupyter-notebook-parser">
+        
+        <script src="/note/static/js/theme_default/pre_main.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/prism.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/viewer.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/dark.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/light.css" type="text/css"/>
+        
+        <script src="/note/static/js/theme_default/jquery.min.js"></script>
+        
+        <script src="/note/static/js/theme_default/split.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/search/style.css" type="text/css"/>
+        
+        <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4d52982572d5512e9762879ebf063c86";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+        
+        <meta name="blog-generator" content="teedoc-plugin-blog">
+        
+        <link rel="stylesheet" href="/note/static/css/gitalk/gitalk.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/gitalk/custom_gitalk.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/custom.css" type="text/css"/>
+        
+    
+    
+    <title>YOLOv5 数据集构建 - niuniu's Note</title>
+    
+    <script type="text/javascript">js_vars = {"teedoc-plugin-ad-hint": {"type": "hint", "label": "☆", "content": "这是一个支持国际化的消息示例</br>喜欢项目请<a target=\"_blank\" href=\"https://github.com/teedoc/teedoc\">点下 ☆ star </a>哦~🦀🦀", "show_times": 2, "show_after_s": 432000, "date": "2021-11-16 14:40", "color": "#a0421d", "link_color": "#e53935", "link_bg_color": "#e6ae5c", "bg_color": "#ffcf89", "color_hover": "white", "bg_color_hover": "#f57c00", "close_color": "#eab971"}}</script>
+    <script type="text/javascript">metadata = {"tags": [], "date": null, "update": [], "ts": 0, "author": "", "brief": "", "cover": ""}</script>
+</head>
+
+
+<body class="type_doc">
+    
+    <div id="navbar">
+        <div id="navbar_menu">
+            <a class="site_title" href="/note/">
+                
+                    <img class="site_logo" src="/note/static/image/logo.png" alt="niuniu logo">
+                
+                
+                    <h2>niuniu</h2>
+                
+        </a>
+            <a id="navbar_menu_btn"></a>
+        </div>
+        <div id="navbar_items">
+            <div>
+                <ul id="nav_left">
+<li class=""><a  href="/note/blog/">博客</a></li>
+<li class="active"><a  href="/note/机器人项目笔记/">机器人项目笔记</a></li>
+<li class=""><a  href="/note/小智笔记/">小智笔记</a></li>
+</ul>
+
+            </div>
+            <div>
+                <ul id="nav_right">
+<li class=""><a target="_blank" href="https://github.com/HiNice2cu/note/">github</a></li>
+</ul>
+
+                <ul class="nav_plugins"><li><a id="google_translate_element"><img class="icon" src="/note/static/image/google_translate/translate.svg"/>Translate</a></li></ul><ul class="nav_plugins"><li><a id="themes" class="light"></a></li></ul><ul class="nav_plugins"><li><a id="search"><span class="icon"></span><span class="placeholder">搜索</span>
+                            <div id="search_hints">
+                                <span id="search_input_hint">输入关键词，多关键词空格隔开</span>
+                                <span id="search_loading_hint">正在加载，请稍候。。。</span>
+                                <span id="search_download_err_hint">下载文件失败，请刷新重试或检查网络</span>
+                                <span id="search_other_docs_result_hint">来自其它文档的结果</span>
+                                <span id="search_curr_doc_result_hint">当前文档搜索结果</span>
+                            </div></a></li></ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="wrapper">
+        <div id="sidebar_wrapper">
+            <div id="sidebar">
+                <div id="sidebar_title">
+                    
+                </div>
+                <ul class="show">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/index.html"><span class="label">README</span><span class=""></span></a></li>
+<li class="not_active no_link"><a><span class="label">ROS</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/ROS/ROS 基础流程.html"><span class="label">ROS 基础流程</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/ROS/ROS入门指南：什么是ROS？.html"><span class="label">ROS入门指南：什么是ROS？</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="active_parent no_link"><a><span class="label">YOLO</span><span class="sub_indicator"></span></a><ul class="show">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 Gradio搭建Web GUI.html"><span class="label">YOLOv5 Gradio搭建Web GUI</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 Pyside6 可视化界面.html"><span class="label">YOLOv5 Pyside6 可视化界面</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 VS Code 与 AutoDL 远程连接.html"><span class="label">YOLOv5 VS Code 与 AutoDL 远程连接</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 使用 AutoDL 服务器训练.html"><span class="label">YOLOv5 使用 AutoDL 服务器训练</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 修改网络结构（以C2f为例）.html"><span class="label">YOLOv5 修改网络结构（以C2f为例）</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 引入 SE 注意力机制.html"><span class="label">YOLOv5 引入 SE 注意力机制</span><span class=""></span></a></li>
+<li class="active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 数据集构建.html"><span class="label">YOLOv5 数据集构建</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 模型检测.html"><span class="label">YOLOv5 模型检测</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 模型结构与构建原理.html"><span class="label">YOLOv5 模型结构与构建原理</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 模型训练.html"><span class="label">YOLOv5 模型训练</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5 环境安装.html"><span class="label">YOLOv5 环境安装</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLOv5：Pycharm 与 AutoDL 远程连接.html"><span class="label">YOLOv5：Pycharm 与 AutoDL 远程连接</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLO物体检测原理与应用.html"><span class="label">YOLO物体检测原理与应用</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="not_active no_link"><a><span class="label">本地模型部署与强化学习算法</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/本地模型部署与强化学习算法/index.html"><span class="label">README</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/本地模型部署与强化学习算法/本地模型部署与强化学习算法简单概念.html"><span class="label">本地模型部署与强化学习算法简单概念</span><span class=""></span></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+        <div id="article">
+            <div id="menu_wrapper">
+                <div id="menu">
+                </div>
+            </div>
+            <div id="content_wrapper">
+                <div id="content_body">
+                    <div id="article_head">
+                        <div id="article_title">
+                            
+                            <h1>YOLOv5 数据集构建</h1>
+                            
+                        </div>
+                        <div id="article_tags">
+                            <ul>
+                            
+                            </ul>
+                        </div>
+                        <div id="article_info">
+                        <div id="article_info_left">
+                            <span class="article_author">
+                                
+                            </span>
+                            
+                                <span class="article_date" title="最后修改日期： 2026-01-26">
+                                    2026-01-26
+                                </span>
+                            
+                        </div>
+                        <div id="article_info_right">
+                            
+                            <div id="source_link">
+                                <a href="https://github.com/HiNice2cu/note/tree/master/doc/机器人项目笔记/YOLO/YOLOv5 数据集构建.md" target="_blank">
+                                    编辑本页
+                                </a>
+                            </div>
+                            
+                        </div>
+                        </div>
+                    </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
+                    <div id="update_history">
+                        
+                    </div>
+                    <div id="article_content">
+                        
+                            <h2 id="%E4%B8%80%E3%80%81%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86%E6%A0%B8%E5%BF%83%E8%A6%81%E7%82%B9">一、数据收集核心要点</h2>
+<p>数据收集是数据集构建的前提，需覆盖目标场景的多样性，确保模型泛化能力。实操中主要分为图片和视频两种数据类型，适配不同原始数据场景。</p>
+<ul>
+<li><p><strong>图片类型数据</strong>：若直接获取图片（如网络爬取、相机拍摄），可直接用于后续标注，无需额外预处理。需注意图片分辨率适中，目标物体清晰，避免模糊、过度曝光等问题，同时保证图片数量覆盖不同角度、光线环境。</p>
+</li>
+<li><p><strong>视频类型数据</strong>：若仅拥有视频素材，可通过 OpenCV 工具进行抽帧处理，将视频转化为连续图片。该方式能快速扩充数据集规模，尤其适合动态场景的数据收集（如实操中“死神VS火影”视频案例）。</p>
+</li>
+</ul>
+<p>关键原则：无论哪种数据类型，最终需将所有图片统一存放至指定文件夹（如 <code>images</code>），确保路径纯英文无空格，便于后续工具调用。</p>
+<h2 id="%E4%BA%8C%E3%80%81OpenCV-%E8%A7%86%E9%A2%91%E6%8A%BD%E5%B8%A7%E5%AE%9E%E6%93%8D">二、OpenCV 视频抽帧实操</h2>
+<p>本章节以 40 秒左右的视频为例，演示如何通过 OpenCV 提取图片帧，解决颜色异常问题，并设置间隔帧减少冗余图片。</p>
+<h3 id="1.-%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87">1. 前期准备</h3>
+<ol>
+<li><p>环境确认：确保已在 yolov5 虚拟环境中安装 OpenCV，若未安装可执行命令：<br />
+     <code>pip install opencv-python matplotlib</code><br />
+     （matplotlib 用于图片可视化，辅助调试抽帧效果）</p>
+</li>
+<li><p>文件夹创建：新建名为 <code>images</code> 的文件夹，用于存放提取后的图片，建议与视频文件同级目录，便于路径管理。</p>
+</li>
+</ol>
+<h3 id="2.-%E5%9F%BA%E7%A1%80%E6%8A%BD%E5%B8%A7%E4%BB%A3%E7%A0%81%EF%BC%88%E5%90%AB%E9%A2%9C%E8%89%B2%E6%A0%A1%E6%AD%A3%EF%BC%89">2. 基础抽帧代码（含颜色校正）</h3>
+<p>OpenCV 读取视频默认采用 BGR 颜色通道，直接显示会出现颜色异常，需转换为 RGB 通道才能正常可视化。</p>
+
+<pre class="language-Python"><code class="language-Python">
+# 导入依赖库
+import cv2
+import matplotlib.pyplot as plt
+
+# 打开视频文件（替换为自己的视频路径）
+video = cv2.VideoCapture(&quot;./BVN.mp4&quot;)
+
+# 读取一帧视频
+ret, frame = video.read()
+
+# 颜色通道转换：BGR → RGB（解决颜色异常问题）
+plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+</code></pre>
+<h4 id="%E4%BB%A3%E7%A0%81%E5%85%B3%E9%94%AE%E8%AF%B4%E6%98%8E">代码关键说明</h4>
+<ul>
+<li><p><code>cv2.VideoCapture()</code>：传入视频路径，创建视频读取对象，路径支持绝对路径（如 <code>C:/data/video.mp4</code>）和相对路径。</p>
+</li>
+<li><p><code>ret</code> 与 <code>frame</code>：<code>ret</code> 为布尔值，<code>True</code> 表示读取成功，<code>False</code> 表示视频读取结束；<code>frame</code> 为当前帧的图像数据。</p>
+</li>
+<li><p><code>cv2.cvtColor()</code>：核心颜色转换函数，<code>cv2.COLOR_BGR2RGB</code> 为转换参数，确保图片显示颜色与原始视频一致。</p>
+</li>
+</ul>
+<h3 id="3.-%E5%AE%8C%E6%95%B4%E6%8A%BD%E5%B8%A7%E4%BB%A3%E7%A0%81%EF%BC%88%E9%97%B4%E9%9A%94%E5%B8%A7%E8%AE%BE%E7%BD%AE%EF%BC%89">3. 完整抽帧代码（间隔帧设置）</h3>
+<p>视频帧速率通常为 30 帧/秒，直接抽帧会生成大量冗余图片，实操中设置间隔帧（如每隔 30 帧保存一张），平衡数据集规模与多样性。</p>
+
+<pre class="language-Python"><code class="language-Python">
+video=cv2.VideoCapture(&quot;./BVN.mp4&quot;)
+num=0
+save_step=30
+while True:
+    ret, frame = video.read()
+    if not ret:
+        break
+    num += 1
+    if num % save_step == 0:
+        cv2.imwrite(&quot;./images/&quot;+str(num)+&quot;.jpg&quot;, frame)
+</code></pre>
+<h4 id="%E5%AE%9E%E6%93%8D%E9%AA%8C%E8%AF%81">实操验证</h4>
+<p>执行代码后，打开 <code>images</code> 文件夹，可看到按间隔帧保存的图片（如 30.jpg、60.jpg、90.jpg），说明抽帧逻辑正常。若需调整图片数量，可修改 <code>save_step</code> 参数（值越大，保存图片越少；值越小，保存图片越密集）。</p>
+<h2 id="%E4%B8%89%E3%80%81LabelImg-%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8">三、LabelImg 标注工具安装与使用</h2>
+<p>LabelImg 是一款轻量型可视化标注工具，支持 YOLO 格式标注文件生成，操作简单且适配 YOLOv5 模型需求，无需源码编译，可直接通过 pip 安装。</p>
+<h3 id="1.-%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%EF%BC%88yolov5-%E7%8E%AF%E5%A2%83%E9%80%82%E9%85%8D%EF%BC%89">1. 工具安装（yolov5 环境适配）</h3>
+<ol>
+<li><p>打开 CMD，激活 yolov5 虚拟环境：<br />
+     <code>conda a</code> <code>ctivate yolov5</code></p>
+</li>
+<li><p>执行安装命令，自动下载并安装 LabelImg：<br />
+     <code>pip install labelimg</code>说明：无需遵循官网源码编译流程，pip 安装可直接完成环境集成，国内源（前文配置的清华源）可加速下载。</p>
+</li>
+</ol>
+<h3 id="2.-%E5%B7%A5%E5%85%B7%E5%90%AF%E5%8A%A8%E4%B8%8E%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE">2. 工具启动与基础设置</h3>
+<h4 id="%E5%90%AF%E5%8A%A8%E6%AD%A5%E9%AA%A4">启动步骤</h4>
+<ol>
+<li><p>在激活的 yolov5 环境中，直接输入命令启动 LabelImg：<br />
+     <code>labelimg</code></p>
+</li>
+<li><p>启动后将弹出标注窗口，需完成两项核心设置：</p>
+<ul>
+<li><p><strong>选择图片文件夹</strong>：点击顶部「Open Dir」，选择前文抽帧后的 <code>images</code> 文件夹，加载所有待标注图片。</p>
+</li>
+<li><p><strong>选择标注结果保存文件夹</strong>：点击顶部「Change Save Dir」，新建并选择 <code>labels</code> 文件夹（与 <code>images</code> 同级），用于存放标注生成的 TXT 文件。</p>
+</li>
+<li><p><strong>切换标注格式</strong>：点击顶部「Save」下拉菜单，将格式从默认的「PascalVOC」切换为「YOLO」，确保生成的标注文件适配 YOLOv5。</p>
+</li>
+<li><p><strong>开启自动保存</strong>：勾选顶部「View」→「Auto Save Mode」，标注完成后自动保存，无需手动点击保存按钮。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="3.-%E6%A0%87%E6%B3%A8%E5%AE%9E%E6%93%8D%E6%B5%81%E7%A8%8B%EF%BC%88%E4%BB%A5%E2%80%9Cdaitu%E2%80%9D%E2%80%9Cmingren%E2%80%9D%E6%A0%87%E6%B3%A8%E4%B8%BA%E4%BE%8B%EF%BC%89">3. 标注实操流程（以“daitu”“mingren”标注为例）</h3>
+<ol>
+<li><p><strong>创建标注框</strong>：</p>
+<ul>
+<li><p>快捷键<code>W</code>：快速创建矩形标注框（或右键选择「Create RectBox」）。</p>
+</li>
+<li><p>拖动鼠标框选图片中的目标物体（如“daitu”），松开后弹出标签输入框，输入目标类别名称（如“daitu”），点击「OK」完成单个目标标注。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>多目标标注</strong>：重复步骤 1，框选图片中的其他目标（如“mingren”），输入对应类别名称，完成单张图片全目标标注。</p>
+</li>
+<li><p><strong>批量标注</strong>：</p>
+<ul>
+<li><p>快捷键 <code>D</code>：切换至下一张图片。</p>
+</li>
+<li><p>快捷键 <code>A</code>：切换至上一张图片，便于修改标注内容。</p>
+</li>
+<li><p>按上述流程逐张标注，标注过程中可通过「View」→「Display Labels」查看已标注框，校验标注准确性。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="4.-%E6%A0%87%E6%B3%A8%E7%BB%93%E6%9E%9C%E8%A7%A3%E6%9E%90">4. 标注结果解析</h3>
+<p>批量标注完成后，打开 <code>labels</code> 文件夹，将生成两类文件，与 <code>images</code>文件夹中的图片一一对应，为后续模型训练提供数据支撑。</p>
+<ul>
+<li><p>第一列（0/1）：类别索引，对应 <code>classes.txt</code> 中的类别顺序（0 为“daitu”，1 为“mingren”）。</p>
+</li>
+<li><p><strong>TXT 标注文件</strong>：<br />
+      每个图片对应一个同名 TXT 文件，文件内容格式如下（以“daitu”和“mingren”为例）</p>
+</li>
+<li><p><strong>classes.txt 文件</strong>：自动生成的类别清单，记录所有标注类别名称（如“daitu”“mingren”），顺序与 TXT 文件中的类别索引对应，不可随意修改顺序。</p>
+</li>
+</ul>
+
+                        
+                    </div>
+                </div>
+                <div id="previous_next">
+                    <div id="previous">
+                        
+                        <a href="/note/机器人项目笔记/YOLO/YOLOv5 引入 SE 注意力机制.html">
+                            <span class="icon"></span>
+                            <span class="label">YOLOv5 引入 SE 注意力机制</span>
+                        </a>
+                        
+                    </div>
+                    <div id="next">
+                        
+                        <a href="/note/机器人项目笔记/YOLO/YOLOv5 模型检测.html">
+                            <span class="label">YOLOv5 模型检测</span>
+                            <span class="icon"></span>
+                        </a>
+                        
+                    </div>
+                </div>
+                <div id="comments-container"></div>
+            </div>
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="to_top" href="#"></a>
+    <div id="doc_footer">
+        <div id="footer">
+            <div id="footer_top">
+                <ul>
+<li><a>链接</a><ul><li><a target="_blank" href="https://teedoc.neucrack.com">网站使用 teedoc 生成</a></li>
+<li><a target="_blank" href="https://neucrack.com">Copyright © 2021 Neucrack</a></li>
+<li><a  href="/note/sitemap.xml">网站地图</a></li>
+</ul>
+</li>
+<li><a>源码</a><ul><li><a target="_blank" href="https://github.com/HiNice2cu/note/">github</a></li>
+<li><a target="_blank" href="https://github.com/teedoc/teedoc">本网站源文件</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div id="footer_bottom">
+                <ul>
+<li><a target="_blank" href="https://beian.miit.gov.cn">渝ICP备19015320号</a></li>
+<li><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030602004109">粤公网安备44030602004109号</a></li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+    
+        <script src="/note/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+        <script type="text/javascript">
+                var transLoaded = false;
+                var loading = false;
+                var domain = "translate.google.com";
+                var domainDefault = domain;
+                var storeDomain = localStorage.getItem("googleTransDomain");
+                if(storeDomain){
+                    domain = storeDomain;
+                    console.log("load google translate domain from local storage:" + domain);
+                }
+                function getUrl(domain){
+                    if(domain == "/")
+                        return "/static/js/google_translate/element.js?cb=googleTranslateElementInit";
+                    else
+                        return "https://" + domain + "/translate_a/element.js?cb=googleTranslateElementInit";
+                }
+                var url = getUrl(domain);
+                console.log("google translate domain:" + domain + ", url: " + url);
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({pageLanguage: "auto", layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                }
+                function loadJS( url, callback ){
+                    var script = document.createElement('script');
+                    fn = callback || function(){ };
+                    script.type = 'text/javascript';
+                    if(script.readyState){
+                        script.onreadystatechange = function(){
+                            if( script.readyState == 'loaded' || script.readyState == 'complete' ){
+                                script.onreadystatechange = null;
+                                fn();
+                            }
+                        };
+                    }else{
+                        script.onload = function(){
+                            fn();
+                        };
+                    }
+                    script.src = url;
+                    document.getElementsByTagName('head')[0].appendChild(script);
+                }
+                function removeHint(){
+                    var hint = document.getElementById("loadingTranslate");
+                    if(hint){
+                        hint.remove();
+                    }
+                }
+                var btn = document.getElementById("google_translate_element");
+                btn.onclick = function(){
+                    if(transLoaded) return;
+                    if(loading){
+                        var flag = confirm("loading from " + domain + ", please wait, or change domain?");
+                        if(flag){
+                            newDomain = prompt("domain, default: " + domainDefault + ", now: " + domain);
+                            if(newDomain){
+                                domain = newDomain;
+                                console.log(domain);
+                                url = getUrl(domain);
+                                loadJS(url, function(){
+                                    localStorage.setItem("googleTransDomain", domain);
+                                    removeHint()
+                                    transLoaded = true;
+                                });
+                            }
+                        }
+                        return;
+                    }
+                    btn.innerHTML = '<span id="loadingTranslate"><img class="icon" src="/note/static/image/google_translate/translate.svg"/>Loading ...</span>';
+                    loading = true;
+                    loadJS(url, function(){
+                        localStorage.setItem("googleTransDomain", domain);
+                        removeHint()
+                        transLoaded = true;
+                    });
+                }
+                </script>
+            
+    
+        <script src="/note/static/js/theme_default/tocbot.min.js"></script>
+    
+        <script src="/note/static/js/theme_default/main.js"></script>
+    
+        <script src="/note/static/js/theme_default/viewer.min.js"></script>
+    
+        <script src="/note/static/css/theme_default/prism.min.js"></script>
+    
+        <script src="/note/static/js/search/search_main.js"></script>
+    
+        <script src="/note/static/js/plugin_blog/main.js"></script>
+    
+        <link rel="stylesheet" href="/note/static/js/add_hint/style.css" type="text/css"/>
+    
+        <script src="/note/static/js/add_hint/main.js"></script>
+    
+        <script src="/note/static/js/gitalk/gitalk.min.js"></script>
+    
+        <script src="/note/static/js/gitalk/main.js"></script>
+    
+        <script src="/note/static/js/custom.js"></script>
+    
+</body>
+
+</html>

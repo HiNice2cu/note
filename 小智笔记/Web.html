@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"  class="">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="keywords" content="">
+    
+    
+    <meta name="description" content="">
+    
+    <meta name="generator" content="teedoc">
+    <meta name="theme" content="teedoc-plugin-theme-default">
+    
+        
+        <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
+        
+        <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+        
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+        <meta name="html-generator" content="teedoc-plugin-jupyter-notebook-parser">
+        
+        <script src="/note/static/js/theme_default/pre_main.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/prism.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/viewer.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/dark.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/light.css" type="text/css"/>
+        
+        <script src="/note/static/js/theme_default/jquery.min.js"></script>
+        
+        <script src="/note/static/js/theme_default/split.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/search/style.css" type="text/css"/>
+        
+        <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4d52982572d5512e9762879ebf063c86";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+        
+        <meta name="blog-generator" content="teedoc-plugin-blog">
+        
+        <link rel="stylesheet" href="/note/static/css/gitalk/gitalk.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/gitalk/custom_gitalk.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/custom.css" type="text/css"/>
+        
+    
+    
+    <title>Web - niuniu's Note</title>
+    
+    <script type="text/javascript">js_vars = {"teedoc-plugin-ad-hint": {"type": "hint", "label": "☆", "content": "这是一个支持国际化的消息示例</br>喜欢项目请<a target=\"_blank\" href=\"https://github.com/teedoc/teedoc\">点下 ☆ star </a>哦~🦀🦀", "show_times": 2, "show_after_s": 432000, "date": "2021-11-16 14:40", "color": "#a0421d", "link_color": "#e53935", "link_bg_color": "#e6ae5c", "bg_color": "#ffcf89", "color_hover": "white", "bg_color_hover": "#f57c00", "close_color": "#eab971"}}</script>
+    <script type="text/javascript">metadata = {"tags": [], "date": null, "update": [], "ts": 0, "author": "", "brief": "", "cover": ""}</script>
+</head>
+
+
+<body class="type_doc">
+    
+    <div id="navbar">
+        <div id="navbar_menu">
+            <a class="site_title" href="/note/">
+                
+                    <img class="site_logo" src="/note/static/image/logo.png" alt="niuniu logo">
+                
+                
+                    <h2>niuniu</h2>
+                
+        </a>
+            <a id="navbar_menu_btn"></a>
+        </div>
+        <div id="navbar_items">
+            <div>
+                <ul id="nav_left">
+<li class=""><a  href="/note/blog/">博客</a></li>
+<li class=""><a  href="/note/机器人项目笔记/">机器人项目笔记</a></li>
+<li class="active"><a  href="/note/小智笔记/">小智笔记</a></li>
+</ul>
+
+            </div>
+            <div>
+                <ul id="nav_right">
+<li class=""><a target="_blank" href="https://github.com/HiNice2cu/note/">github</a></li>
+</ul>
+
+                <ul class="nav_plugins"><li><a id="google_translate_element"><img class="icon" src="/note/static/image/google_translate/translate.svg"/>Translate</a></li></ul><ul class="nav_plugins"><li><a id="themes" class="light"></a></li></ul><ul class="nav_plugins"><li><a id="search"><span class="icon"></span><span class="placeholder">搜索</span>
+                            <div id="search_hints">
+                                <span id="search_input_hint">输入关键词，多关键词空格隔开</span>
+                                <span id="search_loading_hint">正在加载，请稍候。。。</span>
+                                <span id="search_download_err_hint">下载文件失败，请刷新重试或检查网络</span>
+                                <span id="search_other_docs_result_hint">来自其它文档的结果</span>
+                                <span id="search_curr_doc_result_hint">当前文档搜索结果</span>
+                            </div></a></li></ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="wrapper">
+        <div id="sidebar_wrapper">
+            <div id="sidebar">
+                <div id="sidebar_title">
+                    
+                </div>
+                <ul class="show">
+<li class="not_active with_link"><a href="/note/小智笔记/index.html"><span class="label">README</span><span class=""></span></a></li>
+<li class="active with_link"><a href="/note/小智笔记/Web.html"><span class="label">Web</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/小智笔记/定时器.html"><span class="label">定时器</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/小智笔记/背光backlight.html"><span class="label">背光backlight</span><span class=""></span></a></li>
+</ul>
+
+            </div>
+        </div>
+        <div id="article">
+            <div id="menu_wrapper">
+                <div id="menu">
+                </div>
+            </div>
+            <div id="content_wrapper">
+                <div id="content_body">
+                    <div id="article_head">
+                        <div id="article_title">
+                            
+                            <h1>Web</h1>
+                            
+                        </div>
+                        <div id="article_tags">
+                            <ul>
+                            
+                            </ul>
+                        </div>
+                        <div id="article_info">
+                        <div id="article_info_left">
+                            <span class="article_author">
+                                
+                            </span>
+                            
+                                <span class="article_date" title="最后修改日期： 2026-01-21">
+                                    2026-01-21
+                                </span>
+                            
+                        </div>
+                        <div id="article_info_right">
+                            
+                            <div id="source_link">
+                                <a href="https://github.com/HiNice2cu/note/tree/master/doc/小智笔记/Web.md" target="_blank">
+                                    编辑本页
+                                </a>
+                            </div>
+                            
+                        </div>
+                        </div>
+                    </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
+                    <div id="update_history">
+                        
+                    </div>
+                    <div id="article_content">
+                        
+                            <h2 id="mqtt">mqtt</h2>
+<p>例:温度传感器作为客户端连接到 MQTT Broker，并通过发布操作将温度数据发布到一个特定主题（例如 <code>Temperature</code>）。MQTT Broker 接收到该消息后会负责将其转发给订阅了相应主题（<code>Temperature</code>）的订阅者客户端。</p>
+<p><img src="https://q-1336166460.cos.ap-beijing.myqcloud.com/p/202511162000873.png" alt="image-20251116200014788" /></p>
+<p>mqtt_self.cc</p>
+<p>mqtt_self.h</p>
+<p>application.cc</p>
+<p>application.h</p>
+<h4 id="mqtt_self.h">mqtt_self.h</h4>
+<h5 id="%E5%88%9B%E5%BB%BA%E7%B1%BB">创建类</h5>
+
+<pre class="language-c++"><code class="language-c++">#ifndef MQTT_SELF_H
+#define MQTT_SELF_H
+
+#include &lt;mqtt.h&gt;
+#include &lt;memory&gt;
+
+
+class mqtt_self
+{
+private:
+    std::unique_ptr&lt;Mqtt&gt; mqtt_;
+
+    /* data */
+public:
+    mqtt_self(/* args */);
+    ~mqtt_self();
+};
+
+
+#endif
+</code></pre>
+<h4 id="mqtt_self.cc">mqtt_self.cc</h4>
+<h5 id="%E5%AE%9E%E7%8E%B0%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%3A">实现构造函数:</h5>
+<p><img src="C:%5CUsers%5C12804%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20251116202658417.png" alt="image-20251116202658417" /></p>
+<p>mqtt_-&gt;Subscribe(&quot;qin/+&quot;, 2)</p>
+<p><img src="C:%5CUsers%5C12804%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20251116202635577.png" alt="image-20251116202635577" /></p>
+<p>mqtt_-&gt;Connect(&quot;115.190.41.147&quot;, 1883, &quot;client_id&quot;, &quot;&quot;, &quot;&quot;)</p>
+
+<pre class="language-c++"><code class="language-c++">#include &quot;mqtt_self.h&quot;
+#include &quot;board.h&quot;
+#include &lt;esp_log.h&gt;
+
+#define TAG &quot;MQTT_SELF&quot;
+
+mqtt_self::mqtt_self(/* args */)
+{
+    auto network=Board::GetInstance().GetNetwork();
+    mqtt_=network-&gt;CreateMqtt(1);
+    mqtt_-&gt;SetKeepAlive(90);
+
+    mqtt_-&gt;OnDisconnected([this]() {
+        ESP_LOGW(TAG, &quot;MQTT disconnected, scheduling reconnect&quot;);
+    });
+
+    mqtt_-&gt;OnConnected([this]() {
+        ESP_LOGI(TAG, &quot;MQTT connected&quot;);
+        if (!mqtt_-&gt;Subscribe(&quot;qin/+&quot;, 2)) {
+            ESP_LOGE(TAG, &quot;Failed to subscribe to topic&quot;);
+        }
+    });
+
+    mqtt_-&gt;OnMessage([this](const std::string&amp; topic, const std::string&amp; payload) {
+        ESP_LOGI(TAG, &quot;Received message on topic %s: %s&quot;, topic.c_str(), payload.c_str());
+    });
+
+    if (!mqtt_-&gt;Connect(&quot;115.190.41.147&quot;, 1883, &quot;client_id&quot;, &quot;&quot;, &quot;&quot;)) {
+        ESP_LOGE(TAG, &quot;Failed to connect to endpoint&quot;);
+        return;
+    }
+
+    ESP_LOGI(TAG, &quot;Connected to endpoint&quot;);
+}
+
+mqtt_self::~mqtt_self()
+{
+}
+
+</code></pre>
+<h4 id="application.h">application.h</h4>
+
+<pre class="language-c++"><code class="language-c++">private:
+    mqtt_self* mqtt_client_ = nullptr;
+</code></pre>
+<h4 id="application.cc">application.cc</h4>
+
+<pre class="language-c++"><code class="language-c++">void Application::Start(){
+    ...
+    mqtt_client_ = new mqtt_self();
+}
+</code></pre>
+<h2 id="http">http</h2>
+<h4 id="http_self.h">http_self.h</h4>
+<h5 id="%E5%88%9B%E5%BB%BA%E7%B1%BB">创建类</h5>
+
+<pre class="language-c++"><code class="language-c++">#ifndef HTTP_SELF_H
+#define HTTP_SELF_H
+
+class http_self
+{
+private:
+    /* data */
+public:
+    http_self(/* args */);
+    ~http_self();
+};
+#endif
+</code></pre>
+<h4 id="http_self.cc">http_self.cc</h4>
+<ul>
+<li>网络模块初始化</li>
+<li>HTTP GET 请求</li>
+<li>状态码检查</li>
+<li>响应长度获取</li>
+<li>循环读取数据</li>
+<li>JSON 解析</li>
+<li>数组元素提取</li>
+<li>字段验证</li>
+<li>资源清理</li>
+<li>析构函数</li>
+</ul>
+
+<pre class="language-c++"><code class="language-c++">#include &quot;http_self.h&quot;
+#include &quot;board.h&quot;
+#include &lt;esp_log.h&gt;
+#include &quot;http.h&quot;
+#include &quot;cJSON.h&quot;
+#define TAG &quot;HTTP_SELF&quot;
+
+http_self::http_self(/* args */)
+{
+    auto network=Board::GetInstance().GetNetwork();
+    auto http=network-&gt;CreateHttp(2);
+
+    if (!http-&gt;Open(&quot;GET&quot;, &quot;https://www.xvsenfeng.top/shops/shoplists/?boardID=24EC4A0AA884&quot;)) {
+        ESP_LOGE(TAG, &quot;Failed to open HTTP connection&quot;);
+        return ;
+    }
+
+    if (http-&gt;GetStatusCode() != 200) {
+        ESP_LOGE(TAG, &quot;Failed to get firmware, status code: %d&quot;, http-&gt;GetStatusCode());
+        return ;
+    }
+
+    size_t content_length = http-&gt;GetBodyLength();
+    if (content_length == 0) {
+        ESP_LOGE(TAG, &quot;Failed to get content length&quot;);
+        return ;
+    }
+
+    char buffer[600];
+    size_t total_read = 0;
+    while (true) {
+        int ret = http-&gt;Read(buffer, sizeof(buffer));
+        if (ret &lt; 0) {
+            ESP_LOGE(TAG, &quot;Failed to read HTTP data: %s&quot;, esp_err_to_name(ret));
+            return;
+        }
+        ESP_LOGI(TAG, &quot;Read %s&quot;, buffer);
+        total_read += ret;
+        buffer[total_read] = 0;
+        if(total_read&gt;=content_length){
+
+            break;
+        }
+    }
+
+
+    cJSON* root = cJSON_Parse(buffer);
+    if (root == nullptr) {
+        ESP_LOGE(TAG, &quot;Failed to parse json message %s&quot;,buffer);
+        return;
+    }
+
+    cJSON *item =cJSON_GetArrayItem(root, 1);
+
+    cJSON* type = cJSON_GetObjectItem(item, &quot;id&quot;);
+    if (!cJSON_IsNumber(type)) {
+        ESP_LOGE(TAG, &quot;Message type is invalid&quot;);
+        cJSON_Delete(root);
+        return;
+    }
+
+    ESP_LOGI(TAG, &quot;id: %d&quot;, type-&gt;valueint);
+    cJSON_Delete(root);
+    http-&gt;Close();
+}
+http_self::~http_self()
+{
+}
+</code></pre>
+<h4 id="application.h%E5%92%8Capplication.cc%E5%90%8Cmqtt">application.h和application.cc同mqtt</h4>
+
+                        
+                    </div>
+                </div>
+                <div id="previous_next">
+                    <div id="previous">
+                        
+                        <a href="/note/小智笔记/index.html">
+                            <span class="icon"></span>
+                            <span class="label">README</span>
+                        </a>
+                        
+                    </div>
+                    <div id="next">
+                        
+                        <a href="/note/小智笔记/定时器.html">
+                            <span class="label">定时器</span>
+                            <span class="icon"></span>
+                        </a>
+                        
+                    </div>
+                </div>
+                <div id="comments-container"></div>
+            </div>
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="to_top" href="#"></a>
+    <div id="doc_footer">
+        <div id="footer">
+            <div id="footer_top">
+                <ul>
+<li><a>链接</a><ul><li><a target="_blank" href="https://teedoc.neucrack.com">网站使用 teedoc 生成</a></li>
+<li><a target="_blank" href="https://neucrack.com">Copyright © 2021 Neucrack</a></li>
+<li><a  href="/note/sitemap.xml">网站地图</a></li>
+</ul>
+</li>
+<li><a>源码</a><ul><li><a target="_blank" href="https://github.com/HiNice2cu/note/">github</a></li>
+<li><a target="_blank" href="https://github.com/teedoc/teedoc">本网站源文件</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div id="footer_bottom">
+                <ul>
+<li><a target="_blank" href="https://beian.miit.gov.cn">渝ICP备19015320号</a></li>
+<li><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030602004109">粤公网安备44030602004109号</a></li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+    
+        <script src="/note/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+        <script type="text/javascript">
+                var transLoaded = false;
+                var loading = false;
+                var domain = "translate.google.com";
+                var domainDefault = domain;
+                var storeDomain = localStorage.getItem("googleTransDomain");
+                if(storeDomain){
+                    domain = storeDomain;
+                    console.log("load google translate domain from local storage:" + domain);
+                }
+                function getUrl(domain){
+                    if(domain == "/")
+                        return "/static/js/google_translate/element.js?cb=googleTranslateElementInit";
+                    else
+                        return "https://" + domain + "/translate_a/element.js?cb=googleTranslateElementInit";
+                }
+                var url = getUrl(domain);
+                console.log("google translate domain:" + domain + ", url: " + url);
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({pageLanguage: "auto", layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                }
+                function loadJS( url, callback ){
+                    var script = document.createElement('script');
+                    fn = callback || function(){ };
+                    script.type = 'text/javascript';
+                    if(script.readyState){
+                        script.onreadystatechange = function(){
+                            if( script.readyState == 'loaded' || script.readyState == 'complete' ){
+                                script.onreadystatechange = null;
+                                fn();
+                            }
+                        };
+                    }else{
+                        script.onload = function(){
+                            fn();
+                        };
+                    }
+                    script.src = url;
+                    document.getElementsByTagName('head')[0].appendChild(script);
+                }
+                function removeHint(){
+                    var hint = document.getElementById("loadingTranslate");
+                    if(hint){
+                        hint.remove();
+                    }
+                }
+                var btn = document.getElementById("google_translate_element");
+                btn.onclick = function(){
+                    if(transLoaded) return;
+                    if(loading){
+                        var flag = confirm("loading from " + domain + ", please wait, or change domain?");
+                        if(flag){
+                            newDomain = prompt("domain, default: " + domainDefault + ", now: " + domain);
+                            if(newDomain){
+                                domain = newDomain;
+                                console.log(domain);
+                                url = getUrl(domain);
+                                loadJS(url, function(){
+                                    localStorage.setItem("googleTransDomain", domain);
+                                    removeHint()
+                                    transLoaded = true;
+                                });
+                            }
+                        }
+                        return;
+                    }
+                    btn.innerHTML = '<span id="loadingTranslate"><img class="icon" src="/note/static/image/google_translate/translate.svg"/>Loading ...</span>';
+                    loading = true;
+                    loadJS(url, function(){
+                        localStorage.setItem("googleTransDomain", domain);
+                        removeHint()
+                        transLoaded = true;
+                    });
+                }
+                </script>
+            
+    
+        <script src="/note/static/js/theme_default/tocbot.min.js"></script>
+    
+        <script src="/note/static/js/theme_default/main.js"></script>
+    
+        <script src="/note/static/js/theme_default/viewer.min.js"></script>
+    
+        <script src="/note/static/css/theme_default/prism.min.js"></script>
+    
+        <script src="/note/static/js/search/search_main.js"></script>
+    
+        <script src="/note/static/js/plugin_blog/main.js"></script>
+    
+        <link rel="stylesheet" href="/note/static/js/add_hint/style.css" type="text/css"/>
+    
+        <script src="/note/static/js/add_hint/main.js"></script>
+    
+        <script src="/note/static/js/gitalk/gitalk.min.js"></script>
+    
+        <script src="/note/static/js/gitalk/main.js"></script>
+    
+        <script src="/note/static/js/custom.js"></script>
+    
+</body>
+
+</html>
