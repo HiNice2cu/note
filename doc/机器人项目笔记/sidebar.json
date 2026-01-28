@@ -29,6 +29,22 @@
                     "file": "YOLO\\YOLOv5 Pyside6 可视化界面.md"
                 },
                 {
+                    "label": "YOLOv5 VS Code 与 AutoDL 远程连接",
+                    "file": "YOLO\\YOLOv5 VS Code 与 AutoDL 远程连接.md"
+                },
+                {
+                    "label": "YOLOv5 使用 AutoDL 服务器训练",
+                    "file": "YOLO\\YOLOv5 使用 AutoDL 服务器训练.md"
+                },
+                {
+                    "label": "YOLOv5 修改网络结构（以C2f为例）",
+                    "file": "YOLO\\YOLOv5 修改网络结构（以C2f为例）.md"
+                },
+                {
+                    "label": "YOLOv5 引入 SE 注意力机制",
+                    "file": "YOLO\\YOLOv5 引入 SE 注意力机制.md"
+                },
+                {
                     "label": "YOLOv5 数据集构建",
                     "file": "YOLO\\YOLOv5 数据集构建.md"
                 },
@@ -37,12 +53,20 @@
                     "file": "YOLO\\YOLOv5 模型检测.md"
                 },
                 {
+                    "label": "YOLOv5 模型结构与构建原理",
+                    "file": "YOLO\\YOLOv5 模型结构与构建原理.md"
+                },
+                {
                     "label": "YOLOv5 模型训练",
                     "file": "YOLO\\YOLOv5 模型训练.md"
                 },
                 {
                     "label": "YOLOv5 环境安装",
                     "file": "YOLO\\YOLOv5 环境安装.md"
+                },
+                {
+                    "label": "YOLOv5：Pycharm 与 AutoDL 远程连接",
+                    "file": "YOLO\\YOLOv5：Pycharm 与 AutoDL 远程连接.md"
                 },
                 {
                     "label": "YOLO物体检测原理与应用",
