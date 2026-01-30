@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"  class="">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="keywords" content="">
+    
+    
+    <meta name="description" content="">
+    
+    <meta name="generator" content="teedoc">
+    <meta name="theme" content="teedoc-plugin-theme-default">
+    
+        
+        <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
+        
+        <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+        
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+        <meta name="html-generator" content="teedoc-plugin-jupyter-notebook-parser">
+        
+        <script src="/note/static/js/theme_default/pre_main.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/prism.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/viewer.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/dark.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/light.css" type="text/css"/>
+        
+        <script src="/note/static/js/theme_default/jquery.min.js"></script>
+        
+        <script src="/note/static/js/theme_default/split.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/search/style.css" type="text/css"/>
+        
+        <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4d52982572d5512e9762879ebf063c86";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+        
+        <meta name="blog-generator" content="teedoc-plugin-blog">
+        
+        <link rel="stylesheet" href="/note/static/css/gitalk/gitalk.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/gitalk/custom_gitalk.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/custom.css" type="text/css"/>
+        
+    
+    
+    <title>YOLOv5 模型检测 - niuniu's Note</title>
+    
+    <script type="text/javascript">js_vars = {"teedoc-plugin-ad-hint": {"type": "hint", "label": "☆", "content": "这是一个支持国际化的消息示例</br>喜欢项目请<a target=\"_blank\" href=\"https://github.com/teedoc/teedoc\">点下 ☆ star </a>哦~🦀🦀", "show_times": 2, "show_after_s": 432000, "date": "2021-11-16 14:40", "color": "#a0421d", "link_color": "#e53935", "link_bg_color": "#e6ae5c", "bg_color": "#ffcf89", "color_hover": "white", "bg_color_hover": "#f57c00", "close_color": "#eab971"}}</script>
+    <script type="text/javascript">metadata = {"tags": [], "date": null, "update": [], "ts": 0, "author": "", "brief": "", "cover": ""}</script>
+</head>
+
+
+<body class="type_doc">
+    
+    <div id="navbar">
+        <div id="navbar_menu">
+            <a class="site_title" href="/note/">
+                
+                    <img class="site_logo" src="/note/static/image/logo.png" alt="niuniu logo">
+                
+                
+                    <h2>niuniu</h2>
+                
+        </a>
+            <a id="navbar_menu_btn"></a>
+        </div>
+        <div id="navbar_items">
+            <div>
+                <ul id="nav_left">
+<li class=""><a  href="/note/blog/">博客</a></li>
+<li class="active"><a  href="/note/机器人项目笔记/">机器人项目笔记</a></li>
+<li class=""><a  href="/note/小智笔记/">小智笔记</a></li>
+</ul>
+
+            </div>
+            <div>
+                <ul id="nav_right">
+<li class=""><a target="_blank" href="https://github.com/HiNice2cu/note/">github</a></li>
+</ul>
+
+                <ul class="nav_plugins"><li><a id="google_translate_element"><img class="icon" src="/note/static/image/google_translate/translate.svg"/>Translate</a></li></ul><ul class="nav_plugins"><li><a id="themes" class="light"></a></li></ul><ul class="nav_plugins"><li><a id="search"><span class="icon"></span><span class="placeholder">搜索</span>
+                            <div id="search_hints">
+                                <span id="search_input_hint">输入关键词，多关键词空格隔开</span>
+                                <span id="search_loading_hint">正在加载，请稍候。。。</span>
+                                <span id="search_download_err_hint">下载文件失败，请刷新重试或检查网络</span>
+                                <span id="search_other_docs_result_hint">来自其它文档的结果</span>
+                                <span id="search_curr_doc_result_hint">当前文档搜索结果</span>
+                            </div></a></li></ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="wrapper">
+        <div id="sidebar_wrapper">
+            <div id="sidebar">
+                <div id="sidebar_title">
+                    
+                </div>
+                <ul class="show">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/index.html"><span class="label">README</span><span class=""></span></a></li>
+<li class="not_active no_link"><a><span class="label">ROS</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/ROS/ROS 基础流程.html"><span class="label">ROS 基础流程</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/ROS/ROS入门指南：什么是ROS？.html"><span class="label">ROS入门指南：什么是ROS？</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="active_parent no_link"><a><span class="label">YOLO</span><span class="sub_indicator"></span></a><ul class="show">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.1-YOLOv5 环境安装.html"><span class="label">1.1-YOLOv5 环境安装</span><span class=""></span></a></li>
+<li class="active with_link"><a href="/note/机器人项目笔记/YOLO/1.2-YOLOv5 模型检测.html"><span class="label">1.2-YOLOv5 模型检测</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.3-YOLOv5 数据集构建.html"><span class="label">1.3-YOLOv5 数据集构建</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.4-YOLOv5 模型训练.html"><span class="label">1.4-YOLOv5 模型训练</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.5-YOLOv5 Pyside6 可视化界面.html"><span class="label">1.5-YOLOv5 Pyside6 可视化界面</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.6-YOLOv5 Gradio搭建Web GUI.html"><span class="label">1.6-YOLOv5 Gradio搭建Web GUI</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/2.1-YOLOv5 使用 AutoDL 服务器训练.html"><span class="label">2.1-YOLOv5 使用 AutoDL 服务器训练</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/2.2-YOLOv5：Pycharm 与 AutoDL 远程连接.html"><span class="label">2.2-YOLOv5：Pycharm 与 AutoDL 远程连接</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/2.3-YOLOv5 VS Code 与 AutoDL 远程连接.html"><span class="label">2.3-YOLOv5 VS Code 与 AutoDL 远程连接</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.1-YOLOv5 模型结构与构建原理.html"><span class="label">3.1-YOLOv5 模型结构与构建原理</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.2-YOLOv5 修改网络结构（以C2f为例）.html"><span class="label">3.2-YOLOv5 修改网络结构（以C2f为例）</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.3-YOLOv5 引入 SE 注意力机制.html"><span class="label">3.3-YOLOv5 引入 SE 注意力机制</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.4-YOLOv5 替换主干网络（以 MobileNetV3 为例).html"><span class="label">3.4-YOLOv5 替换主干网络（以 MobileNetV3 为例)</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/4.1-YOLOv5 Torchhub 模型预测进阶.html"><span class="label">4.1-YOLOv5 Torchhub 模型预测进阶</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/4.2-基于Flask的YOLOv5项目部署.html"><span class="label">4.2-基于Flask的YOLOv5项目部署</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLO物体检测原理与应用.html"><span class="label">YOLO物体检测原理与应用</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="not_active no_link"><a><span class="label">本地模型部署与强化学习算法</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/本地模型部署与强化学习算法/index.html"><span class="label">README</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/本地模型部署与强化学习算法/本地模型部署与强化学习算法简单概念.html"><span class="label">本地模型部署与强化学习算法简单概念</span><span class=""></span></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+        <div id="article">
+            <div id="menu_wrapper">
+                <div id="menu">
+                </div>
+            </div>
+            <div id="content_wrapper">
+                <div id="content_body">
+                    <div id="article_head">
+                        <div id="article_title">
+                            
+                            <h1>YOLOv5 模型检测</h1>
+                            
+                        </div>
+                        <div id="article_tags">
+                            <ul>
+                            
+                            </ul>
+                        </div>
+                        <div id="article_info">
+                        <div id="article_info_left">
+                            <span class="article_author">
+                                
+                            </span>
+                            
+                                <span class="article_date" title="最后修改日期： 2026-01-30">
+                                    2026-01-30
+                                </span>
+                            
+                        </div>
+                        <div id="article_info_right">
+                            
+                            <div id="source_link">
+                                <a href="https://github.com/HiNice2cu/note/tree/master/doc/机器人项目笔记/YOLO/1.2-YOLOv5 模型检测.md" target="_blank">
+                                    编辑本页
+                                </a>
+                            </div>
+                            
+                        </div>
+                        </div>
+                    </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
+                    <div id="update_history">
+                        
+                    </div>
+                    <div id="article_content">
+                        
+                            <h2 id="%E4%B8%80%E3%80%81YOLOv5-%E6%A8%A1%E5%9E%8B%E7%89%88%E6%9C%AC%E9%80%89%E5%9E%8B">一、YOLOv5 模型版本选型</h2>
+<h3 id="1.-%E6%A8%A1%E5%9E%8B%E5%AE%B6%E6%97%8F%E7%89%88%E6%9C%AC%E5%B7%AE%E5%BC%82">1. 模型家族版本差异</h3>
+<p>YOLOv5 提供 N、S、M、L、X 五个核心版本，结构框架一致，核心差异体现在参数量、推理速度与检测精度（MAP 指标），需根据硬件性能和业务需求选择：</p>
+<table>
+<thead>
+<tr>
+  <th>模型版本</th>
+  <th>参数量</th>
+  <th>推理速度</th>
+  <th>检测精度（MAP）</th>
+  <th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>YOLOv5N</td>
+  <td>1.9M（最小）</td>
+  <td>最快</td>
+  <td>最低</td>
+  <td>轻量设备、实时性优先场景（如边缘设备）</td>
+</tr>
+<tr>
+  <td>YOLOv5S</td>
+  <td>中等（倒数第二小）</td>
+  <td>较快</td>
+  <td>中等</td>
+  <td>平衡速度与精度，日常实操首选（前文环境验证默认模型）</td>
+</tr>
+<tr>
+  <td>YOLOv5M/L</td>
+  <td>递增</td>
+  <td>中等</td>
+  <td>中高</td>
+  <td>PC 端、对精度有一定要求的场景</td>
+</tr>
+<tr>
+  <td>YOLOv5X</td>
+  <td>最大</td>
+  <td>最慢</td>
+  <td>最高</td>
+  <td>高性能 GPU 设备、精度优先场景（如精密检测）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2.-%E6%A8%A1%E5%9E%8B%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F">2. 模型获取方式</h3>
+<ul>
+<li><p>自动下载：首次运行 <code>detect.py</code> 时，脚本会自动下载默认的 <code>yolov5s.pt</code> 模型（约 140M），保存至 YOLOv5 根目录。</p>
+</li>
+<li><p>手动下载：访问 YOLOv5 官方 GitHub 仓库 → 进入 Releases 页面 → 选择对应版本（如 V7.0）→ 下载所需模型文件（.pt 格式），手动放置到 YOLOv5 根目录（适合网络不佳时加速）。</p>
+</li>
+</ul>
+<h2 id="%E4%BA%8C%E3%80%81detect.py-%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3">二、detect.py 核心参数详解</h2>
+<p>通过命令行指定参数调用 <code>detect.py</code>，核心语法：<code>python detect.py --参数名 参数值</code>，以下为高频必用参数及实操演示。</p>
+<h3 id="1.---weights%EF%BC%88%E6%8C%87%E5%AE%9A%E6%A8%A1%E5%9E%8B%E6%96%87%E4%BB%B6%EF%BC%89">1. --weights（指定模型文件）</h3>
+<p>作用：指定用于推理的预训练模型或自定义训练模型，是检测的核心参数。</p>
+<h4 id="%E5%AE%9E%E6%93%8D%E7%A4%BA%E4%BE%8B">实操示例</h4>
+
+<pre class="language-Bash"><code class="language-Bash">
+# 使用 YOLOv5S 模型推理（默认模型，可省略--weights参数）
+python detect.py --weights yolov5s.pt
+
+# 切换 YOLOv5X 模型推理（需提前下载 yolov5x.pt 至根目录）
+python detect.py --weights yolov5x.pt
+</code></pre>
+<h4 id="%E6%95%88%E6%9E%9C%E5%AF%B9%E6%AF%94">效果对比</h4>
+<ul>
+<li><p>YOLOv5S：推理 2 张测试图，耗时分别为 120.19ms、3ms，检测结果为 4 人 + 1 辆车。</p>
+</li>
+<li><p>YOLOv5X：检测结果一致（精度略有提升），但推理时间显著增加，需权衡速度与精度选择。</p>
+</li>
+</ul>
+<h3 id="2.---source%EF%BC%88%E6%8C%87%E5%AE%9A%E6%A3%80%E6%B5%8B%E7%9B%AE%E6%A0%87%EF%BC%89">2. --source（指定检测目标）</h3>
+<p>作用：定义检测对象的来源，支持多种输入类型，参数值根据目标类型灵活设置。</p>
+<table>
+<thead>
+<tr>
+  <th>参数值类型</th>
+  <th>示例</th>
+  <th>功能说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>数字（摄像头）</td>
+  <td><code>--source 0</code></td>
+  <td>调用电脑默认摄像头，进行实时视频检测</td>
+</tr>
+<tr>
+  <td>图片路径</td>
+  <td><code>--source data/images/bus.jpg</code></td>
+  <td>检测单张图片（示例为 YOLOv5 自带测试图）</td>
+</tr>
+<tr>
+  <td>视频路径</td>
+  <td><code>--source test_video.mp4</code></td>
+  <td>对本地视频文件逐帧检测</td>
+</tr>
+<tr>
+  <td>特殊值（屏幕）</td>
+  <td><code>--source screen</code></td>
+  <td>对整个电脑屏幕实时检测，按 <code>Ctrl+C</code> 终止程序</td>
+</tr>
+</tbody>
+</table>
+<h4 id="%E5%AE%9E%E6%93%8D%E7%A4%BA%E4%BE%8B">实操示例</h4>
+
+<pre class="language-Bash"><code class="language-Bash">
+# 检测单张自带测试图
+python detect.py --weights yolov5s.pt --source data/images/bus.jpg
+
+# 对屏幕实时检测
+python detect.py --weights yolov5s.pt --source screen
+</code></pre>
+<p>说明：检测结果默认保存至 <code>runs/detect/expX</code> 文件夹（X 为递增数字，区分多次检测结果）。</p>
+<h3 id="3.---conf-thres%EF%BC%88%E7%BD%AE%E4%BF%A1%E5%BA%A6%E9%98%88%E5%80%BC%EF%BC%89">3. --conf-thres（置信度阈值）</h3>
+<p>作用：过滤低置信度检测框，仅显示置信度高于该阈值的目标，取值范围 0~1，默认值 0.25。</p>
+<ul>
+<li><p>阈值越低：检测框越多，可能包含误检目标（置信度低的候选框被保留）。</p>
+</li>
+<li><p>阈值越高：检测框越少，仅保留高置信度目标，可能过滤掉真实低置信度目标。</p>
+</li>
+</ul>
+<h4 id="%E5%AE%9E%E6%93%8D%E7%A4%BA%E4%BE%8B">实操示例</h4>
+
+<pre class="language-Bash"><code class="language-Bash">
+# 调高阈值至 0.8（仅保留高置信度目标）
+python detect.py --weights yolov5s.pt --source data/images/bus.jpg --conf-thres 0.8
+
+# 调低阈值至 0.05（保留更多候选框，易出现误检）
+python detect.py --weights yolov5s.pt --source data/images/bus.jpg --conf-thres 0.05
+</code></pre>
+<h4 id="%E6%95%88%E6%9E%9C%E5%AF%B9%E6%AF%94">效果对比</h4>
+<ul>
+<li><p>阈值 0.8：仅检测到 1 个 person，领带等低置信度目标被过滤。</p>
+</li>
+<li><p>阈值 0.05：检测框数量激增，出现大量低置信度误检目标，干扰有效结果。</p>
+</li>
+</ul>
+<h3 id="4.---iou-thres%EF%BC%88IOU-%E9%98%88%E5%80%BC%EF%BC%89">4. --iou-thres（IOU 阈值）</h3>
+<p>作用：基于非极大抑制（NMS）算法过滤重叠检测框，与置信度阈值逻辑相反，取值范围 0~1。</p>
+<ul>
+<li><p>阈值越低：过滤越严格，重叠框越少（仅保留最优框）。</p>
+</li>
+<li><p>阈值越高：保留的重叠框越多，可保留同一目标的多个候选框。</p>
+</li>
+</ul>
+<p>说明：无需深入理解 NMS 原理，实操中可根据重叠框情况微调，默认值 0.45 适用于多数场景。</p>
+<h3 id="5.-%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0">5. 其他常用参数</h3>
+<ul>
+<li><p><code>--img-size</code>：输入图像尺寸，默认 640（与 YOLOv5 预训练模型维度一致，建议不随意修改，避免影响精度）。</p>
+</li>
+<li><p><code>--max-det</code>：单张图片最大检测目标数量，默认值可满足日常需求，按需调整即可。</p>
+</li>
+<li><p><code>--device</code>：指定检测设备，不手动设置则自动匹配（优先 GPU，无 GPU 则用 CPU）。</p>
+</li>
+<li><p><code>--view-img</code>：检测过程中弹窗显示结果图片，便于实时查看。</p>
+</li>
+<li><p><code>--classes</code>：指定检测类别（如仅检测“人”），过滤无关类别，示例：<code>--classes 0</code>（0 对应 COCO 数据集的 person 类别）。</p>
+</li>
+<li><p><code>--no-save</code>：不保存检测结果，仅实时查看，适合调试场景。</p>
+</li>
+</ul>
+<h2 id="%E4%B8%89%E3%80%81%E5%9F%BA%E4%BA%8E-Torch-Hub-%E7%9A%84%E7%AE%80%E5%8C%96%E6%8E%A8%E7%90%86%EF%BC%88%E8%BD%BB%E9%87%8F%E5%8C%96%E5%B0%81%E8%A3%85%EF%BC%89">三、基于 Torch Hub 的简化推理（轻量化封装）</h2>
+<p>前文 <code>detect.py</code> 代码量较大，封装或嵌入可视化界面时较繁琐，Torch Hub 提供极简方案，仅需几行代码即可完成检测，且支持加载本地模型。</p>
+<h3 id="1.-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%EF%BC%88%E5%AE%89%E8%A3%85-Jupyter-Lab%EF%BC%89">1. 环境准备（安装 Jupyter Lab）</h3>
+<p>在激活的 yolov5 虚拟环境中执行安装命令：</p>
+
+<pre class="language-Bash"><code class="language-Bash">
+pip install jupyter lab
+</code></pre>
+<h3 id="2.-%E6%96%B0%E5%BB%BA-Notebook-%E6%96%87%E4%BB%B6">2. 新建 Notebook 文件</h3>
+<ol>
+<li><p>启动 Jupyter Lab：命令行输入 <code>jupyter lab</code>，自动打开浏览器界面。</p>
+</li>
+<li><p>新建文件：点击「New」→ 选择「Notebook（Python 3）」，命名为 <code>hub_detect.ipynb</code>。</p>
+</li>
+</ol>
+<h3 id="3.-%E6%9E%81%E7%AE%80%E6%8E%A8%E7%90%86%E4%BB%A3%E7%A0%81%EF%BC%88%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%9E%8B%EF%BC%89">3. 极简推理代码（支持本地模型）</h3>
+
+<pre class="language-Python"><code class="language-Python">
+# 1. 从 Torch Hub 加载模型（本地模型需指定 source='local'）
+import torch
+model = torch.hub.load('./', 'custom', path='yolov5s.pt', source='local')  # path 为本地模型路径
+
+# 2. 指定检测目标（图片路径）
+img = 'data/images/bus.jpg'  # 可替换为自定义图片路径
+
+# 3. 模型推理
+results = model(img)
+
+# 4. 展示检测结果
+results.show()
+</code></pre>
+<h4 id="%E4%BB%A3%E7%A0%81%E8%AF%B4%E6%98%8E">代码说明</h4>
+<ul>
+<li><p>加载本地模型：需将 <code>path</code> 参数设为本地 .pt 模型文件路径，同时指定 <code>source='local'</code>。</p>
+</li>
+<li><p>结果输出：<code>results.show()</code> 弹窗显示检测结果，也可通过 <code>results.save()</code> 保存结果至本地。</p>
+</li>
+<li><p>优势：代码精简，易于封装和嵌入可视化界面，虽参数不如 <code>detect.py</code> 全面，但可满足多数检测需求。</p>
+</li>
+</ul>
+<h2 id="%E5%9B%9B%E3%80%81%E6%A3%80%E6%B5%8B%E5%AE%9E%E6%88%98%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">四、检测实战注意事项</h2>
+<ol>
+<li><p>模型与环境匹配：确保使用的模型版本与 YOLOv5 源码版本兼容（本文均基于 V7.0，避免高版本模型适配低版本源码）。</p>
+</li>
+<li><p>硬件性能适配：YOLOv5X 等大模型需高性能 GPU 支持，否则推理速度极慢，低配置设备优先选 YOLOv5N/S。</p>
+</li>
+<li><p>参数微调逻辑：优先调整 <code>--conf-thres</code> 优化检测精度，重叠框过多时微调<code>--iou-thres</code>。</p>
+</li>
+<li><p>结果路径管理：多次检测后 <code>runs/detect/</code> 下会生成多个 exp 文件夹，建议按场景重命名，便于追溯结果。</p>
+</li>
+<li><p>终止实时检测：调用摄像头或屏幕检测时，需在命令行按 <code>Ctrl+C</code> 终止程序，避免后台占用资源。</p>
+</li>
+</ol>
+
+                        
+                    </div>
+                </div>
+                <div id="previous_next">
+                    <div id="previous">
+                        
+                        <a href="/note/机器人项目笔记/YOLO/1.1-YOLOv5 环境安装.html">
+                            <span class="icon"></span>
+                            <span class="label">1.1-YOLOv5 环境安装</span>
+                        </a>
+                        
+                    </div>
+                    <div id="next">
+                        
+                        <a href="/note/机器人项目笔记/YOLO/1.3-YOLOv5 数据集构建.html">
+                            <span class="label">1.3-YOLOv5 数据集构建</span>
+                            <span class="icon"></span>
+                        </a>
+                        
+                    </div>
+                </div>
+                <div id="comments-container"></div>
+            </div>
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="to_top" href="#"></a>
+    <div id="doc_footer">
+        <div id="footer">
+            <div id="footer_top">
+                <ul>
+<li><a>链接</a><ul><li><a target="_blank" href="https://teedoc.neucrack.com">网站使用 teedoc 生成</a></li>
+<li><a target="_blank" href="https://neucrack.com">Copyright © 2021 Neucrack</a></li>
+<li><a  href="/note/sitemap.xml">网站地图</a></li>
+</ul>
+</li>
+<li><a>源码</a><ul><li><a target="_blank" href="https://github.com/HiNice2cu/note/">github</a></li>
+<li><a target="_blank" href="https://github.com/teedoc/teedoc">本网站源文件</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div id="footer_bottom">
+                <ul>
+<li><a target="_blank" href="https://beian.miit.gov.cn">渝ICP备19015320号</a></li>
+<li><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030602004109">粤公网安备44030602004109号</a></li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+    
+        <script src="/note/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+        <script type="text/javascript">
+                var transLoaded = false;
+                var loading = false;
+                var domain = "translate.google.com";
+                var domainDefault = domain;
+                var storeDomain = localStorage.getItem("googleTransDomain");
+                if(storeDomain){
+                    domain = storeDomain;
+                    console.log("load google translate domain from local storage:" + domain);
+                }
+                function getUrl(domain){
+                    if(domain == "/")
+                        return "/static/js/google_translate/element.js?cb=googleTranslateElementInit";
+                    else
+                        return "https://" + domain + "/translate_a/element.js?cb=googleTranslateElementInit";
+                }
+                var url = getUrl(domain);
+                console.log("google translate domain:" + domain + ", url: " + url);
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({pageLanguage: "auto", layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                }
+                function loadJS( url, callback ){
+                    var script = document.createElement('script');
+                    fn = callback || function(){ };
+                    script.type = 'text/javascript';
+                    if(script.readyState){
+                        script.onreadystatechange = function(){
+                            if( script.readyState == 'loaded' || script.readyState == 'complete' ){
+                                script.onreadystatechange = null;
+                                fn();
+                            }
+                        };
+                    }else{
+                        script.onload = function(){
+                            fn();
+                        };
+                    }
+                    script.src = url;
+                    document.getElementsByTagName('head')[0].appendChild(script);
+                }
+                function removeHint(){
+                    var hint = document.getElementById("loadingTranslate");
+                    if(hint){
+                        hint.remove();
+                    }
+                }
+                var btn = document.getElementById("google_translate_element");
+                btn.onclick = function(){
+                    if(transLoaded) return;
+                    if(loading){
+                        var flag = confirm("loading from " + domain + ", please wait, or change domain?");
+                        if(flag){
+                            newDomain = prompt("domain, default: " + domainDefault + ", now: " + domain);
+                            if(newDomain){
+                                domain = newDomain;
+                                console.log(domain);
+                                url = getUrl(domain);
+                                loadJS(url, function(){
+                                    localStorage.setItem("googleTransDomain", domain);
+                                    removeHint()
+                                    transLoaded = true;
+                                });
+                            }
+                        }
+                        return;
+                    }
+                    btn.innerHTML = '<span id="loadingTranslate"><img class="icon" src="/note/static/image/google_translate/translate.svg"/>Loading ...</span>';
+                    loading = true;
+                    loadJS(url, function(){
+                        localStorage.setItem("googleTransDomain", domain);
+                        removeHint()
+                        transLoaded = true;
+                    });
+                }
+                </script>
+            
+    
+        <script src="/note/static/js/theme_default/tocbot.min.js"></script>
+    
+        <script src="/note/static/js/theme_default/main.js"></script>
+    
+        <script src="/note/static/js/theme_default/viewer.min.js"></script>
+    
+        <script src="/note/static/css/theme_default/prism.min.js"></script>
+    
+        <script src="/note/static/js/search/search_main.js"></script>
+    
+        <script src="/note/static/js/plugin_blog/main.js"></script>
+    
+        <link rel="stylesheet" href="/note/static/js/add_hint/style.css" type="text/css"/>
+    
+        <script src="/note/static/js/add_hint/main.js"></script>
+    
+        <script src="/note/static/js/gitalk/gitalk.min.js"></script>
+    
+        <script src="/note/static/js/gitalk/main.js"></script>
+    
+        <script src="/note/static/js/custom.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"  class="">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="keywords" content="">
+    
+    
+    <meta name="description" content="">
+    
+    <meta name="generator" content="teedoc">
+    <meta name="theme" content="teedoc-plugin-theme-default">
+    
+        
+        <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
+        
+        <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+        
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+        <meta name="html-generator" content="teedoc-plugin-jupyter-notebook-parser">
+        
+        <script src="/note/static/js/theme_default/pre_main.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/prism.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/viewer.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/dark.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/light.css" type="text/css"/>
+        
+        <script src="/note/static/js/theme_default/jquery.min.js"></script>
+        
+        <script src="/note/static/js/theme_default/split.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/search/style.css" type="text/css"/>
+        
+        <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4d52982572d5512e9762879ebf063c86";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+        
+        <meta name="blog-generator" content="teedoc-plugin-blog">
+        
+        <link rel="stylesheet" href="/note/static/css/gitalk/gitalk.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/gitalk/custom_gitalk.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/custom.css" type="text/css"/>
+        
+    
+    
+    <title>YOLOv5 模型结构与构建原理 - niuniu's Note</title>
+    
+    <script type="text/javascript">js_vars = {"teedoc-plugin-ad-hint": {"type": "hint", "label": "☆", "content": "这是一个支持国际化的消息示例</br>喜欢项目请<a target=\"_blank\" href=\"https://github.com/teedoc/teedoc\">点下 ☆ star </a>哦~🦀🦀", "show_times": 2, "show_after_s": 432000, "date": "2021-11-16 14:40", "color": "#a0421d", "link_color": "#e53935", "link_bg_color": "#e6ae5c", "bg_color": "#ffcf89", "color_hover": "white", "bg_color_hover": "#f57c00", "close_color": "#eab971"}}</script>
+    <script type="text/javascript">metadata = {"tags": [], "date": null, "update": [], "ts": 0, "author": "", "brief": "", "cover": ""}</script>
+</head>
+
+
+<body class="type_doc">
+    
+    <div id="navbar">
+        <div id="navbar_menu">
+            <a class="site_title" href="/note/">
+                
+                    <img class="site_logo" src="/note/static/image/logo.png" alt="niuniu logo">
+                
+                
+                    <h2>niuniu</h2>
+                
+        </a>
+            <a id="navbar_menu_btn"></a>
+        </div>
+        <div id="navbar_items">
+            <div>
+                <ul id="nav_left">
+<li class=""><a  href="/note/blog/">博客</a></li>
+<li class="active"><a  href="/note/机器人项目笔记/">机器人项目笔记</a></li>
+<li class=""><a  href="/note/小智笔记/">小智笔记</a></li>
+</ul>
+
+            </div>
+            <div>
+                <ul id="nav_right">
+<li class=""><a target="_blank" href="https://github.com/HiNice2cu/note/">github</a></li>
+</ul>
+
+                <ul class="nav_plugins"><li><a id="google_translate_element"><img class="icon" src="/note/static/image/google_translate/translate.svg"/>Translate</a></li></ul><ul class="nav_plugins"><li><a id="themes" class="light"></a></li></ul><ul class="nav_plugins"><li><a id="search"><span class="icon"></span><span class="placeholder">搜索</span>
+                            <div id="search_hints">
+                                <span id="search_input_hint">输入关键词，多关键词空格隔开</span>
+                                <span id="search_loading_hint">正在加载，请稍候。。。</span>
+                                <span id="search_download_err_hint">下载文件失败，请刷新重试或检查网络</span>
+                                <span id="search_other_docs_result_hint">来自其它文档的结果</span>
+                                <span id="search_curr_doc_result_hint">当前文档搜索结果</span>
+                            </div></a></li></ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="wrapper">
+        <div id="sidebar_wrapper">
+            <div id="sidebar">
+                <div id="sidebar_title">
+                    
+                </div>
+                <ul class="show">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/index.html"><span class="label">README</span><span class=""></span></a></li>
+<li class="not_active no_link"><a><span class="label">ROS</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/ROS/ROS 基础流程.html"><span class="label">ROS 基础流程</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/ROS/ROS入门指南：什么是ROS？.html"><span class="label">ROS入门指南：什么是ROS？</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="active_parent no_link"><a><span class="label">YOLO</span><span class="sub_indicator"></span></a><ul class="show">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.1-YOLOv5 环境安装.html"><span class="label">1.1-YOLOv5 环境安装</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.2-YOLOv5 模型检测.html"><span class="label">1.2-YOLOv5 模型检测</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.3-YOLOv5 数据集构建.html"><span class="label">1.3-YOLOv5 数据集构建</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.4-YOLOv5 模型训练.html"><span class="label">1.4-YOLOv5 模型训练</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.5-YOLOv5 Pyside6 可视化界面.html"><span class="label">1.5-YOLOv5 Pyside6 可视化界面</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.6-YOLOv5 Gradio搭建Web GUI.html"><span class="label">1.6-YOLOv5 Gradio搭建Web GUI</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/2.1-YOLOv5 使用 AutoDL 服务器训练.html"><span class="label">2.1-YOLOv5 使用 AutoDL 服务器训练</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/2.2-YOLOv5：Pycharm 与 AutoDL 远程连接.html"><span class="label">2.2-YOLOv5：Pycharm 与 AutoDL 远程连接</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/2.3-YOLOv5 VS Code 与 AutoDL 远程连接.html"><span class="label">2.3-YOLOv5 VS Code 与 AutoDL 远程连接</span><span class=""></span></a></li>
+<li class="active with_link"><a href="/note/机器人项目笔记/YOLO/3.1-YOLOv5 模型结构与构建原理.html"><span class="label">3.1-YOLOv5 模型结构与构建原理</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.2-YOLOv5 修改网络结构（以C2f为例）.html"><span class="label">3.2-YOLOv5 修改网络结构（以C2f为例）</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.3-YOLOv5 引入 SE 注意力机制.html"><span class="label">3.3-YOLOv5 引入 SE 注意力机制</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.4-YOLOv5 替换主干网络（以 MobileNetV3 为例).html"><span class="label">3.4-YOLOv5 替换主干网络（以 MobileNetV3 为例)</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/4.1-YOLOv5 Torchhub 模型预测进阶.html"><span class="label">4.1-YOLOv5 Torchhub 模型预测进阶</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/4.2-基于Flask的YOLOv5项目部署.html"><span class="label">4.2-基于Flask的YOLOv5项目部署</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLO物体检测原理与应用.html"><span class="label">YOLO物体检测原理与应用</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="not_active no_link"><a><span class="label">本地模型部署与强化学习算法</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/本地模型部署与强化学习算法/index.html"><span class="label">README</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/本地模型部署与强化学习算法/本地模型部署与强化学习算法简单概念.html"><span class="label">本地模型部署与强化学习算法简单概念</span><span class=""></span></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+        <div id="article">
+            <div id="menu_wrapper">
+                <div id="menu">
+                </div>
+            </div>
+            <div id="content_wrapper">
+                <div id="content_body">
+                    <div id="article_head">
+                        <div id="article_title">
+                            
+                            <h1>YOLOv5 模型结构与构建原理</h1>
+                            
+                        </div>
+                        <div id="article_tags">
+                            <ul>
+                            
+                            </ul>
+                        </div>
+                        <div id="article_info">
+                        <div id="article_info_left">
+                            <span class="article_author">
+                                
+                            </span>
+                            
+                                <span class="article_date" title="最后修改日期： 2026-01-30">
+                                    2026-01-30
+                                </span>
+                            
+                        </div>
+                        <div id="article_info_right">
+                            
+                            <div id="source_link">
+                                <a href="https://github.com/HiNice2cu/note/tree/master/doc/机器人项目笔记/YOLO/3.1-YOLOv5 模型结构与构建原理.md" target="_blank">
+                                    编辑本页
+                                </a>
+                            </div>
+                            
+                        </div>
+                        </div>
+                    </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
+                    <div id="update_history">
+                        
+                    </div>
+                    <div id="article_content">
+                        
+                            <h3 id="%E4%B8%80%E3%80%81%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84%E7%9A%84%E5%AE%9A%E4%B9%89%E4%BD%8D%E7%BD%AE%E4%B8%8E%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6">一、模型结构的定义位置与核心文件</h3>
+<p>YOLOv5 模型结构并非硬编码在业务逻辑中，而是统一配置在项目的 <code>models</code> 文件夹下的 YAML 文件中，不同模型（S/M/L/X）对应不同配置文件，结构逻辑一致，仅参数存在差异。</p>
+<h4 id="1.-%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E">1. 核心文件说明</h4>
+<ul>
+<li><p><code>models/yolov5s.yaml</code>（以 S 模型为例）：存储模型核心结构配置，包括类别数、缩放系数、锚框、主干网络（backbone）、头部结构（head）等关键信息。</p>
+</li>
+<li><p><code>models/yolo.py</code>：模型构建核心逻辑，负责解析 YAML 配置并实例化网络模块。</p>
+</li>
+<li><p><code>models/commons.py</code>：定义网络基础模块（如 Conv、C3、SPPF 等），供 YAML 配置调用。</p>
+</li>
+</ul>
+<h4 id="2.-YAML-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%A0%B8%E5%BF%83%E5%86%85%E5%AE%B9%E8%A7%A3%E6%9E%90%EF%BC%88yolov5s.yaml%EF%BC%89">2. YAML 配置文件核心内容解析（yolov5s.yaml）</h4>
+
+<pre class="language-yaml"><code class="language-yaml"># YOLOv5s 模型配置文件 (假设输入为640x640)
+# 从原文提取的核心配置（无修改）
+nc: 80  # 目标类别数，默认80（COCO数据集）
+depth_multiple: 0.33  # 深度缩放系数（控制模块重复次数）
+width_multiple: 0.50  # 宽度缩放系数（控制通道数）
+anchors:  # 锚框，3个特征图各3组锚框
+  - [10,13, 16,30, 33,23]
+  - [30,61, 62,45, 59,119]
+  - [116,90, 156,198, 373,326]
+
+# 主干网络（backbone）- 特征提取部分
+backbone:
+  # [从哪层输入, 重复次数, 模块类型, [参数]]
+  [[-1, 1, Conv, [64, 6, 2, 2]],  # 第0层: Conv, 输出 1*64*320*320 (640/2=320)
+   [-1, 1, Conv, [128, 3, 2]],    # 第1层: Conv, 输出 1*128*160*160 (320/2=160)
+   [-1, 3, C3, [128]],            # 第2层: C3, 输出 1*128*160*160 (尺寸不变)
+   [-1, 1, Conv, [256, 3, 2]],    # 第3层: Conv, 输出 1*256*80*80 (160/2=80)
+   [-1, 6, C3, [256]],            # 第4层: C3, 输出 1*256*80*80 (尺寸不变)
+   [-1, 1, Conv, [512, 3, 2]],    # 第5层: Conv, 输出 1*512*40*40 (80/2=40)
+   [-1, 9, C3, [512]],            # 第6层: C3, 输出 1*512*40*40 (尺寸不变)
+   [-1, 1, Conv, [1024, 3, 2]],   # 第7层: Conv, 输出 1*1024*20*20 (40/2=20)
+   [-1, 3, C3, [1024]],           # 第8层: C3, 输出 1*1024*20*20 (尺寸不变)
+   [-1, 1, SPPF, [1024, 5]],      # 第9层: SPPF, 输出 1*1024*20*20 (尺寸不变)
+  ]
+
+# 头部结构（head）- 多尺度特征融合和检测部分
+head:
+  [[-1, 1, Conv, [512, 1, 1]],    # 第10层: Conv(1x1), 输出 1*512*20*20 (尺寸不变)
+   [-1, 1, nn.Upsample, [None, 2, 'nearest']],  # 第11层: 上采样2倍, 输出 1*512*40*40
+   [[-1, 6], 1, Concat, [1]],     # 第12层: 拼接第11层和第6层, 输出 1*1024*40*40
+   [-1, 3, C3, [512, False]],     # 第13层: C3, 输出 1*512*40*40 (尺寸不变)
+   [-1, 1, Conv, [256, 1, 1]],    # 第14层: Conv(1x1), 输出 1*256*40*40 (尺寸不变)
+   [-1, 1, nn.Upsample, [None, 2, 'nearest']],  # 第15层: 上采样2倍, 输出 1*256*80*80
+   [[-1, 4], 1, Concat, [1]],     # 第16层: 拼接第15层和第4层, 输出 1*512*80*80
+   [-1, 3, C3, [256, False]],     # 第17层: C3, 输出 1*256*80*80 (尺寸不变)
+   [-1, 1, Conv, [256, 3, 2]],    # 第18层: Conv(3x3,stride=2), 输出 1*256*40*40 (80/2=40)
+   [[-1, 14], 1, Concat, [1]],    # 第19层: 拼接第18层和第14层, 输出 1*512*40*40
+   [-1, 3, C3, [512, False]],     # 第20层: C3, 输出 1*512*40*40 (尺寸不变)
+   [-1, 1, Conv, [512, 3, 2]],    # 第21层: Conv(3x3,stride=2), 输出 1*512*20*20 (40/2=20)
+   [[-1, 10], 1, Concat, [1]],    # 第22层: 拼接第21层和第10层, 输出 1*1024*20*20
+   [-1, 3, C3, [1024, False]],    # 第23层: C3, 输出 1*1024*20*20 (尺寸不变)
+   [[17, 20, 23], 1, Detect, [nc, anchors]],  # 第24层: Detect, 输入3个尺度的特征图
+  ]
+</code></pre>
+<h4 id="3.-%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E6%A0%B8%E5%BF%83%E5%90%AB%E4%B9%89">3. 配置参数核心含义</h4>
+<ul>
+<li><p><strong>nc</strong>：目标类别数，默认 80（适配 COCO 数据集），自定义数据集需修改为对应类别数。</p>
+</li>
+<li><p><strong>depth_multiple/width_multiple</strong>：深度/宽度缩放系数，分别控制模块重复次数和通道数，决定模型规模（S/M/L/X 模型差异核心）。</p>
+</li>
+<li><p><strong>anchors</strong>：锚框预设值，3 组特征图各对应 3 组锚框，适配不同尺寸目标检测。</p>
+</li>
+<li><p><strong>backbone/head</strong>：网络核心部分，每一行配置格式为 <code>[from, number, module, args]</code>，含义如下：</p>
+<ul>
+<li><p>from：当前层输入来源，<code>-1</code> 表示来自上一层，具体数字表示来自对应层编号（如 6 表示第 6 层输出）。</p>
+<ul>
+<li><p>number：模块重复次数，仅 C3 模块可能大于 1，其他模块默认 1。</p>
+</li>
+<li><p>module：使用的网络模块（如 Conv、C3、SPPF、Concat、Detect 等）。</p>
+</li>
+<li><p>args：模块参数（如 Conv 模块参数为 [输出通道、卷积核大小、步长、padding(填充数)]）。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="%E4%BA%8C%E3%80%81%E7%94%A8-TensorBoard-%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84%EF%BC%88%E5%AE%9E%E6%93%8D%E6%96%B9%E6%B3%95%EF%BC%89">二、用 TensorBoard 可视化模型结构（实操方法）</h3>
+<p>网络结构可通过 TensorBoard 直观展示，无需手动绘图，同时支持监控训练参数，操作步骤如下：</p>
+<h4 id="1.-%E5%90%AF%E5%8A%A8-TensorBoard">1. 启动 TensorBoard</h4>
+
+<pre class="language-Bash"><code class="language-Bash"># 1. 激活 yolov5 虚拟环境（终端前缀显示 (yolov5)）
+# 2. 进入 YOLOv5 项目根目录
+cd yolov5-master
+# 3. 启动 TensorBoard，指定日志目录为 runs
+tensorboard --logdir runs
+</code></pre>
+<h4 id="2.-%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84">2. 查看网络结构</h4>
+<ol>
+<li><p>终端输出链接（默认 <code>http://localhost:6006</code>），浏览器打开该链接。</p>
+</li>
+<li><p>点击左侧「Graphs」选项卡，即可看到模型整体结构（输入→DetectionModel→输出）。</p>
+</li>
+<li><p>交互操作：双击「DetectionModel」展开完整网络；鼠标滚轮缩放、拖拽平移视图；双击模块可查看层级细节。</p>
+</li>
+</ol>
+<h3 id="%E4%B8%89%E3%80%81%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%8E%E7%89%B9%E5%BE%81%E5%8F%98%E6%8D%A2%E8%A7%84%E5%BE%8B">三、网络结构数据流与特征变换规律</h3>
+<p>通过 TensorBoard 可视化可清晰梳理数据流，核心规律如下：</p>
+<h4 id="1.-%E8%BE%93%E5%85%A5%E4%B8%8E%E4%B8%BB%E5%B9%B2%E7%BD%91%E7%BB%9C%E7%89%B9%E5%BE%81%E5%8F%98%E6%8D%A2">1. 输入与主干网络特征变换</h4>
+<ul>
+<li><p>输入图像尺寸为<code>1×3×640×640</code>（batch_size=1，3 通道，分辨率 640×640）。</p>
+</li>
+<li><p>主干网络通过连续卷积层执行下采样，每次卷积步长为 2 时，特征图尺寸减半，通道数按宽度系数缩放：</p>
+<ul>
+<li><p>第 0 层 Conv：输入 <code>1×3×640×640</code> → 输出 <code>1×32×320×320</code>（64×0.5=32，尺寸/2）。</p>
+</li>
+<li><p>依次经过卷积、C3 模块，特征图尺寸逐步缩减为 160×160、80×80、40×40、20×20，通道数逐步增加。</p>
+</li>
+<li><p>SPPF 模块（第 9 层）为骨干网络最后一层，输出特征图尺寸 <code>1×1024×20×20</code>。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2.-%E5%A4%B4%E9%83%A8%E7%BB%93%E6%9E%84%E7%89%B9%E5%BE%81%E8%9E%8D%E5%90%88%E4%B8%8E%E6%A3%80%E6%B5%8B%E5%B1%82">2. 头部结构特征融合与检测层</h4>
+<ul>
+<li><p>头部结构通过「上采样+拼接」实现多尺度特征融合：</p>
+<ul>
+<li><p>第 10 层 Conv 降维后上采样（20×20→40×40），与第 6 层输出（40×40）拼接，增强中尺度特征。</p>
+</li>
+<li><p>再次上采样（40×40→80×80），与第 4 层输出（80×80）拼接，增强小尺度特征。</p>
+</li>
+<li><p>通过卷积下采样恢复尺寸，多次拼接后形成 3 个尺度特征图，用于不同尺寸目标检测。</p>
+</li>
+</ul>
+</li>
+<li><p>检测层（Detect）融合 3 个特征图：</p>
+<ul>
+<li><p>第 17 层（80×80，8 倍下采样）：检测小目标。</p>
+</li>
+<li><p>第 20 层（40×40，16 倍下采样）：检测中目标。</p>
+</li>
+<li><p>第 23 层（20×20，32 倍下采样）：检测大目标。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="%E5%9B%9B%E3%80%81%E6%B7%B1%E5%BA%A6%E4%B8%8E%E5%AE%BD%E5%BA%A6%E7%B3%BB%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8%E6%9C%BA%E5%88%B6">四、深度与宽度系数的作用机制</h3>
+<p>depth_multiple（深度系数）和 width_multiple（宽度系数）是控制模型规模的核心参数，直接影响模块重复次数和通道数：</p>
+<h4 id="1.-%E6%B7%B1%E5%BA%A6%E7%B3%BB%E6%95%B0%EF%BC%88depth_multiple%EF%BC%89">1. 深度系数（depth_multiple）</h4>
+<ul>
+<li><p>作用：控制 C3 模块的重复次数，公式为 <code>实际重复次数 = max(round(number×depth_multiple), 1)</code>。</p>
+</li>
+<li><p>示例（yolov5s.yaml，depth_multiple=0.33）：</p>
+<ul>
+<li><p>backbone 中第 2 层 C3：number=3 → 3×0.33≈1 → 实际重复 1 次。</p>
+</li>
+<li><p>backbone 中第 4 层 C3：number=6 → 6×0.33≈2 → 实际重复 2 次。</p>
+</li>
+<li><p>取最大值 1 是为了保证模块至少存在 1 层，避免网络结构缺失。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2.-%E5%AE%BD%E5%BA%A6%E7%B3%BB%E6%95%B0%EF%BC%88width_multiple%EF%BC%89">2. 宽度系数（width_multiple）</h4>
+<ul>
+<li><p>作用：控制所有模块的输出通道数，公式为 <code>实际通道数 = round(args[0]×width_multiple)</code>。</p>
+</li>
+<li><p>示例（yolov5s.yaml，width_multiple=0.5）：</p>
+<ul>
+<li><p>第 0 层 Conv：args[0]=64 → 64×0.5=32 → 实际输出通道 32。</p>
+</li>
+<li><p>第 1 层 Conv：args[0]=128 → 128×0.5=64 → 实际输出通道 64。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="%E4%BA%94%E3%80%81%E6%A8%A1%E5%9E%8B%E6%9E%84%E5%BB%BA%E4%BB%A3%E7%A0%81%E9%80%BB%E8%BE%91%E8%A7%A3%E6%9E%90%EF%BC%88models/yolo.py%EF%BC%89">五、模型构建代码逻辑解析（models/yolo.py）</h3>
+<p>模型构建核心是解析 YAML 配置并实例化模块，关键代码逻辑从原文提取，步骤如下：</p>
+<h4 id="1.-%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90%E4%B8%8E%E5%8F%82%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96">1. 配置解析与参数初始化</h4>
+
+<pre class="language-Python"><code class="language-Python">
+# 核心代码逻辑（从原文提取，无修改）
+def parse_model(d, ch):  # d=YAML配置字典，ch=输入通道数（初始为3）
+    nc, anchors = d.get('nc', 80), d.get('anchors', 3)
+    depth_multiple = d.get('depth_multiple', 1.0)
+    width_multiple = d.get('width_multiple', 1.0)
+
+    # 计算输出通道数：锚框数×(类别数+5)，5为坐标(x,y,w,h) + object分数
+    na = (len(anchors[0]) // 2) if isinstance(anchors, list) else anchors
+    no = na * (nc + 5)
+
+    layers, save, c2 = [], [], ch[-1]  # layers=网络层列表，save=需保存的层，c2=上一层输出通道数
+    for i, (f, n, m, args) in enumerate(d['backbone'] + d['head']):
+        m = eval(m) if isinstance(m, str) else m  # 实例化模块（如Conv、C3）
+        for j, a in enumerate(args):
+            try:
+                args[j] = eval(a) if isinstance(a, str) else a  # 解析参数
+            except:
+                pass
+
+        # 处理深度系数：控制模块重复次数
+        n = n_ = max(round(n * depth_multiple), 1) if n &gt; 1 else n
+        if m in [Conv, C3, C3TR, C3Ghost, C3X]:
+            c1, c2 = ch[f], args[0]
+            c2 = make_divisible(c2 * width_multiple, 8)  # 通道数按宽度系数缩放，确保可被8整除
+            args = [c1, c2, *args[1:]]  # 更新输入/输出通道数
+            if m is C3:
+                args.insert(2, n)  # 为C3模块插入重复次数参数n
+                n = 1  # 重置n，避免重复实例化
+
+        # 实例化模块并添加到网络层
+        m_ = nn.Sequential(*[m(*args) for _ in range(n)]) if n &gt; 1 else m(*args)
+        layers.append(m_)
+        save.append(i) if f == -1 else None
+        ch.append(c2)
+    return nn.Sequential(*layers), sorted(save)
+</code></pre>
+<h4 id="2.-%E5%85%B3%E9%94%AE%E6%AD%A5%E9%AA%A4%E8%AF%B4%E6%98%8E">2. 关键步骤说明</h4>
+<ul>
+<li><p>模块实例化：通过<code>eval(m)</code> 将 YAML 中的模块名称（如 'Conv'）转换为 Python 实例，依赖 <code>commons.py</code> 中定义的模块类。</p>
+</li>
+<li><p>通道数调整：通过 <code>make_divisible</code> 确保通道数可被 8 整除，适配 GPU 加速运算。</p>
+</li>
+<li><p>层保存：标记 <code>from=-1</code> 的层，供后续特征融合时调用对应层输出。</p>
+</li>
+</ul>
+<h3 id="%E5%85%AD%E3%80%81%E5%AE%9E%E6%93%8D%E5%85%B3%E9%94%AE%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">六、实操关键注意事项</h3>
+<ol>
+<li><p>配置文件一致性：修改 <code>nc</code>（类别数）后，需确保与数据集类别一致，否则训练报错；锚框需根据自定义数据集尺寸调整，提升检测精度。</p>
+</li>
+<li><p>模块修改规范：自定义模块（如添加 C4）需先在 <code>commons.py</code> 中定义，再在 YAML 配置中调用，且名称需与代码中一致，否则无法实例化。</p>
+</li>
+<li><p>层数编号意义：网络层从 0 开始编号，头部结构拼接时需准确引用对应层编号（如 [ -1, 6 ] 表示拼接上一层与第 6 层），编号错误会导致特征融合失败。</p>
+</li>
+<li><p>可视化依赖：TensorBoard 需在训练后生成日志文件（存于 runs 目录），若未训练可先运行 <code>python train.py</code> 生成日志，再启动可视化。</p>
+</li>
+</ol>
+<h3 id="%E4%B8%83%E3%80%81%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B%E5%9B%9E%E9%A1%BE">七、整体流程回顾</h3>
+<ol>
+<li><p>结构定义：在 <code>models/yolov5s.yaml</code> 中配置 backbone、head、参数系数及锚框。</p>
+</li>
+<li><p>可视化验证：通过 TensorBoard 查看网络结构，确认数据流与特征变换规律。</p>
+</li>
+<li><p>模型构建：<code>yolo.py</code> 解析 YAML 配置，按系数调整模块重复次数与通道数，实例化网络。</p>
+</li>
+<li><p>自定义优化：修改配置文件（如调整系数、替换模块），或在 <code>commons.py</code> 中添加新模块，实现网络结构创新。</p>
+</li>
+</ol>
+<p>核心原则：理解模型构建原理是结构修改与优化的前提，需结合配置文件、代码逻辑与可视化结果，确保每一处修改都符合网络数据流规律。</p>
+
+                        
+                    </div>
+                </div>
+                <div id="previous_next">
+                    <div id="previous">
+                        
+                        <a href="/note/机器人项目笔记/YOLO/2.3-YOLOv5 VS Code 与 AutoDL 远程连接.html">
+                            <span class="icon"></span>
+                            <span class="label">2.3-YOLOv5 VS Code 与 AutoDL 远程连接</span>
+                        </a>
+                        
+                    </div>
+                    <div id="next">
+                        
+                        <a href="/note/机器人项目笔记/YOLO/3.2-YOLOv5 修改网络结构（以C2f为例）.html">
+                            <span class="label">3.2-YOLOv5 修改网络结构（以C2f为例）</span>
+                            <span class="icon"></span>
+                        </a>
+                        
+                    </div>
+                </div>
+                <div id="comments-container"></div>
+            </div>
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="to_top" href="#"></a>
+    <div id="doc_footer">
+        <div id="footer">
+            <div id="footer_top">
+                <ul>
+<li><a>链接</a><ul><li><a target="_blank" href="https://teedoc.neucrack.com">网站使用 teedoc 生成</a></li>
+<li><a target="_blank" href="https://neucrack.com">Copyright © 2021 Neucrack</a></li>
+<li><a  href="/note/sitemap.xml">网站地图</a></li>
+</ul>
+</li>
+<li><a>源码</a><ul><li><a target="_blank" href="https://github.com/HiNice2cu/note/">github</a></li>
+<li><a target="_blank" href="https://github.com/teedoc/teedoc">本网站源文件</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div id="footer_bottom">
+                <ul>
+<li><a target="_blank" href="https://beian.miit.gov.cn">渝ICP备19015320号</a></li>
+<li><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030602004109">粤公网安备44030602004109号</a></li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+    
+        <script src="/note/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+        <script type="text/javascript">
+                var transLoaded = false;
+                var loading = false;
+                var domain = "translate.google.com";
+                var domainDefault = domain;
+                var storeDomain = localStorage.getItem("googleTransDomain");
+                if(storeDomain){
+                    domain = storeDomain;
+                    console.log("load google translate domain from local storage:" + domain);
+                }
+                function getUrl(domain){
+                    if(domain == "/")
+                        return "/static/js/google_translate/element.js?cb=googleTranslateElementInit";
+                    else
+                        return "https://" + domain + "/translate_a/element.js?cb=googleTranslateElementInit";
+                }
+                var url = getUrl(domain);
+                console.log("google translate domain:" + domain + ", url: " + url);
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({pageLanguage: "auto", layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                }
+                function loadJS( url, callback ){
+                    var script = document.createElement('script');
+                    fn = callback || function(){ };
+                    script.type = 'text/javascript';
+                    if(script.readyState){
+                        script.onreadystatechange = function(){
+                            if( script.readyState == 'loaded' || script.readyState == 'complete' ){
+                                script.onreadystatechange = null;
+                                fn();
+                            }
+                        };
+                    }else{
+                        script.onload = function(){
+                            fn();
+                        };
+                    }
+                    script.src = url;
+                    document.getElementsByTagName('head')[0].appendChild(script);
+                }
+                function removeHint(){
+                    var hint = document.getElementById("loadingTranslate");
+                    if(hint){
+                        hint.remove();
+                    }
+                }
+                var btn = document.getElementById("google_translate_element");
+                btn.onclick = function(){
+                    if(transLoaded) return;
+                    if(loading){
+                        var flag = confirm("loading from " + domain + ", please wait, or change domain?");
+                        if(flag){
+                            newDomain = prompt("domain, default: " + domainDefault + ", now: " + domain);
+                            if(newDomain){
+                                domain = newDomain;
+                                console.log(domain);
+                                url = getUrl(domain);
+                                loadJS(url, function(){
+                                    localStorage.setItem("googleTransDomain", domain);
+                                    removeHint()
+                                    transLoaded = true;
+                                });
+                            }
+                        }
+                        return;
+                    }
+                    btn.innerHTML = '<span id="loadingTranslate"><img class="icon" src="/note/static/image/google_translate/translate.svg"/>Loading ...</span>';
+                    loading = true;
+                    loadJS(url, function(){
+                        localStorage.setItem("googleTransDomain", domain);
+                        removeHint()
+                        transLoaded = true;
+                    });
+                }
+                </script>
+            
+    
+        <script src="/note/static/js/theme_default/tocbot.min.js"></script>
+    
+        <script src="/note/static/js/theme_default/main.js"></script>
+    
+        <script src="/note/static/js/theme_default/viewer.min.js"></script>
+    
+        <script src="/note/static/css/theme_default/prism.min.js"></script>
+    
+        <script src="/note/static/js/search/search_main.js"></script>
+    
+        <script src="/note/static/js/plugin_blog/main.js"></script>
+    
+        <link rel="stylesheet" href="/note/static/js/add_hint/style.css" type="text/css"/>
+    
+        <script src="/note/static/js/add_hint/main.js"></script>
+    
+        <script src="/note/static/js/gitalk/gitalk.min.js"></script>
+    
+        <script src="/note/static/js/gitalk/main.js"></script>
+    
+        <script src="/note/static/js/custom.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"  class="">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="keywords" content="">
+    
+    
+    <meta name="description" content="">
+    
+    <meta name="generator" content="teedoc">
+    <meta name="theme" content="teedoc-plugin-theme-default">
+    
+        
+        <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
+        
+        <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+        
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+        <meta name="html-generator" content="teedoc-plugin-jupyter-notebook-parser">
+        
+        <script src="/note/static/js/theme_default/pre_main.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/prism.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/viewer.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/dark.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/light.css" type="text/css"/>
+        
+        <script src="/note/static/js/theme_default/jquery.min.js"></script>
+        
+        <script src="/note/static/js/theme_default/split.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/search/style.css" type="text/css"/>
+        
+        <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4d52982572d5512e9762879ebf063c86";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+        
+        <meta name="blog-generator" content="teedoc-plugin-blog">
+        
+        <link rel="stylesheet" href="/note/static/css/gitalk/gitalk.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/gitalk/custom_gitalk.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/custom.css" type="text/css"/>
+        
+    
+    
+    <title>YOLOv5 Pyside6 可视化界面 - niuniu's Note</title>
+    
+    <script type="text/javascript">js_vars = {"teedoc-plugin-ad-hint": {"type": "hint", "label": "☆", "content": "这是一个支持国际化的消息示例</br>喜欢项目请<a target=\"_blank\" href=\"https://github.com/teedoc/teedoc\">点下 ☆ star </a>哦~🦀🦀", "show_times": 2, "show_after_s": 432000, "date": "2021-11-16 14:40", "color": "#a0421d", "link_color": "#e53935", "link_bg_color": "#e6ae5c", "bg_color": "#ffcf89", "color_hover": "white", "bg_color_hover": "#f57c00", "close_color": "#eab971"}}</script>
+    <script type="text/javascript">metadata = {"tags": [], "date": null, "update": [], "ts": 0, "author": "", "brief": "", "cover": ""}</script>
+</head>
+
+
+<body class="type_doc">
+    
+    <div id="navbar">
+        <div id="navbar_menu">
+            <a class="site_title" href="/note/">
+                
+                    <img class="site_logo" src="/note/static/image/logo.png" alt="niuniu logo">
+                
+                
+                    <h2>niuniu</h2>
+                
+        </a>
+            <a id="navbar_menu_btn"></a>
+        </div>
+        <div id="navbar_items">
+            <div>
+                <ul id="nav_left">
+<li class=""><a  href="/note/blog/">博客</a></li>
+<li class="active"><a  href="/note/机器人项目笔记/">机器人项目笔记</a></li>
+<li class=""><a  href="/note/小智笔记/">小智笔记</a></li>
+</ul>
+
+            </div>
+            <div>
+                <ul id="nav_right">
+<li class=""><a target="_blank" href="https://github.com/HiNice2cu/note/">github</a></li>
+</ul>
+
+                <ul class="nav_plugins"><li><a id="google_translate_element"><img class="icon" src="/note/static/image/google_translate/translate.svg"/>Translate</a></li></ul><ul class="nav_plugins"><li><a id="themes" class="light"></a></li></ul><ul class="nav_plugins"><li><a id="search"><span class="icon"></span><span class="placeholder">搜索</span>
+                            <div id="search_hints">
+                                <span id="search_input_hint">输入关键词，多关键词空格隔开</span>
+                                <span id="search_loading_hint">正在加载，请稍候。。。</span>
+                                <span id="search_download_err_hint">下载文件失败，请刷新重试或检查网络</span>
+                                <span id="search_other_docs_result_hint">来自其它文档的结果</span>
+                                <span id="search_curr_doc_result_hint">当前文档搜索结果</span>
+                            </div></a></li></ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="wrapper">
+        <div id="sidebar_wrapper">
+            <div id="sidebar">
+                <div id="sidebar_title">
+                    
+                </div>
+                <ul class="show">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/index.html"><span class="label">README</span><span class=""></span></a></li>
+<li class="not_active no_link"><a><span class="label">ROS</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/ROS/ROS 基础流程.html"><span class="label">ROS 基础流程</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/ROS/ROS入门指南：什么是ROS？.html"><span class="label">ROS入门指南：什么是ROS？</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="active_parent no_link"><a><span class="label">YOLO</span><span class="sub_indicator"></span></a><ul class="show">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.1-YOLOv5 环境安装.html"><span class="label">1.1-YOLOv5 环境安装</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.2-YOLOv5 模型检测.html"><span class="label">1.2-YOLOv5 模型检测</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.3-YOLOv5 数据集构建.html"><span class="label">1.3-YOLOv5 数据集构建</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.4-YOLOv5 模型训练.html"><span class="label">1.4-YOLOv5 模型训练</span><span class=""></span></a></li>
+<li class="active with_link"><a href="/note/机器人项目笔记/YOLO/1.5-YOLOv5 Pyside6 可视化界面.html"><span class="label">1.5-YOLOv5 Pyside6 可视化界面</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.6-YOLOv5 Gradio搭建Web GUI.html"><span class="label">1.6-YOLOv5 Gradio搭建Web GUI</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/2.1-YOLOv5 使用 AutoDL 服务器训练.html"><span class="label">2.1-YOLOv5 使用 AutoDL 服务器训练</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/2.2-YOLOv5：Pycharm 与 AutoDL 远程连接.html"><span class="label">2.2-YOLOv5：Pycharm 与 AutoDL 远程连接</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/2.3-YOLOv5 VS Code 与 AutoDL 远程连接.html"><span class="label">2.3-YOLOv5 VS Code 与 AutoDL 远程连接</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.1-YOLOv5 模型结构与构建原理.html"><span class="label">3.1-YOLOv5 模型结构与构建原理</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.2-YOLOv5 修改网络结构（以C2f为例）.html"><span class="label">3.2-YOLOv5 修改网络结构（以C2f为例）</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.3-YOLOv5 引入 SE 注意力机制.html"><span class="label">3.3-YOLOv5 引入 SE 注意力机制</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.4-YOLOv5 替换主干网络（以 MobileNetV3 为例).html"><span class="label">3.4-YOLOv5 替换主干网络（以 MobileNetV3 为例)</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/4.1-YOLOv5 Torchhub 模型预测进阶.html"><span class="label">4.1-YOLOv5 Torchhub 模型预测进阶</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/4.2-基于Flask的YOLOv5项目部署.html"><span class="label">4.2-基于Flask的YOLOv5项目部署</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLO物体检测原理与应用.html"><span class="label">YOLO物体检测原理与应用</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="not_active no_link"><a><span class="label">本地模型部署与强化学习算法</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/本地模型部署与强化学习算法/index.html"><span class="label">README</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/本地模型部署与强化学习算法/本地模型部署与强化学习算法简单概念.html"><span class="label">本地模型部署与强化学习算法简单概念</span><span class=""></span></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+        <div id="article">
+            <div id="menu_wrapper">
+                <div id="menu">
+                </div>
+            </div>
+            <div id="content_wrapper">
+                <div id="content_body">
+                    <div id="article_head">
+                        <div id="article_title">
+                            
+                            <h1>YOLOv5 Pyside6 可视化界面</h1>
+                            
+                        </div>
+                        <div id="article_tags">
+                            <ul>
+                            
+                            </ul>
+                        </div>
+                        <div id="article_info">
+                        <div id="article_info_left">
+                            <span class="article_author">
+                                
+                            </span>
+                            
+                                <span class="article_date" title="最后修改日期： 2026-01-30">
+                                    2026-01-30
+                                </span>
+                            
+                        </div>
+                        <div id="article_info_right">
+                            
+                            <div id="source_link">
+                                <a href="https://github.com/HiNice2cu/note/tree/master/doc/机器人项目笔记/YOLO/1.5-YOLOv5 Pyside6 可视化界面.md" target="_blank">
+                                    编辑本页
+                                </a>
+                            </div>
+                            
+                        </div>
+                        </div>
+                    </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
+                    <div id="update_history">
+                        
+                    </div>
+                    <div id="article_content">
+                        
+                            <h3 id="%E4%B8%80%E3%80%81%E5%8F%AF%E8%A7%86%E5%8C%96%E7%95%8C%E9%9D%A2%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85">一、可视化界面环境安装</h3>
+<p>需安装 Pyside6 框架、QT Designer 设计工具及 VS Code 辅助插件，环境基于前文 yolov5 虚拟环境搭建。</p>
+<h4 id="1.-%E6%A0%B8%E5%BF%83%E4%BE%9D%E8%B5%96%E5%AE%89%E8%A3%85">1. 核心依赖安装</h4>
+<p>在激活的 yolov5 虚拟环境中执行以下命令：</p>
+
+<pre class="language-Bash"><code class="language-Bash">
+# 安装 Pyside6（含 QT Designer）
+pip install pyside6
+# 安装 jupyter lab（辅助模型调用验证）
+pip install jupyter lab
+</code></pre>
+<h4 id="2.-QT-Designer-%E5%AE%9A%E4%BD%8D%E4%B8%8E%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F%E5%88%9B%E5%BB%BA">2. QT Designer 定位与快捷方式创建</h4>
+<p>QT Designer 随 Pyside6 一并安装，需找到其路径并创建桌面快捷方式：</p>
+<ol>
+<li><p>查找 Python 安装路径：打开 CMD，输入 <code>where python</code>，获取当前 yolov5 环境的 Python 路径（如 <code>C:\Miniconda3\envs\yolov5\python.exe</code>）。</p>
+</li>
+<li><p>定位 QT Designer：进入 Python 路径下的 <code>C:\Users\12804\miniconda3\envs\yolov5\Lib\site-packages\PySide6</code> 文件夹，找到 <code>designer.exe</code> 文件。</p>
+</li>
+<li><p>创建快捷方式：右键 <code>designer.exe</code>，选择「发送到」→「桌面快捷方式」，便于后续快速启动。</p>
+</li>
+</ol>
+<h4 id="3.-VS-Code-%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85%EF%BC%88UI-%E7%BC%96%E8%AF%91%E6%94%AF%E6%8C%81%EF%BC%89">3. VS Code 插件安装（UI 编译支持）</h4>
+<p>打开 VS Code，在左侧扩展栏搜索「QT for Python」，点击安装，用于将 QT Designer 生成的 <code>.ui</code> 文件编译为 Python 代码。</p>
+<h3 id="%E4%BA%8C%E3%80%81QT-Designer-%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1%EF%BC%88%E6%8B%96%E6%8B%BD%E5%BC%8F%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%89">二、QT Designer 界面设计（拖拽式可视化）</h3>
+<h4 id="1.-%E6%96%B0%E5%BB%BA-UI-%E9%A1%B9%E7%9B%AE">1. 新建 UI 项目</h4>
+<ol>
+<li><p>双击桌面 <code>designer.exe</code> 启动工具，选择「Main Window」→ 点击「创建」，生成空白窗口。</p>
+</li>
+<li><p>移除默认菜单栏（无需保留），按以下规划设计界面布局。</p>
+</li>
+</ol>
+<h4 id="2.-%E7%95%8C%E9%9D%A2%E7%BB%84%E4%BB%B6%E6%8B%96%E6%8B%BD%E4%B8%8E%E5%B8%83%E5%B1%80">2. 界面组件拖拽与布局</h4>
+<h4 id="3.-%E4%BF%9D%E5%AD%98-UI-%E6%96%87%E4%BB%B6">3. 保存 UI 文件</h4>
+<p>按 <code>Ctrl+S</code> 保存文件，路径选择 YOLOv5 根目录，文件名为 <code>m</code> <code>ain</code> <code>_window.ui</code>（后缀为 <code>.ui</code>，不可修改）。</p>
+<h3 id="%E4%B8%89%E3%80%81UI-%E6%96%87%E4%BB%B6%E7%BC%96%E8%AF%91%EF%BC%88.ui-%E2%86%92-.py%EF%BC%89">三、UI 文件编译（.ui → .py）</h3>
+<p>通过 VS Code 插件将设计好的 <code>.ui</code> 文件编译为 Python 代码，便于后续逻辑编写：</p>
+<ol>
+<li><p>用 VS Code 打开 YOLOv5 根目录，找到 <code>main_window.ui</code> 文件。</p>
+</li>
+<li><p>右键点击该文件，选择「Compile QT UI File」，自动生成 <code>main_window</code> <code>_ui</code> <code>.py</code> 文件（含界面组件的 Python 定义）。</p>
+</li>
+</ol>
+<h3 id="%E5%9B%9B%E3%80%81%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%EF%BC%88%E5%9B%BE%E7%89%87/%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B%E9%80%BB%E8%BE%91%EF%BC%89">四、核心代码实现（图片/视频检测逻辑）</h3>
+<p>新建 Python 文件 <code>base_ui.py</code>，导入编译后的 UI 模块，实现信号绑定、文件读取、模型调用、结果显示等逻辑，代码完全复刻实操演示：</p>
+
+<pre class="language-Python"><code class="language-Python"># 导入核心依赖
+import sys
+import torch
+import cv2
+# 导入 PySide6 相关模块
+from PySide6.QtWidgets import QMainWindow, QApplication, QFileDialog
+from PySide6.QtGui import QPixmap,QImage
+# 导入编译后的 UI 模块（同步修改为新编译文件名）
+from main_window_ui import Ui_MainWindow
+from PySide6.QtCore import QTimer
+
+def convert2QImage(img):
+    &quot;&quot;&quot;将 OpenCV 图像转换为 QImage 格式&quot;&quot;&quot;
+    # 获取图像的高度、宽度和通道数
+    height, width, channel = img.shape
+    # 创建并返回QImage对象，使用RGB888格式
+    return QImage(img, width, height, width*channel, QImage.Format_RGB888)
+
+class MainWindow(QMainWindow, Ui_MainWindow):
+    def __init__(self):
+        # 调用父类初始化方法
+        super(MainWindow, self).__init__()
+        # 初始化 UI 界面
+        self.setupUi(self)
+        # 加载YOLOv5模型：从本地目录加载自定义权重文件
+        self.model = torch.hub.load(&quot;./&quot;,&quot;custom&quot;, path=&quot;runs/train/exp/weights/best.pt&quot;, source=&quot;local&quot;)
+        # 创建定时器对象，用于视频帧处理
+        self.timer = QTimer()
+        # 设置定时器间隔（1毫秒，实际视频处理速度受性能限制）
+        self.timer.setInterval(1)
+        # 初始化视频捕获对象
+        self.video = None
+        # 绑定信号与槽函数
+        self.bind_slots()
+
+    def image_pred(self,file_path):
+        # 图像预测逻辑
+        # 使用模型对图像进行推理
+        results = self.model(file_path)
+        # 渲染并获取处理后的图像（第一张）
+        image = results.render()[0]  # 显示第一张图像的结果
+        # 将处理后的图像转换为QImage格式
+        return convert2QImage(image)
+
+    def open_image(self):
+        # 停止定时器（防止与视频处理冲突）
+        self.timer.stop()  
+        # 打开文件对话框选择图像文件，默认路径为训练集图像目录
+        file_path=QFileDialog.getOpenFileName(self, dir=&quot;./datasets/images/train&quot;, filter=&quot;*.png *.jpg *.jpeg&quot;)
+        # 如果用户选择了文件（路径不为空）
+        if file_path[0]:
+            # 获取文件路径字符串
+            file_path=file_path[0]
+            # 对图像进行预测并获取处理后的QImage
+            qimage= self.image_pred(file_path)
+            # 在输入显示区域显示原始图像
+            self.input.setPixmap(QPixmap(file_path))
+            # 在输出显示区域显示处理后的图像
+            self.output.setPixmap(QPixmap.fromImage(qimage))
+
+    def video_pred(self):
+        # 视频预测逻辑（由定时器周期性调用）
+        # 读取视频的下一帧
+        ret, frame = self.video.read()
+        # 如果读取失败（视频结束）
+        if not ret:
+            # 停止定时器
+            self.timer.stop()
+        else:
+            # 将BGR格式转换为RGB格式
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            # 在输入显示区域显示当前帧
+            self.input.setPixmap(QPixmap.fromImage(convert2QImage(frame)))
+            # 使用模型对当前帧进行推理
+            results = self.model(frame)
+            # 渲染并获取处理后的图像
+            image = results.render()[0]
+            # 在输出显示区域显示处理后的帧
+            self.output.setPixmap(QPixmap.fromImage(convert2QImage(image)))
+
+    def open_video(self):
+        # 打开视频文件
+        # 打开文件对话框选择视频文件
+        file_path=QFileDialog.getOpenFileName(self, dir=&quot;./datasets&quot;, filter=&quot;*.mp4&quot;)
+        # 如果用户选择了文件
+        if file_path[0]:
+            # 获取文件路径字符串
+            file_path=file_path[0]
+            # 创建视频捕获对象
+            self.video = cv2.VideoCapture(file_path) 
+            # 启动定时器，开始视频处理循环
+            self.timer.start()              
+
+    def bind_slots(self):
+        # 绑定按钮点击事件到相应的槽函数
+        # 图像检测按钮 -&gt; 打开图像方法
+        self.det_image.clicked.connect(self.open_image)
+        # 视频检测按钮 -&gt; 打开视频方法
+        self.det_video.clicked.connect(self.open_video)
+        # 定时器超时信号 -&gt; 视频预测方法
+        self.timer.timeout.connect(self.video_pred)
+
+# 程序入口
+if __name__ == &quot;__main__&quot;:
+    # 创建QApplication实例（GUI应用程序必需）
+    app = QApplication(sys.argv)
+    # 创建主窗口实例
+    window = MainWindow()
+    # 显示主窗口
+    window.show()
+    # 启动应用程序事件循环
+    app.exec()
+</code></pre>
+<h3 id="%E4%BA%94%E3%80%81%E5%85%B3%E9%94%AE%E5%8A%9F%E8%83%BD%E9%80%BB%E8%BE%91%E8%A7%A3%E6%9E%90">五、关键功能逻辑解析</h3>
+<h4 id="1.-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E4%B8%8E%E4%BF%A1%E5%8F%B7%E7%BB%91%E5%AE%9A">1. 核心组件与信号绑定</h4>
+<ul>
+<li><p>信号与槽机制：通过<code>clicked.connect()</code> 将按钮点击事件与函数绑定（如代码中 <code>det_image</code> 绑定 <code>open_image</code>、<code>det_video</code> 绑定 <code>open_video</code>）。</p>
+</li>
+<li><p>计时器：解决 QT 界面阻塞问题，视频检测时通过 <code>QTimer</code> 定时读取帧，设置 1 毫秒间隔，避免循环阻塞界面刷新，同时初始化 <code>self.video = None</code> 防止资源残留。</p>
+</li>
+</ul>
+<h4 id="2.-%E5%9B%BE%E7%89%87%E6%A3%80%E6%B5%8B%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B">2. 图片检测核心流程</h4>
+<ol>
+<li><p>文件选择：通过 <code>QFileDialog.getOpenFileName()</code> 打开图片，默认路径为 <code>./datasets/images/train</code>（同步代码中 datasets 复数格式），过滤 <code>.png/.jpg/.jpeg</code> 格式。</p>
+</li>
+<li><p>模型检测：调用训练好的 <code>best.pt</code> 模型（路径为 <code>runs/train/exp/weights/best.pt</code>），通过 <code>results.render()</code> 提取检测结果（array 格式）。</p>
+</li>
+<li><p>格式转换：代码中 <code>convert2QImage()</code> 函数实现格式转换，先适配图像宽高通道，直接将处理后图像转为 QImage 格式，确保 QT 正常显示。</p>
+</li>
+</ol>
+<h4 id="3.-%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B">3. 视频检测核心流程</h4>
+<ol>
+<li><p>视频初始化：<code>cv2.VideoCapture()</code> 读取视频文件，默认打开路径为 <code>./datasets</code>（复数格式），计时器启动后按 1 毫秒间隔读取帧，保证流畅播放。</p>
+</li>
+<li><p>帧处理：循环读取视频帧，先将 BGR 格式转为 RGB 格式，再执行「原始帧显示→模型检测→检测结果显示」流程，逻辑与图片检测一致。</p>
+</li>
+<li><p>终止条件：视频读取完毕（<code>ret=False</code>）时，停止计时器释放资源，避免后台占用。</p>
+</li>
+</ol>
+<h4 id="4.-%E5%86%B2%E7%AA%81%E4%BC%98%E5%8C%96">4. 冲突优化</h4>
+<ul>
+<li><p>图片检测时调用 <code>self.timer.stop()</code>，停止视频检测计时器，避免两者同时运行冲突，同时清空之前的视频资源。</p>
+</li>
+<li><p>计时器间隔固定为 1 毫秒（代码中已设置），无需额外调整，可直接实现视频流畅播放。</p>
+</li>
+</ul>
+<h3 id="%E5%85%AD%E3%80%81%E7%95%8C%E9%9D%A2%E8%BF%90%E8%A1%8C%E4%B8%8E%E6%B5%8B%E8%AF%95">六、界面运行与测试</h3>
+<h4 id="1.-%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F">1. 运行程序</h4>
+<p>在 yolov5 虚拟环境中，进入代码所在目录，执行（同步修改为新文件名）：</p>
+
+<pre class="language-Bash"><code class="language-Bash">python base_ui.py
+</code></pre>
+<h4 id="2.-%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95">2. 功能测试</h4>
+<ol>
+<li><p>图片检测：点击「图片检测」按钮→ 选择 <code>datasets/images/train</code>（复数格式）下的图片（如 30.jpg）→ 左侧显示原始图片，右侧显示检测结果（标注daitu、mingren）。</p>
+</li>
+<li><p>视频检测：点击「视频检测」按钮→ 选择 <code>datasets</code>（复数格式）下的 MP4 视频（如 BVN.mp4）→ 左侧播放原始视频，右侧实时显示检测结果。</p>
+</li>
+<li><p>终止操作：视频检测时按 <code>Ctrl+C</code> 终止程序（不可直接关闭窗口），避免资源泄露。</p>
+</li>
+</ol>
+<h3 id="%E4%B8%83%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">七、常见问题与注意事项</h3>
+<ol>
+<li><p>界面无响应：视频检测时未使用计时器，或未初始化 <code>self.video</code>，导致循环阻塞 QT 事件队列，需确保 <code>video_pred</code> 由 <code>QTimer</code> 触发，且初始化视频资源。</p>
+</li>
+<li><p>图片显示异常：检查<code>convert2QImage()</code> 函数参数，确保图像宽、高、通道数适配，且格式设为 <code>QImage.Format_RGB888</code>。</p>
+</li>
+<li><p>模型加载失败：检查 <code>best.pt</code> 路径是否正确（需与代码一致，为 <code>runs/train/exp/weights/best.pt</code>），同时确认模型与 YOLOv5 版本兼容。</p>
+</li>
+<li><p>依赖冲突：安装 Pyside6 后若报错，执行<code>pip uninstall pywin32</code> 卸载冲突包，重新启动程序即可。</p>
+</li>
+</ol>
+<h3 id="%E5%85%AB%E3%80%81%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B%E5%9B%9E%E9%A1%BE">八、整体流程回顾</h3>
+<ol>
+<li><p>环境搭建：安装 Pyside6、QT Designer 及辅助工具，创建设计工具快捷方式，确保环境与 yolov5 虚拟环境一致。</p>
+</li>
+<li><p>UI 设计：通过 QT Designer 拖拽组件、设置属性，保存为 <code>main_window.ui</code> 文件，编译为 <code>main_window_ui.py</code> 模块（同步代码导入路径）。</p>
+</li>
+<li><p>逻辑编写：新建<code>base_ui.py</code> 文件，导入编译后的 UI 模块，实现文件选择、模型调用、格式转换、视频帧处理等核心功能，通过信号与槽绑定 <code>det_image</code>、<code>det_video</code> 按钮事件。</p>
+</li>
+<li><p>测试优化：运行 <code>python base_ui.py</code> 测试功能，确保图片/视频检测流畅，无界面阻塞、格式异常等问题。</p>
+</li>
+</ol>
+
+                        
+                    </div>
+                </div>
+                <div id="previous_next">
+                    <div id="previous">
+                        
+                        <a href="/note/机器人项目笔记/YOLO/1.4-YOLOv5 模型训练.html">
+                            <span class="icon"></span>
+                            <span class="label">1.4-YOLOv5 模型训练</span>
+                        </a>
+                        
+                    </div>
+                    <div id="next">
+                        
+                        <a href="/note/机器人项目笔记/YOLO/1.6-YOLOv5 Gradio搭建Web GUI.html">
+                            <span class="label">1.6-YOLOv5 Gradio搭建Web GUI</span>
+                            <span class="icon"></span>
+                        </a>
+                        
+                    </div>
+                </div>
+                <div id="comments-container"></div>
+            </div>
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="to_top" href="#"></a>
+    <div id="doc_footer">
+        <div id="footer">
+            <div id="footer_top">
+                <ul>
+<li><a>链接</a><ul><li><a target="_blank" href="https://teedoc.neucrack.com">网站使用 teedoc 生成</a></li>
+<li><a target="_blank" href="https://neucrack.com">Copyright © 2021 Neucrack</a></li>
+<li><a  href="/note/sitemap.xml">网站地图</a></li>
+</ul>
+</li>
+<li><a>源码</a><ul><li><a target="_blank" href="https://github.com/HiNice2cu/note/">github</a></li>
+<li><a target="_blank" href="https://github.com/teedoc/teedoc">本网站源文件</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div id="footer_bottom">
+                <ul>
+<li><a target="_blank" href="https://beian.miit.gov.cn">渝ICP备19015320号</a></li>
+<li><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030602004109">粤公网安备44030602004109号</a></li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+    
+        <script src="/note/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+        <script type="text/javascript">
+                var transLoaded = false;
+                var loading = false;
+                var domain = "translate.google.com";
+                var domainDefault = domain;
+                var storeDomain = localStorage.getItem("googleTransDomain");
+                if(storeDomain){
+                    domain = storeDomain;
+                    console.log("load google translate domain from local storage:" + domain);
+                }
+                function getUrl(domain){
+                    if(domain == "/")
+                        return "/static/js/google_translate/element.js?cb=googleTranslateElementInit";
+                    else
+                        return "https://" + domain + "/translate_a/element.js?cb=googleTranslateElementInit";
+                }
+                var url = getUrl(domain);
+                console.log("google translate domain:" + domain + ", url: " + url);
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({pageLanguage: "auto", layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                }
+                function loadJS( url, callback ){
+                    var script = document.createElement('script');
+                    fn = callback || function(){ };
+                    script.type = 'text/javascript';
+                    if(script.readyState){
+                        script.onreadystatechange = function(){
+                            if( script.readyState == 'loaded' || script.readyState == 'complete' ){
+                                script.onreadystatechange = null;
+                                fn();
+                            }
+                        };
+                    }else{
+                        script.onload = function(){
+                            fn();
+                        };
+                    }
+                    script.src = url;
+                    document.getElementsByTagName('head')[0].appendChild(script);
+                }
+                function removeHint(){
+                    var hint = document.getElementById("loadingTranslate");
+                    if(hint){
+                        hint.remove();
+                    }
+                }
+                var btn = document.getElementById("google_translate_element");
+                btn.onclick = function(){
+                    if(transLoaded) return;
+                    if(loading){
+                        var flag = confirm("loading from " + domain + ", please wait, or change domain?");
+                        if(flag){
+                            newDomain = prompt("domain, default: " + domainDefault + ", now: " + domain);
+                            if(newDomain){
+                                domain = newDomain;
+                                console.log(domain);
+                                url = getUrl(domain);
+                                loadJS(url, function(){
+                                    localStorage.setItem("googleTransDomain", domain);
+                                    removeHint()
+                                    transLoaded = true;
+                                });
+                            }
+                        }
+                        return;
+                    }
+                    btn.innerHTML = '<span id="loadingTranslate"><img class="icon" src="/note/static/image/google_translate/translate.svg"/>Loading ...</span>';
+                    loading = true;
+                    loadJS(url, function(){
+                        localStorage.setItem("googleTransDomain", domain);
+                        removeHint()
+                        transLoaded = true;
+                    });
+                }
+                </script>
+            
+    
+        <script src="/note/static/js/theme_default/tocbot.min.js"></script>
+    
+        <script src="/note/static/js/theme_default/main.js"></script>
+    
+        <script src="/note/static/js/theme_default/viewer.min.js"></script>
+    
+        <script src="/note/static/css/theme_default/prism.min.js"></script>
+    
+        <script src="/note/static/js/search/search_main.js"></script>
+    
+        <script src="/note/static/js/plugin_blog/main.js"></script>
+    
+        <link rel="stylesheet" href="/note/static/js/add_hint/style.css" type="text/css"/>
+    
+        <script src="/note/static/js/add_hint/main.js"></script>
+    
+        <script src="/note/static/js/gitalk/gitalk.min.js"></script>
+    
+        <script src="/note/static/js/gitalk/main.js"></script>
+    
+        <script src="/note/static/js/custom.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"  class="">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="keywords" content="">
+    
+    
+    <meta name="description" content="">
+    
+    <meta name="generator" content="teedoc">
+    <meta name="theme" content="teedoc-plugin-theme-default">
+    
+        
+        <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
+        
+        <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+        
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+        <meta name="html-generator" content="teedoc-plugin-jupyter-notebook-parser">
+        
+        <script src="/note/static/js/theme_default/pre_main.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/prism.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/viewer.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/dark.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/light.css" type="text/css"/>
+        
+        <script src="/note/static/js/theme_default/jquery.min.js"></script>
+        
+        <script src="/note/static/js/theme_default/split.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/search/style.css" type="text/css"/>
+        
+        <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4d52982572d5512e9762879ebf063c86";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+        
+        <meta name="blog-generator" content="teedoc-plugin-blog">
+        
+        <link rel="stylesheet" href="/note/static/css/gitalk/gitalk.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/gitalk/custom_gitalk.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/custom.css" type="text/css"/>
+        
+    
+    
+    <title>ROS入门指南：什么是ROS？ - niuniu's Note</title>
+    
+    <script type="text/javascript">js_vars = {"teedoc-plugin-ad-hint": {"type": "hint", "label": "☆", "content": "这是一个支持国际化的消息示例</br>喜欢项目请<a target=\"_blank\" href=\"https://github.com/teedoc/teedoc\">点下 ☆ star </a>哦~🦀🦀", "show_times": 2, "show_after_s": 432000, "date": "2021-11-16 14:40", "color": "#a0421d", "link_color": "#e53935", "link_bg_color": "#e6ae5c", "bg_color": "#ffcf89", "color_hover": "white", "bg_color_hover": "#f57c00", "close_color": "#eab971"}}</script>
+    <script type="text/javascript">metadata = {"tags": [], "date": null, "update": [], "ts": 0, "author": "", "brief": "", "cover": ""}</script>
+</head>
+
+
+<body class="type_doc">
+    
+    <div id="navbar">
+        <div id="navbar_menu">
+            <a class="site_title" href="/note/">
+                
+                    <img class="site_logo" src="/note/static/image/logo.png" alt="niuniu logo">
+                
+                
+                    <h2>niuniu</h2>
+                
+        </a>
+            <a id="navbar_menu_btn"></a>
+        </div>
+        <div id="navbar_items">
+            <div>
+                <ul id="nav_left">
+<li class=""><a  href="/note/blog/">博客</a></li>
+<li class="active"><a  href="/note/机器人项目笔记/">机器人项目笔记</a></li>
+<li class=""><a  href="/note/小智笔记/">小智笔记</a></li>
+</ul>
+
+            </div>
+            <div>
+                <ul id="nav_right">
+<li class=""><a target="_blank" href="https://github.com/HiNice2cu/note/">github</a></li>
+</ul>
+
+                <ul class="nav_plugins"><li><a id="google_translate_element"><img class="icon" src="/note/static/image/google_translate/translate.svg"/>Translate</a></li></ul><ul class="nav_plugins"><li><a id="themes" class="light"></a></li></ul><ul class="nav_plugins"><li><a id="search"><span class="icon"></span><span class="placeholder">搜索</span>
+                            <div id="search_hints">
+                                <span id="search_input_hint">输入关键词，多关键词空格隔开</span>
+                                <span id="search_loading_hint">正在加载，请稍候。。。</span>
+                                <span id="search_download_err_hint">下载文件失败，请刷新重试或检查网络</span>
+                                <span id="search_other_docs_result_hint">来自其它文档的结果</span>
+                                <span id="search_curr_doc_result_hint">当前文档搜索结果</span>
+                            </div></a></li></ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="wrapper">
+        <div id="sidebar_wrapper">
+            <div id="sidebar">
+                <div id="sidebar_title">
+                    
+                </div>
+                <ul class="show">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/index.html"><span class="label">README</span><span class=""></span></a></li>
+<li class="active_parent no_link"><a><span class="label">ROS</span><span class="sub_indicator"></span></a><ul class="show">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/ROS/ROS 基础流程.html"><span class="label">ROS 基础流程</span><span class=""></span></a></li>
+<li class="active with_link"><a href="/note/机器人项目笔记/ROS/ROS入门指南：什么是ROS？.html"><span class="label">ROS入门指南：什么是ROS？</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="not_active no_link"><a><span class="label">YOLO</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.1-YOLOv5 环境安装.html"><span class="label">1.1-YOLOv5 环境安装</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.2-YOLOv5 模型检测.html"><span class="label">1.2-YOLOv5 模型检测</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.3-YOLOv5 数据集构建.html"><span class="label">1.3-YOLOv5 数据集构建</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.4-YOLOv5 模型训练.html"><span class="label">1.4-YOLOv5 模型训练</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.5-YOLOv5 Pyside6 可视化界面.html"><span class="label">1.5-YOLOv5 Pyside6 可视化界面</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.6-YOLOv5 Gradio搭建Web GUI.html"><span class="label">1.6-YOLOv5 Gradio搭建Web GUI</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/2.1-YOLOv5 使用 AutoDL 服务器训练.html"><span class="label">2.1-YOLOv5 使用 AutoDL 服务器训练</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/2.2-YOLOv5：Pycharm 与 AutoDL 远程连接.html"><span class="label">2.2-YOLOv5：Pycharm 与 AutoDL 远程连接</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/2.3-YOLOv5 VS Code 与 AutoDL 远程连接.html"><span class="label">2.3-YOLOv5 VS Code 与 AutoDL 远程连接</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.1-YOLOv5 模型结构与构建原理.html"><span class="label">3.1-YOLOv5 模型结构与构建原理</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.2-YOLOv5 修改网络结构（以C2f为例）.html"><span class="label">3.2-YOLOv5 修改网络结构（以C2f为例）</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.3-YOLOv5 引入 SE 注意力机制.html"><span class="label">3.3-YOLOv5 引入 SE 注意力机制</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.4-YOLOv5 替换主干网络（以 MobileNetV3 为例).html"><span class="label">3.4-YOLOv5 替换主干网络（以 MobileNetV3 为例)</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/4.1-YOLOv5 Torchhub 模型预测进阶.html"><span class="label">4.1-YOLOv5 Torchhub 模型预测进阶</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/4.2-基于Flask的YOLOv5项目部署.html"><span class="label">4.2-基于Flask的YOLOv5项目部署</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLO物体检测原理与应用.html"><span class="label">YOLO物体检测原理与应用</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="not_active no_link"><a><span class="label">本地模型部署与强化学习算法</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/本地模型部署与强化学习算法/index.html"><span class="label">README</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/本地模型部署与强化学习算法/本地模型部署与强化学习算法简单概念.html"><span class="label">本地模型部署与强化学习算法简单概念</span><span class=""></span></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+        <div id="article">
+            <div id="menu_wrapper">
+                <div id="menu">
+                </div>
+            </div>
+            <div id="content_wrapper">
+                <div id="content_body">
+                    <div id="article_head">
+                        <div id="article_title">
+                            
+                            <h1>ROS入门指南：什么是ROS？</h1>
+                            
+                        </div>
+                        <div id="article_tags">
+                            <ul>
+                            
+                            </ul>
+                        </div>
+                        <div id="article_info">
+                        <div id="article_info_left">
+                            <span class="article_author">
+                                
+                            </span>
+                            
+                                <span class="article_date" title="最后修改日期： 2026-01-22">
+                                    2026-01-22
+                                </span>
+                            
+                        </div>
+                        <div id="article_info_right">
+                            
+                            <div id="source_link">
+                                <a href="https://github.com/HiNice2cu/note/tree/master/doc/机器人项目笔记/ROS/ROS入门指南：什么是ROS？.md" target="_blank">
+                                    编辑本页
+                                </a>
+                            </div>
+                            
+                        </div>
+                        </div>
+                    </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
+                    <div id="update_history">
+                        
+                    </div>
+                    <div id="article_content">
+                        
+                            <p><strong>核心定位</strong>：机器人软件开发的标准化框架与工具集，类比“机器人界的安卓系统”，实现模块化、分布式开发，避免重复造轮子。</p>
+<h2 id="%E4%B8%80%E3%80%81ROS%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F">一、ROS是什么？</h2>
+<h3 id="%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5">核心概念</h3>
+<ul>
+<li><p><strong>ROS</strong> = Robot Operating System（机器人操作系统），并非传统意义上的操作系统（如Windows、Linux），而是一套<strong>机器人软件开发框架和工具集</strong>。</p>
+</li>
+<li><p>核心价值：像安卓统一手机开发平台一样，为机器人提供标准化软件开发环境，实现功能模块复用与跨设备适配。</p>
+</li>
+</ul>
+<h2 id="%E4%BA%8C%E3%80%81ROS%E7%9A%84%E8%AF%9E%E7%94%9F%E6%95%85%E4%BA%8B%EF%BC%88%E7%B1%BB%E6%AF%94%E5%AE%89%E5%8D%93%EF%BC%89">二、ROS的诞生故事（类比安卓）</h2>
+<table>
+<thead>
+<tr>
+  <th>对比项</th>
+  <th>安卓（手机）</th>
+  <th>ROS（机器人）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>诞生背景</td>
+  <td>早期手机系统碎片化，开发困难，应用无法通用</td>
+  <td>早期机器人软硬件定制化，每款机器人需重新开发软件</td>
+</tr>
+<tr>
+  <td>核心思想</td>
+  <td>提供统一系统，实现应用跨品牌手机运行</td>
+  <td>提供统一框架，实现功能模块跨机器人复用</td>
+</tr>
+<tr>
+  <td>关键人物</td>
+  <td>Andy Rubin（被谷歌收购后壮大）</td>
+  <td>Morgan Quigley（斯坦福大学与吴恩达共同提出）</td>
+</tr>
+<tr>
+  <td>开源生态</td>
+  <td>谷歌Play商店，第三方应用生态繁荣</td>
+  <td>ROS软件包（Package）生态，社区贡献大量功能模块</td>
+</tr>
+<tr>
+  <td>效果</td>
+  <td>厂商省开发成本，开发者一次开发多平台运行</td>
+  <td>开发者复用模块，快速构建复杂机器人系统</td>
+</tr>
+</tbody>
+</table>
+<h2 id="%E4%B8%89%E3%80%81ROS%E7%9A%84%E6%A0%B8%E5%BF%83%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%EF%BC%88%E4%B9%90%E9%AB%98%E7%A7%AF%E6%9C%A8%E5%BC%8F%E5%BC%80%E5%8F%91%EF%BC%89">三、ROS的核心设计思想（乐高积木式开发）</h2>
+<ol>
+<li><p><strong>模块化</strong></p>
+<ul>
+<li><p>将复杂机器人软件拆分为独立小模块（称为<strong>Node，节点</strong>），每个节点负责单一功能（如传感器读取、运动控制、视觉处理）。</p>
+</li>
+<li><p>节点间通过标准接口通信，功能边界清晰。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>分布式</strong></p>
+<ul>
+<li><p>节点可部署在不同计算机上，例如视觉处理节点运行在高性能电脑，运动控制节点运行在树莓派。</p>
+</li>
+<li><p>优点：实现负载均衡，提升系统性能，便于团队分工协作开发。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>松耦合</strong></p>
+<ul>
+<li><p>节点独立开发、运行、调试，支持C++、Python等多语言编写。</p>
+</li>
+<li><p>新增或替换节点不影响其他模块，系统扩展性强。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="%E5%9B%9B%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81ROS%EF%BC%9F">四、为什么需要ROS？</h2>
+<ul>
+<li><p><strong>避免重复造轮子</strong>：可直接复用社区成熟功能模块（如建图、导航、机械臂控制），无需从零开发。</p>
+</li>
+<li><p><strong>标准化开发流程</strong>：提供统一通信机制（Topic、Service、Action）与工具链（Rviz可视化、Gazebo仿真、rosbag数据记录）。</p>
+</li>
+<li><p><strong>促进协作与开源</strong>：支持研究人员、企业、爱好者共享软件包，形成良性开源生态。</p>
+</li>
+<li><p><strong>快速原型开发</strong>：像搭积木一样组合现有节点，快速实现功能，便于调试与迭代优化。</p>
+</li>
+</ul>
+<h2 id="%E4%BA%94%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94">五、常见问题解答</h2>
+<ul>
+<li><p><strong>Q1：ROS能控制我的单片机/电机/舵机吗？</strong></p>
+
+<pre class="language-none"><code class="language-none">  能。ROS通常运行在电脑或树莓派，通过串口、USB、蓝牙、Wi-Fi与单片机通信；单片机负责底层硬件控制，ROS节点负责指令发送与传感器数据接收。
+
+</code></pre>
+</li>
+<li><p><strong>Q2：一定要用Ubuntu才能运行ROS吗？</strong></p>
+
+<pre class="language-none"><code class="language-none">  首选Ubuntu，大部分ROS版本基于其开发，兼容性最佳；支持其他Linux发行版但社区支持有限，Windows和macOS有适配版本但成熟度不足。
+
+</code></pre>
+</li>
+<li><p><strong>Q3：不会C++/Python能用ROS吗？</strong></p>
+</li>
+</ul>
+<p>可以。ROS节点主要用C++/Python编写，但可从使用现有节点入手，多数功能有现成包，无需自行编码。</p>
+<ul>
+<li><p><strong>Q4：ROS适合做什么类型的机器人？</strong></p>
+
+<pre class="language-none"><code class="language-none">  几乎所有类型，包括移动机器人、机械臂、无人机、服务机器人、教育机器人等，只要需软件协调传感器与执行器，ROS均可提供支持。
+
+
+</code></pre>
+</li>
+</ul>
+<h2 id="%E5%85%AD%E3%80%81ROS%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF">六、ROS典型应用场景</h2>
+<table>
+<thead>
+<tr>
+  <th>场景</th>
+  <th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>SLAM建图与导航</td>
+  <td>使用<code>gmapping</code>、<code>move_base</code>等包实现自主建图与路径规划</td>
+</tr>
+<tr>
+  <td>机械臂控制</td>
+  <td>使用<code>MoveIt!</code>进行运动规划与控制</td>
+</tr>
+<tr>
+  <td>视觉处理</td>
+  <td>结合<code>OpenCV</code>与<code>cv_bridge</code>实现图像识别、目标跟踪</td>
+</tr>
+<tr>
+  <td>仿真开发</td>
+  <td>通过<code>Gazebo</code>仿真，无需真实硬件即可开发调试</td>
+</tr>
+<tr>
+  <td>数据记录与分析</td>
+  <td>使用<code>rosbag</code>记录运行数据，便于回放分析与问题排查</td>
+</tr>
+</tbody>
+</table>
+<h2 id="%E4%B8%83%E3%80%81%E6%A0%B8%E5%BF%83%E6%80%BB%E7%BB%93">七、核心总结</h2>
+<p>ROS核心价值在于提供标准化、模块化的机器人开发工具链，让开发者像搭积木一样组合现有模块，站在开源社区的肩膀上快速实现功能，大幅降低开发成本，避免重复造轮子。</p>
+
+                        
+                    </div>
+                </div>
+                <div id="previous_next">
+                    <div id="previous">
+                        
+                        <a href="/note/机器人项目笔记/ROS/ROS 基础流程.html">
+                            <span class="icon"></span>
+                            <span class="label">ROS 基础流程</span>
+                        </a>
+                        
+                    </div>
+                    <div id="next">
+                        
+                        <a href="/note/机器人项目笔记/YOLO/1.1-YOLOv5 环境安装.html">
+                            <span class="label">1.1-YOLOv5 环境安装</span>
+                            <span class="icon"></span>
+                        </a>
+                        
+                    </div>
+                </div>
+                <div id="comments-container"></div>
+            </div>
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="to_top" href="#"></a>
+    <div id="doc_footer">
+        <div id="footer">
+            <div id="footer_top">
+                <ul>
+<li><a>链接</a><ul><li><a target="_blank" href="https://teedoc.neucrack.com">网站使用 teedoc 生成</a></li>
+<li><a target="_blank" href="https://neucrack.com">Copyright © 2021 Neucrack</a></li>
+<li><a  href="/note/sitemap.xml">网站地图</a></li>
+</ul>
+</li>
+<li><a>源码</a><ul><li><a target="_blank" href="https://github.com/HiNice2cu/note/">github</a></li>
+<li><a target="_blank" href="https://github.com/teedoc/teedoc">本网站源文件</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div id="footer_bottom">
+                <ul>
+<li><a target="_blank" href="https://beian.miit.gov.cn">渝ICP备19015320号</a></li>
+<li><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030602004109">粤公网安备44030602004109号</a></li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+    
+        <script src="/note/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+        <script type="text/javascript">
+                var transLoaded = false;
+                var loading = false;
+                var domain = "translate.google.com";
+                var domainDefault = domain;
+                var storeDomain = localStorage.getItem("googleTransDomain");
+                if(storeDomain){
+                    domain = storeDomain;
+                    console.log("load google translate domain from local storage:" + domain);
+                }
+                function getUrl(domain){
+                    if(domain == "/")
+                        return "/static/js/google_translate/element.js?cb=googleTranslateElementInit";
+                    else
+                        return "https://" + domain + "/translate_a/element.js?cb=googleTranslateElementInit";
+                }
+                var url = getUrl(domain);
+                console.log("google translate domain:" + domain + ", url: " + url);
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({pageLanguage: "auto", layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                }
+                function loadJS( url, callback ){
+                    var script = document.createElement('script');
+                    fn = callback || function(){ };
+                    script.type = 'text/javascript';
+                    if(script.readyState){
+                        script.onreadystatechange = function(){
+                            if( script.readyState == 'loaded' || script.readyState == 'complete' ){
+                                script.onreadystatechange = null;
+                                fn();
+                            }
+                        };
+                    }else{
+                        script.onload = function(){
+                            fn();
+                        };
+                    }
+                    script.src = url;
+                    document.getElementsByTagName('head')[0].appendChild(script);
+                }
+                function removeHint(){
+                    var hint = document.getElementById("loadingTranslate");
+                    if(hint){
+                        hint.remove();
+                    }
+                }
+                var btn = document.getElementById("google_translate_element");
+                btn.onclick = function(){
+                    if(transLoaded) return;
+                    if(loading){
+                        var flag = confirm("loading from " + domain + ", please wait, or change domain?");
+                        if(flag){
+                            newDomain = prompt("domain, default: " + domainDefault + ", now: " + domain);
+                            if(newDomain){
+                                domain = newDomain;
+                                console.log(domain);
+                                url = getUrl(domain);
+                                loadJS(url, function(){
+                                    localStorage.setItem("googleTransDomain", domain);
+                                    removeHint()
+                                    transLoaded = true;
+                                });
+                            }
+                        }
+                        return;
+                    }
+                    btn.innerHTML = '<span id="loadingTranslate"><img class="icon" src="/note/static/image/google_translate/translate.svg"/>Loading ...</span>';
+                    loading = true;
+                    loadJS(url, function(){
+                        localStorage.setItem("googleTransDomain", domain);
+                        removeHint()
+                        transLoaded = true;
+                    });
+                }
+                </script>
+            
+    
+        <script src="/note/static/js/theme_default/tocbot.min.js"></script>
+    
+        <script src="/note/static/js/theme_default/main.js"></script>
+    
+        <script src="/note/static/js/theme_default/viewer.min.js"></script>
+    
+        <script src="/note/static/css/theme_default/prism.min.js"></script>
+    
+        <script src="/note/static/js/search/search_main.js"></script>
+    
+        <script src="/note/static/js/plugin_blog/main.js"></script>
+    
+        <link rel="stylesheet" href="/note/static/js/add_hint/style.css" type="text/css"/>
+    
+        <script src="/note/static/js/add_hint/main.js"></script>
+    
+        <script src="/note/static/js/gitalk/gitalk.min.js"></script>
+    
+        <script src="/note/static/js/gitalk/main.js"></script>
+    
+        <script src="/note/static/js/custom.js"></script>
+    
+</body>
+
+</html>

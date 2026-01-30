@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"  class="">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="keywords" content="">
+    
+    
+    <meta name="description" content="">
+    
+    <meta name="generator" content="teedoc">
+    <meta name="theme" content="teedoc-plugin-theme-default">
+    
+        
+        <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
+        
+        <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+        
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+        <meta name="html-generator" content="teedoc-plugin-jupyter-notebook-parser">
+        
+        <script src="/note/static/js/theme_default/pre_main.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/prism.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/viewer.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/dark.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/light.css" type="text/css"/>
+        
+        <script src="/note/static/js/theme_default/jquery.min.js"></script>
+        
+        <script src="/note/static/js/theme_default/split.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/search/style.css" type="text/css"/>
+        
+        <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4d52982572d5512e9762879ebf063c86";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+        
+        <meta name="blog-generator" content="teedoc-plugin-blog">
+        
+        <link rel="stylesheet" href="/note/static/css/gitalk/gitalk.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/gitalk/custom_gitalk.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/custom.css" type="text/css"/>
+        
+    
+    
+    <title>YOLOv5 Gradio搭建Web GUI实战 - niuniu's Note</title>
+    
+    <script type="text/javascript">js_vars = {"teedoc-plugin-ad-hint": {"type": "hint", "label": "☆", "content": "这是一个支持国际化的消息示例</br>喜欢项目请<a target=\"_blank\" href=\"https://github.com/teedoc/teedoc\">点下 ☆ star </a>哦~🦀🦀", "show_times": 2, "show_after_s": 432000, "date": "2021-11-16 14:40", "color": "#a0421d", "link_color": "#e53935", "link_bg_color": "#e6ae5c", "bg_color": "#ffcf89", "color_hover": "white", "bg_color_hover": "#f57c00", "close_color": "#eab971"}}</script>
+    <script type="text/javascript">metadata = {"tags": [], "date": null, "update": [], "ts": 0, "author": "", "brief": "", "cover": ""}</script>
+</head>
+
+
+<body class="type_doc">
+    
+    <div id="navbar">
+        <div id="navbar_menu">
+            <a class="site_title" href="/note/">
+                
+                    <img class="site_logo" src="/note/static/image/logo.png" alt="niuniu logo">
+                
+                
+                    <h2>niuniu</h2>
+                
+        </a>
+            <a id="navbar_menu_btn"></a>
+        </div>
+        <div id="navbar_items">
+            <div>
+                <ul id="nav_left">
+<li class=""><a  href="/note/blog/">博客</a></li>
+<li class="active"><a  href="/note/机器人项目笔记/">机器人项目笔记</a></li>
+<li class=""><a  href="/note/小智笔记/">小智笔记</a></li>
+</ul>
+
+            </div>
+            <div>
+                <ul id="nav_right">
+<li class=""><a target="_blank" href="https://github.com/HiNice2cu/note/">github</a></li>
+</ul>
+
+                <ul class="nav_plugins"><li><a id="google_translate_element"><img class="icon" src="/note/static/image/google_translate/translate.svg"/>Translate</a></li></ul><ul class="nav_plugins"><li><a id="themes" class="light"></a></li></ul><ul class="nav_plugins"><li><a id="search"><span class="icon"></span><span class="placeholder">搜索</span>
+                            <div id="search_hints">
+                                <span id="search_input_hint">输入关键词，多关键词空格隔开</span>
+                                <span id="search_loading_hint">正在加载，请稍候。。。</span>
+                                <span id="search_download_err_hint">下载文件失败，请刷新重试或检查网络</span>
+                                <span id="search_other_docs_result_hint">来自其它文档的结果</span>
+                                <span id="search_curr_doc_result_hint">当前文档搜索结果</span>
+                            </div></a></li></ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="wrapper">
+        <div id="sidebar_wrapper">
+            <div id="sidebar">
+                <div id="sidebar_title">
+                    
+                </div>
+                <ul class="show">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/index.html"><span class="label">README</span><span class=""></span></a></li>
+<li class="not_active no_link"><a><span class="label">ROS</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/ROS/ROS 基础流程.html"><span class="label">ROS 基础流程</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/ROS/ROS入门指南：什么是ROS？.html"><span class="label">ROS入门指南：什么是ROS？</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="active_parent no_link"><a><span class="label">YOLO</span><span class="sub_indicator"></span></a><ul class="show">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.1-YOLOv5 环境安装.html"><span class="label">1.1-YOLOv5 环境安装</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.2-YOLOv5 模型检测.html"><span class="label">1.2-YOLOv5 模型检测</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.3-YOLOv5 数据集构建.html"><span class="label">1.3-YOLOv5 数据集构建</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.4-YOLOv5 模型训练.html"><span class="label">1.4-YOLOv5 模型训练</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/1.5-YOLOv5 Pyside6 可视化界面.html"><span class="label">1.5-YOLOv5 Pyside6 可视化界面</span><span class=""></span></a></li>
+<li class="active with_link"><a href="/note/机器人项目笔记/YOLO/1.6-YOLOv5 Gradio搭建Web GUI.html"><span class="label">1.6-YOLOv5 Gradio搭建Web GUI</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/2.1-YOLOv5 使用 AutoDL 服务器训练.html"><span class="label">2.1-YOLOv5 使用 AutoDL 服务器训练</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/2.2-YOLOv5：Pycharm 与 AutoDL 远程连接.html"><span class="label">2.2-YOLOv5：Pycharm 与 AutoDL 远程连接</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/2.3-YOLOv5 VS Code 与 AutoDL 远程连接.html"><span class="label">2.3-YOLOv5 VS Code 与 AutoDL 远程连接</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.1-YOLOv5 模型结构与构建原理.html"><span class="label">3.1-YOLOv5 模型结构与构建原理</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.2-YOLOv5 修改网络结构（以C2f为例）.html"><span class="label">3.2-YOLOv5 修改网络结构（以C2f为例）</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.3-YOLOv5 引入 SE 注意力机制.html"><span class="label">3.3-YOLOv5 引入 SE 注意力机制</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/3.4-YOLOv5 替换主干网络（以 MobileNetV3 为例).html"><span class="label">3.4-YOLOv5 替换主干网络（以 MobileNetV3 为例)</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/4.1-YOLOv5 Torchhub 模型预测进阶.html"><span class="label">4.1-YOLOv5 Torchhub 模型预测进阶</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/4.2-基于Flask的YOLOv5项目部署.html"><span class="label">4.2-基于Flask的YOLOv5项目部署</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/YOLO/YOLO物体检测原理与应用.html"><span class="label">YOLO物体检测原理与应用</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="not_active no_link"><a><span class="label">本地模型部署与强化学习算法</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/机器人项目笔记/本地模型部署与强化学习算法/index.html"><span class="label">README</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/机器人项目笔记/本地模型部署与强化学习算法/本地模型部署与强化学习算法简单概念.html"><span class="label">本地模型部署与强化学习算法简单概念</span><span class=""></span></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+        <div id="article">
+            <div id="menu_wrapper">
+                <div id="menu">
+                </div>
+            </div>
+            <div id="content_wrapper">
+                <div id="content_body">
+                    <div id="article_head">
+                        <div id="article_title">
+                            
+                            <h1>YOLOv5 Gradio搭建Web GUI实战</h1>
+                            
+                        </div>
+                        <div id="article_tags">
+                            <ul>
+                            
+                            </ul>
+                        </div>
+                        <div id="article_info">
+                        <div id="article_info_left">
+                            <span class="article_author">
+                                
+                            </span>
+                            
+                                <span class="article_date" title="最后修改日期： 2026-01-30">
+                                    2026-01-30
+                                </span>
+                            
+                        </div>
+                        <div id="article_info_right">
+                            
+                            <div id="source_link">
+                                <a href="https://github.com/HiNice2cu/note/tree/master/doc/机器人项目笔记/YOLO/1.6-YOLOv5 Gradio搭建Web GUI.md" target="_blank">
+                                    编辑本页
+                                </a>
+                            </div>
+                            
+                        </div>
+                        </div>
+                    </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
+                    <div id="update_history">
+                        
+                    </div>
+                    <div id="article_content">
+                        
+                            <h3 id="%E4%B8%80%E3%80%81Gradio-%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85">一、Gradio 简介与环境安装</h3>
+<h4 id="1.-Gradio-%E6%A0%B8%E5%BF%83%E4%BC%98%E5%8A%BF">1. Gradio 核心优势</h4>
+<p>Gradio 是开源 Python 库，专为机器学习演示和 Web 应用开发设计，内置丰富交互组件，已封装前后端交互逻辑，无需额外编写复杂代码，仅需少量代码即可实现可视化 Web 界面。</p>
+<h4 id="2.-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%EF%BC%88%E5%9F%BA%E4%BA%8E-yolov5-%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%EF%BC%89">2. 环境安装（基于 yolov5 虚拟环境）</h4>
+<ol>
+<li><p>打开终端，激活前文创建的 yolov5 虚拟环境：</p>
+
+<pre class="language-Bash"><code class="language-Bash">conda activate yolov5
+</code></pre>
+</li>
+<li><p>执行安装命令，下载并安装 Gradio：</p>
+
+<pre class="language-Bash"><code class="language-Bash">pip install gradio
+</code></pre>
+</li>
+<li><p>验证安装：安装完成后无报错，即可开始后续开发（国内源可加速下载，无需额外配置）。</p>
+</li>
+</ol>
+<h3 id="%E4%BA%8C%E3%80%81%E5%AE%8C%E6%95%B4-Web-GUI-%E5%AE%9E%E7%8E%B0%EF%BC%88%E9%9B%86%E6%88%90%E5%85%A8%E6%8B%93%E5%B1%95%E5%8A%9F%E8%83%BD%EF%BC%89">二、完整 Web GUI 实现（集成全拓展功能）</h3>
+<p>以下为集成所有核心及拓展功能的完整代码，已通过注释标注关键功能点（实时更新、示例图片、公网分享等）。该代码一次性实现双输入源、参数调节、实时检测、示例预设、公网分享五大功能.</p>
+
+<pre class="language-Python"><code class="language-Python">import torch
+import gradio as gr
+
+model = torch.hub.load(&quot;./&quot;,&quot;custom&quot;, path=&quot;runs/train/exp/weights/best.pt&quot;, source=&quot;local&quot;)
+
+title = &quot;YOLOv5 Object Detection&quot;
+description = &quot;Upload an image to detect objects using a custom-trained YOLOv5 model.&quot;
+
+base_conf = 0.25
+base_iou = 0.45
+
+def det_image(img,conf,iou):
+    model.conf = conf
+    model.iou = iou
+    results = model(img)
+    return results.render()[0]
+
+gr.Interface(inputs=[gr.Image(sources=[&quot;webcam&quot;, &quot;upload&quot;], label=&quot;选择输入源&quot;, type=&quot;numpy&quot;),gr.Slider(minimum=0.0,maximum=1.0,value=base_conf),gr.Slider(minimum=0.0,maximum=1.0,value=base_iou)],
+             outputs=[&quot;image&quot;],
+             #1.Gradio的设计哲学是&quot;声明式&quot;编程：你声明输入组件、函数和输出组件，Gradio负责连接它们
+    		 #2.fn= 参数指定的函数是Gradio自动调用的回调函数
+    		 #3.参数传递顺序完全由inputs列表的顺序决定
+             fn=det_image,
+             title=title,
+             description=description,
+             #实时更新
+             live=True,
+             #示例图片
+             examples=[[&quot;./datasets/images/train/90.jpg&quot;,base_conf,base_iou],[&quot;./datasets/images/train/120.jpg&quot;,0.35,base_iou]]).launch(share=True)#公网
+</code></pre>
+<h4 id="%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%E4%B8%8E%E5%8A%9F%E8%83%BD%E5%AF%B9%E5%BA%94%E8%A7%A3%E6%9E%90">代码结构与功能对应解析</h4>
+<p>代码按“模型加载→参数定义→检测函数→界面配置”逻辑组织，每处拓展功能均与注释精准对应，具体说明如下：</p>
+<ol>
+<li><p><strong>模型加载</strong>：通过<code>torch.hub.load</code> 加载本地训练好的模型，路径为 <code>runs/train/exp/weights/best.pt</code>，<code>source=&quot;local&quot;</code> 指定从本地加载，避免网络请求，适配自定义训练模型。</p>
+</li>
+<li><p><strong>核心参数</strong>：默认置信度阈值 <code>base_conf=0.25</code>、IOU 阈值 <code>base_iou=0.45</code>，与 YOLOv5 原生默认参数一致，确保检测效果基础稳定。</p>
+</li>
+<li><p><strong>检测函数</strong>：<code>det_image</code> 函数接收图片、置信度、IOU 三个参数，动态更新模型阈值后执行检测，返回渲染后的检测结果（含目标标注框）。</p>
+</li>
+<li><p><strong>界面配置（拓展功能对应）</strong>：<br />
+ 双输入源：<code>gr.Image(sources=[&quot;webcam&quot;, &quot;upload&quot;])</code> 支持摄像头拍摄和本地图片上传两种方式，<code>type=&quot;numpy&quot;</code> 适配模型输入格式，标签设为“选择输入源”，操作直观。</p>
+</li>
+<li><p>参数调节：两个 <code>gr.Slider</code> 组件分别控制置信度、IOU 阈值，范围限定为 0.0-1.0，默认值关联前文定义的基础参数，支持实时微调检测精度。</p>
+</li>
+<li><p>实时更新（注释对应）：<code>live=True</code> 开启动态触发机制，上传图片、调节滑动条或摄像头拍摄后，右侧结果将自动刷新，无需手动点击提交。</p>
+</li>
+<li><p>示例图片（注释对应）：<code>examples</code> 预设两组示例数据，分别为 <code>./datasets/images/train/90.jpg</code>（默认阈值）和 <code>./datasets/images/train/120.jpg</code>（置信度阈值 0.35），用户可直接点击示例快速测试。</p>
+</li>
+<li><p>公网分享（注释对应）：<code>launch(share=True)</code> 生成临时公网链接，支持异地访问，默认有效期 72 小时，适合演示和团队协作测试。</p>
+</li>
+</ol>
+<h4 id="%E8%BF%90%E8%A1%8C%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%AD%A5%E9%AA%A4">运行与测试步骤</h4>
+<ol>
+<li><p>保存代码：将上述代码保存为 <code>yolov5_gradio.py</code>，放置于 YOLOv5 根目录，确保与 <code>runs</code>、<code>datasets</code> 文件夹同级。</p>
+</li>
+<li><p>启动程序：在激活的 yolov5 虚拟环境中，执行命令 <code>python yolov5_gradio.py</code>。</p>
+</li>
+<li><p>访问界面：终端将输出两个地址，本地访问地址 <code>http://localhost:7860</code>（Ctrl+点击直接打开）、公网访问地址 <code>https://xxx.gradio.live</code>（72 小时有效）。</p>
+</li>
+<li><p>功能测试：<br />
+ 上传检测：点击“选择输入源”上传 <code>datasets/images/train</code> 下的图片，右侧自动显示标注结果，调节滑动条可过滤冗余框或补充漏检目标。</p>
+</li>
+<li><p>摄像头检测：点击输入框下方“摄像头”按钮，授权后可实时拍摄并检测，适合动态场景测试。</p>
+</li>
+<li><p>示例测试：直接点击界面下方预设示例，快速验证模型检测效果，无需手动上传。</p>
+</li>
+</ol>
+<h3 id="%E4%B8%89%E3%80%81%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B%E5%9B%9E%E9%A1%BE%E4%B8%8E%E4%BC%98%E5%8A%BF%E6%80%BB%E7%BB%93">三、整体流程回顾与优势总结</h3>
+<p>流程梳理：环境安装（Gradio）→ 编写完整代码（集成全功能）→ 运行测试 → 公网分享，全程无需编写前后端分离代码，仅通过 Gradio 组件配置即可实现 Web 可视化。</p>
+<h4 id="%E8%BF%90%E8%A1%8C%E4%B8%8E%E6%B5%8B%E8%AF%95">运行与测试</h4>
+<ol>
+<li><p>执行代码，终端将提示本地访问地址：<code>http://localhost:7860</code>。</p>
+</li>
+<li><p>按 <code>Ctrl+点击</code> 地址打开浏览器，左侧上传图片（如死神VS火影数据集图片），右侧将自动显示检测结果。</p>
+</li>
+</ol>
+
+                        
+                    </div>
+                </div>
+                <div id="previous_next">
+                    <div id="previous">
+                        
+                        <a href="/note/机器人项目笔记/YOLO/1.5-YOLOv5 Pyside6 可视化界面.html">
+                            <span class="icon"></span>
+                            <span class="label">1.5-YOLOv5 Pyside6 可视化界面</span>
+                        </a>
+                        
+                    </div>
+                    <div id="next">
+                        
+                        <a href="/note/机器人项目笔记/YOLO/2.1-YOLOv5 使用 AutoDL 服务器训练.html">
+                            <span class="label">2.1-YOLOv5 使用 AutoDL 服务器训练</span>
+                            <span class="icon"></span>
+                        </a>
+                        
+                    </div>
+                </div>
+                <div id="comments-container"></div>
+            </div>
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="to_top" href="#"></a>
+    <div id="doc_footer">
+        <div id="footer">
+            <div id="footer_top">
+                <ul>
+<li><a>链接</a><ul><li><a target="_blank" href="https://teedoc.neucrack.com">网站使用 teedoc 生成</a></li>
+<li><a target="_blank" href="https://neucrack.com">Copyright © 2021 Neucrack</a></li>
+<li><a  href="/note/sitemap.xml">网站地图</a></li>
+</ul>
+</li>
+<li><a>源码</a><ul><li><a target="_blank" href="https://github.com/HiNice2cu/note/">github</a></li>
+<li><a target="_blank" href="https://github.com/teedoc/teedoc">本网站源文件</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div id="footer_bottom">
+                <ul>
+<li><a target="_blank" href="https://beian.miit.gov.cn">渝ICP备19015320号</a></li>
+<li><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030602004109">粤公网安备44030602004109号</a></li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+    
+        <script src="/note/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+        <script type="text/javascript">
+                var transLoaded = false;
+                var loading = false;
+                var domain = "translate.google.com";
+                var domainDefault = domain;
+                var storeDomain = localStorage.getItem("googleTransDomain");
+                if(storeDomain){
+                    domain = storeDomain;
+                    console.log("load google translate domain from local storage:" + domain);
+                }
+                function getUrl(domain){
+                    if(domain == "/")
+                        return "/static/js/google_translate/element.js?cb=googleTranslateElementInit";
+                    else
+                        return "https://" + domain + "/translate_a/element.js?cb=googleTranslateElementInit";
+                }
+                var url = getUrl(domain);
+                console.log("google translate domain:" + domain + ", url: " + url);
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({pageLanguage: "auto", layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                }
+                function loadJS( url, callback ){
+                    var script = document.createElement('script');
+                    fn = callback || function(){ };
+                    script.type = 'text/javascript';
+                    if(script.readyState){
+                        script.onreadystatechange = function(){
+                            if( script.readyState == 'loaded' || script.readyState == 'complete' ){
+                                script.onreadystatechange = null;
+                                fn();
+                            }
+                        };
+                    }else{
+                        script.onload = function(){
+                            fn();
+                        };
+                    }
+                    script.src = url;
+                    document.getElementsByTagName('head')[0].appendChild(script);
+                }
+                function removeHint(){
+                    var hint = document.getElementById("loadingTranslate");
+                    if(hint){
+                        hint.remove();
+                    }
+                }
+                var btn = document.getElementById("google_translate_element");
+                btn.onclick = function(){
+                    if(transLoaded) return;
+                    if(loading){
+                        var flag = confirm("loading from " + domain + ", please wait, or change domain?");
+                        if(flag){
+                            newDomain = prompt("domain, default: " + domainDefault + ", now: " + domain);
+                            if(newDomain){
+                                domain = newDomain;
+                                console.log(domain);
+                                url = getUrl(domain);
+                                loadJS(url, function(){
+                                    localStorage.setItem("googleTransDomain", domain);
+                                    removeHint()
+                                    transLoaded = true;
+                                });
+                            }
+                        }
+                        return;
+                    }
+                    btn.innerHTML = '<span id="loadingTranslate"><img class="icon" src="/note/static/image/google_translate/translate.svg"/>Loading ...</span>';
+                    loading = true;
+                    loadJS(url, function(){
+                        localStorage.setItem("googleTransDomain", domain);
+                        removeHint()
+                        transLoaded = true;
+                    });
+                }
+                </script>
+            
+    
+        <script src="/note/static/js/theme_default/tocbot.min.js"></script>
+    
+        <script src="/note/static/js/theme_default/main.js"></script>
+    
+        <script src="/note/static/js/theme_default/viewer.min.js"></script>
+    
+        <script src="/note/static/css/theme_default/prism.min.js"></script>
+    
+        <script src="/note/static/js/search/search_main.js"></script>
+    
+        <script src="/note/static/js/plugin_blog/main.js"></script>
+    
+        <link rel="stylesheet" href="/note/static/js/add_hint/style.css" type="text/css"/>
+    
+        <script src="/note/static/js/add_hint/main.js"></script>
+    
+        <script src="/note/static/js/gitalk/gitalk.min.js"></script>
+    
+        <script src="/note/static/js/gitalk/main.js"></script>
+    
+        <script src="/note/static/js/custom.js"></script>
+    
+</body>
+
+</html>
